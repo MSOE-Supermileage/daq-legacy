@@ -1,0 +1,3 @@
+<resources>
+    <item type="layout" name="activity_datamodule_list">@layout/activity_datamodule_twopane</item>
+</resources>
