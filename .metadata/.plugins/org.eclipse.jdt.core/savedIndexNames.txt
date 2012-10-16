@@ -1,5 +1,0 @@
-INDEX VERSION 1.126+D:\smv\driverstation\.metadata\.plugins\org.eclipse.jdt.core
-114304086.index
-4112413308.index
-1027526336.index
-1218305685.index
