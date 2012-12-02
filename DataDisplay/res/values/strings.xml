@@ -1,7 +1,0 @@
-<resources>
-
-    <string name="app_name">DataDisplay</string>
-    <string name="title_datamodule_detail">DataModule Detail</string>
-    <string name="title_datamodule_list">DataModules</string>
-
-</resources>
