@@ -1,5 +1,7 @@
-package com.example.smvdriverdisplay;
+package edu.smv.android;
 
+import edu.smv.android.R;
+import edu.smv.data.DataBase;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -89,7 +91,7 @@ public class DriverDisplay extends Activity {
 	    			//logData
 	    			if(logData){
 	    				lastTimeLogged = System.currentTimeMillis();
-	    				data.logData();
+	    				//data.logData();
 	    			}
     			}
     		}
