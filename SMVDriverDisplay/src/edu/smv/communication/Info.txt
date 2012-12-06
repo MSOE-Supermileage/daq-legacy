@@ -1,0 +1,22 @@
+Amarino is the andriod meets audino library, and it has by added to the project.
+
+Javadocs:
+http://www.amarino-toolkit.net/tl_files/doc/index.html
+
+
+Other Documentation:
+http://www.amarino-toolkit.net/index.php/docs.html
+
+
+The libraries download location can be found here:
+http://www.amarino-toolkit.net/index.php/download.html
+http://code.google.com/p/amarino/downloads/detail?name=AmarinoLibrary_v0_55.jar&can=2&q=
+
+
+
+Note that:
+
+Amarino basically consists of three main parts (two mandatory and one optional):
+  1) Android application called "Amarino"
+  2) Arduino library called "MeetAndroid"
+  3) Amarino Plug-In Bundle (optional)
