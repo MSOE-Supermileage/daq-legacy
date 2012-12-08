@@ -3,6 +3,7 @@ package edu.smv.android;
 import edu.smv.android.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.Menu;
 
@@ -18,7 +19,6 @@ public class MainActivity extends Activity {
         this.setRequestedOrientation(0);
         
         driverDisplay = new MainService(this);
-        driverDisplay.startService(null);
     }
     
     @Override

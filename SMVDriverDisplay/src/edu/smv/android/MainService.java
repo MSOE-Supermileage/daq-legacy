@@ -57,11 +57,11 @@ public class MainService extends Service {
     			boolean logData = System.currentTimeMillis() - lastTimeLogged >= DATA_LOG;
     			
     			// Get Data
-    			if(displayData || logData){
+    			if((displayData && updateGUI) || logData){
     				data.loadFromArduino();
     			
 	    			// Display Data
-	    			if(displayData){
+	    			if(displayData && updateGUI){
 	    				lastTimeDisplayed = System.currentTimeMillis();
 	    				mainActivity.runOnUiThread(displayValues);
 	    			}
@@ -69,7 +69,7 @@ public class MainService extends Service {
 	    			//logData
 	    			if(logData){
 	    				lastTimeLogged = System.currentTimeMillis();
-	    				data.logData();
+	    				// data.logData();
 	    			}
     			}
     		}
