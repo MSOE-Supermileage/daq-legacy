@@ -12,9 +12,6 @@ public class MainService extends Service {
 	
 	private Activity mainActivity;
 	private boolean updateGUI;
-	private DataBase data;
-	
-	@SuppressWarnings("unused")
 	private DataHandler dataHandler;
 	
 	private final double DISPLAY_REFRESH = .5 * 1000; 	//in milliseconds
@@ -24,8 +21,9 @@ public class MainService extends Service {
 	public MainService(Activity mainActivity) {
 		this.mainActivity = mainActivity;
 		this.updateGUI = true;
-		this.data = new DataBase();
 		this.dataHandler = new DataHandler();
+		
+		this.dataHandler.start();
 	}
 	
 	@Override
@@ -43,6 +41,12 @@ public class MainService extends Service {
 	}
 	
 	private class DataHandler extends Thread {
+		private DataBase data;
+		
+		public DataHandler(){
+			data = new DataBase();
+		}
+		
 		@Override
     	public void run(){
     		double lastTimeDisplayed = -1;
@@ -72,6 +76,7 @@ public class MainService extends Service {
     	}
     
 	    private Runnable displayValues = new Runnable() {
+	    	
 	    	public void run(){
 	    		mainActivity.setContentView(R.layout.activity_main);
 	        	TextView mphValue = (TextView) mainActivity.findViewById(R.id.mphValue);

@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
-	@SuppressWarnings("unused")
 	private MainService driverDisplay;
 	private final CharSequence TITLE = "MSOE Data Display";
 
@@ -19,6 +18,7 @@ public class MainActivity extends Activity {
         this.setRequestedOrientation(0);
         
         driverDisplay = new MainService(this);
+        driverDisplay.startService(null);
     }
     
     @Override
@@ -50,6 +50,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy(){
     	super.onDestroy();
+    	driverDisplay.stopSelf();
     	driverDisplay = null; 
     }
     
