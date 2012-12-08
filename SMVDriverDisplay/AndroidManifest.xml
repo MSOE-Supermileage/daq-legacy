@@ -14,7 +14,7 @@
         configChanges= "orientation|keyboardHidden"
         android:screenOrientation="landscape" android:name="edu.smv.android.MSOE_Data_Display">
         <activity
-            android:name="edu.smv.android.DriverDisplay"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main" >
             
             <intent-filter>
