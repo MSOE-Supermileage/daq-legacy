@@ -22,7 +22,6 @@ public class MainService extends Service {
 		this.mainActivity = mainActivity;
 		this.updateGUI = true;
 		this.dataHandler = new DataHandler();
-		
 		this.dataHandler.start();
 	}
 	
@@ -53,15 +52,15 @@ public class MainService extends Service {
     		double lastTimeLogged = -1;
     		
     		while(true){
-    			boolean displayData = System.currentTimeMillis() - lastTimeDisplayed >= DISPLAY_REFRESH;
+    			boolean displayData = (updateGUI) && (System.currentTimeMillis() - lastTimeDisplayed >= DISPLAY_REFRESH);
     			boolean logData = System.currentTimeMillis() - lastTimeLogged >= DATA_LOG;
     			
     			// Get Data
-    			if((displayData && updateGUI) || logData){
+    			if((displayData) || logData){
     				data.loadFromArduino();
     			
 	    			// Display Data
-	    			if(displayData && updateGUI){
+	    			if(displayData){
 	    				lastTimeDisplayed = System.currentTimeMillis();
 	    				mainActivity.runOnUiThread(displayValues);
 	    			}
@@ -82,11 +81,13 @@ public class MainService extends Service {
 	        	TextView mphValue = (TextView) mainActivity.findViewById(R.id.mphValue);
 	        	TextView rpmValue = (TextView) mainActivity.findViewById(R.id.rpmValue);
 	        	TextView mpgValue = (TextView) mainActivity.findViewById(R.id.mpgValue);
+	        	TextView ampgValue = (TextView) mainActivity.findViewById(R.id.amphValue);
 	        	TextView batteryVoltage = (TextView) mainActivity.findViewById(R.id.bvVoltage);
 	    		
 	    		mphValue.setText("" + data.getMph());
 	    		rpmValue.setText("" + data.getRpm());
 	    		mpgValue.setText("" + data.getMpg());
+	    		ampgValue.setText("" + data.getAmph());
 	    		batteryVoltage.setText("" + data.getBatteryVoltage());
 	    	}
 		 };
