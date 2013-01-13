@@ -1,100 +1,156 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <TextView
-        android:id="@+id/rpmValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/rpmValue"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="36dp" />
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:columnCount="6"
+    android:orientation="vertical" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnDiagnostics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Diagnostics" />
+        android:text="@string/btnDiagnostics" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
         android:layout_alignParentBottom="true"
-        android:text="Battery Voltage:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical" >
 
-    <DigitalClock
-        android:id="@+id/digitalClock1"
+        <DigitalClock
+            android:id="@+id/digitalClock1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:text="DigitalClock" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/lblBatteryVoltage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:text="@string/lblBattery"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/bvVoltage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:text="@string/batteryValue"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/TableLayout2"
+        android:layout_width="482dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/lblMPH"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lblMPH"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lblAMPG"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/lblRPM"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="@string/lblRPM"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/lblMPG"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/lblMPG"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:baselineAligned="true" >
+
+            <TextView
+                android:id="@+id/mphValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mphValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/amphValue"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="@string/ampgValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/rpmValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/rpmValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/mpgValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="78dp"
+                android:layout_weight="1"
+                android:text="@string/mpgValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+        </TableRow>
+    </TableLayout>
+
+    <edu.smv.android.views.CircularGauge
+        android:id="@+id/circularGauge1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView5"
-        android:layout_alignLeft="@+id/textView5"
-        android:text="DigitalClock" />
-
-    <TextView
-        android:id="@+id/bvVoltage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/digitalClock1"
-        android:layout_toRightOf="@+id/textView5"
-        android:text="@string/batteryValue"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rpmValue"
-        android:layout_alignLeft="@+id/rpmValue"
-        android:text="RPM"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/mpgValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/rpmValue"
-        android:layout_alignBottom="@+id/rpmValue"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="78dp"
-        android:text="@string/mpgValue"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="36dp" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/mpgValue"
-        android:layout_alignLeft="@+id/mpgValue"
-        android:text="MPG"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/mphValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/rpmValue"
-        android:layout_alignBottom="@+id/rpmValue"
-        android:layout_toRightOf="@+id/digitalClock1"
-        android:text="@string/mphValue"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="36dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/mphValue"
-        android:layout_alignLeft="@+id/mphValue"
-        android:text="MPH"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="84dp"
+        android:layout_marginTop="26dp"
+        android:layout_toLeftOf="@+id/btnDiagnostics" />
 
 </RelativeLayout>

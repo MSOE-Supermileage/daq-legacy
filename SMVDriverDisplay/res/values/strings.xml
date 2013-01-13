@@ -1,11 +1,9 @@
 <resources>
 
     <string name="app_name">SMVDriverDisplay</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">MSOE_Data_Display</string>
     <string name="mphValue">0.00</string>
-    <string name="mphLabel">MPH</string>
     <string name="rpmValue">0.00</string>
     <string name="rpmDisplay">RPM</string>
     <string name="mpgLabel">MPG</string>
@@ -13,5 +11,12 @@
     <string name="mphLbl">mphLbl</string>
     <string name="mph">MPH</string>
     <string name="batteryValue">12.00V</string>
+    <string name="btnDiagnostics">Diagnostics</string>
+    <string name="lblMPH">MPH</string>
+    <string name="lblRPM">RPM</string>
+    <string name="lblMPG">MPG</string>
+    <string name="lblBattery">Battery Voltage:</string>
+    <string name="lblAMPG">AMPH</string>
+    <string name="ampgValue">0.00</string>
 
 </resources>

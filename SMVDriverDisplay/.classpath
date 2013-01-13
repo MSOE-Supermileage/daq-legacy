@@ -5,5 +5,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="D:/SMV Views/DriverDisplayView/SMVDriverDisplay/libs/AmarinoLibrary_v0_55.jar"/>
+	<classpathentry kind="lib" path="D:/SMV Views/DriverDisplayView/SMVDriverDisplay/libs/gaugeview-library.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

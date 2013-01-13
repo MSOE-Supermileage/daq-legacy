@@ -4,6 +4,7 @@ package edu.smv.data;
 public class DataBase {
 	private double rpm;
 	private double mph;
+	private double amph;
 	private double mpg;
 	private double batteryVoltage;
 	private Logger logger;
@@ -12,9 +13,11 @@ public class DataBase {
 	 * Default Constructor
 	 */
 	public DataBase(){
-		//logger.setLogToSD(true);
-		//logger = new Logger();
-		//logger.run();
+		this.rpm = 0;
+		this.mpg = 0;
+		this.mpg = 0;
+		this.amph = 0;
+		this.batteryVoltage = 0;
 	}
 	
 	/**
@@ -24,23 +27,12 @@ public class DataBase {
 	 */
 	public boolean loadFromArduino(){
 		//TODO: Get Real Values
-		rpm = randomNumber(0, 999);
-		mph = randomNumber(0, 999);
-		mpg = randomNumber(0, 999);
-		batteryVoltage = randomNumber(0, 12);
+		rpm = (rpm < 999) ? rpm + 1 : 0;
+		mph = (mph < 999) ? mph + 1 : 0;
+		mpg = (mpg < 999) ? mph + 1 : 0;
+		amph = (amph < 999) ? mph + 1 : 0;
+		batteryVoltage = (batteryVoltage < 12) ? mph + 1 : 0;
 		return false;
-	}
-	
-	/**
-	 * Create a random number to mock data from arduino
-	 * Remove this method once loadFromArduino() has been implemented
-	 * @param minNum
-	 * @param maxNum
-	 * @return
-	 */
-	private double randomNumber(double minNum, double maxNum){
-		//TODO: REMOVE ME!
-		return Math.round((maxNum - minNum) * Math.random() + minNum);
 	}
 	
 	/**
@@ -90,6 +82,14 @@ public class DataBase {
 	 */
 	public double getBatteryVoltage() {
 		return batteryVoltage;
+	}
+
+	public double getAmph() {
+		return amph;
+	}
+
+	public void setAmph(double amph) {
+		this.amph = amph;
 	}
 
 }
