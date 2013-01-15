@@ -68,7 +68,7 @@ public class MainService extends Service {
 	    			//logData
 	    			if(logData){
 	    				lastTimeLogged = System.currentTimeMillis();
-	    				// data.logData();
+	    				data.logData();
 	    			}
     			}
     		}

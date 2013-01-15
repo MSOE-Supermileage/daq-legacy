@@ -2,20 +2,20 @@ package edu.smv.data;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.LinkedList;
-
-import android.os.Environment;
+import java.util.List;
 
 public class Logger extends Thread {
-	private Collection<String> logBuffer;
+	private List<String> logBuffer;
 	private boolean logToSD;
-	
+	private boolean appendFile;
+	private boolean running;
 	/**
 	 * Default Constructor
 	 */
 	public Logger(){
-		logBuffer = new LinkedList<String>();
+		this.logBuffer = new LinkedList<String>();
+		this.running = true;
 	}
 	
 	/**
@@ -26,7 +26,7 @@ public class Logger extends Thread {
 	public boolean logString(String out){
 		// Will this execute if the thread is paused?
 		boolean retVal = logBuffer.add(out);
-		this.notify();
+		//this.notify();
 		return retVal;
 	}
 	
@@ -35,29 +35,34 @@ public class Logger extends Thread {
 	 */
 	@Override
 	public void run(){
-//		while(true){
-//			Calendar rightNow = Calendar.getInstance();
-//			File file = new File("Change File Path.txt");
-//			boolean appendFile = true;
-//			
-//    		while(appendFile){
-//    			try {
-//    				// Pause Runnable if there's nothing to log.
-//    				if(logBuffer.isEmpty()){
-//    					this.wait();
-//    				}
-//    				
-//    				//Log Data append data to
-//    			    
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//    			
-//    		}
-//    	}
+		while(this.running){
+			String fileName = "" + Calendar.getInstance() + ".txt";
+			File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
+			File logFile = new File(fileDirectory, fileName);
+			AndroidFileIO afio = new AndroidFileIO();
+			AndroidFileIO.createDirectory(fileDirectory);
+			
+			appendFile = true;
+			
+    		while(this.running && this.appendFile){
+    			try {
+    				// Pause Runnable if there's nothing to log.
+    				if(this.logBuffer.isEmpty()){
+    					//this.wait();
+    				}
+    				
+    				// Remove from buffer if a successful write occurs
+    				if(afio.appendFile(logFile, this.logBuffer.get(0))){
+    					this.logBuffer.remove(0);
+    				}
+				//} catch (InterruptedException e) {
+				//	e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    			
+    		}
+    	}
 	}
 	
 	/**
@@ -74,6 +79,21 @@ public class Logger extends Thread {
 	 */
 	public void setLogToSD(boolean logToSD) {
 		this.logToSD = logToSD;
+	}
+	
+	/**
+	 * Log to a new file
+	 */
+	public void createNewFile(){
+		this.appendFile = false;
+	}
+	
+	/**
+	 * Kill the logger thread.
+	 */
+	public void killLogger(){
+		this.running = false;
+		this.logString("Logger closed at " + System.currentTimeMillis() + ".");
 	}
 	
 }

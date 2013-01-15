@@ -30,11 +30,4 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/edu/smv/communication/Info.txt</name>
-			<type>1</type>
-			<location>D:/SMV Views/DriverDisplayView/SMVDriverDisplay/src/edu/smv/communication/Info.txt</location>
-		</link>
-	</linkedResources>
 </projectDescription>

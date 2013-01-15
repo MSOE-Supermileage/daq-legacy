@@ -18,6 +18,7 @@ public class DataBase {
 		this.mpg = 0;
 		this.amph = 0;
 		this.batteryVoltage = 0;
+		this.logger = new Logger();
 	}
 	
 	/**
@@ -48,7 +49,7 @@ public class DataBase {
 	 */
 	@Override
 	public String toString(){
-		return null;
+		return this.mph + "/t"+ this.rpm + "/t" + this.mpg;
 		
 	}
 

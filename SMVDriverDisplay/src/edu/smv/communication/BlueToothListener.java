@@ -1,14 +1,14 @@
 package edu.smv.communication;
 
-import at.abraxas.amarino.*;
+//import at.abraxas.amarino.*;
 
-public class BlueToothListener extends Thread{
-	
-	@Override
-	public void run() {
-		while(true){
-			
-		}
-	}
-
-}
+//public class BlueToothListener extends Thread{
+//	
+//	@Override
+//	public void run() {
+//		while(true){
+//			
+//		}
+//	}
+//
+//}
