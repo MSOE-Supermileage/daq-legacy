@@ -22,15 +22,27 @@ public class AndroidFileIO extends android.os.Environment {
 	 * static boolean 	isExternalStorageRemovable()	- Returns whether the primary "external" storage device is removable.
 	 */
 	
-	
+	/**
+	 * AndroidFileIO() - Constructor
+	 */
 	public AndroidFileIO(){
 		super();
 	}
 	
-	public String readFile(File file){
+	/**
+	 * readFile - Method not yet implemented.
+	 * @param file
+	 * @return
+	 */
+	static public String readFile(File file){
 		throw new UnsupportedOperationException("Method not yet implemented.");
 	}
 	
+	/**
+	 * createDirectory(File dir) - create a new directory at the location specfied by the passed file.
+	 * @param dir
+	 * @return
+	 */
 	static public boolean createDirectory(File dir){
 		boolean retVal = false;
 		try{
@@ -42,19 +54,41 @@ public class AndroidFileIO extends android.os.Environment {
 		return retVal;
 	}
 	
-	public boolean writeFile(File file, String data){
-		return this.writer(file, data, false);
+	/**
+	 * writeFile(File, String) - Write a new file.
+	 * @param file
+	 * @param data
+	 * @return
+	 */
+	static public boolean writeFile(File file, String data){
+		return writer(file, data, false);
 	}
 	
-	public boolean appendFile(File file, String data){
-		return this.writer(file, data, true);
+	/**
+	 * Append to a file or create the file if it doesn't exist.
+	 * @param file
+	 * @param data
+	 * @return
+	 */
+	static public boolean appendFile(File file, String data){
+		return writer(file, data, true);
 	}
 	
-	private boolean writer(File file, String data, boolean appendFile){
+	/**
+	 * Private method that wrties to the storage device for both write and append file.
+	 * @param file
+	 * @param data
+	 * @param appendFile
+	 * @return
+	 */
+	static private boolean writer(File file, String data, boolean appendFile){
 		boolean retVal = false;
 		
 		String state = Environment.getExternalStorageState();
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		boolean isExternalWrite = file.getPath().substring(0, getExternalStorageDirectory().getPath().length()).equalsIgnoreCase(
+									getExternalStorageDirectory().getPath());
+		
+		if (isExternalWrite && Environment.MEDIA_MOUNTED.equals(state) || !isExternalWrite) {
 		    // We can read and write the media
 			
 			BufferedWriter output = null;

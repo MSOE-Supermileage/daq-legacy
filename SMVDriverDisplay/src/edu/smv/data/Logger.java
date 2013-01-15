@@ -10,6 +10,7 @@ public class Logger extends Thread {
 	private boolean logToSD;
 	private boolean appendFile;
 	private boolean running;
+	
 	/**
 	 * Default Constructor
 	 */
@@ -39,7 +40,6 @@ public class Logger extends Thread {
 			String fileName = "" + Calendar.getInstance() + ".txt";
 			File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
 			File logFile = new File(fileDirectory, fileName);
-			AndroidFileIO afio = new AndroidFileIO();
 			AndroidFileIO.createDirectory(fileDirectory);
 			
 			appendFile = true;
@@ -52,7 +52,7 @@ public class Logger extends Thread {
     				}
     				
     				// Remove from buffer if a successful write occurs
-    				if(afio.appendFile(logFile, this.logBuffer.get(0))){
+    				if(AndroidFileIO.appendFile(logFile, this.logBuffer.get(0))){
     					this.logBuffer.remove(0);
     				}
 				//} catch (InterruptedException e) {

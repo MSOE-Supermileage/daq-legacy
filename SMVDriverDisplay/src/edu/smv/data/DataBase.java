@@ -85,12 +85,12 @@ public class DataBase {
 		return batteryVoltage;
 	}
 
+	/**
+	 * Getter for average mph
+	 * @return
+	 */
 	public double getAmph() {
 		return amph;
-	}
-
-	public void setAmph(double amph) {
-		this.amph = amph;
 	}
 
 }

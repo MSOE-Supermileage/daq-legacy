@@ -75,7 +75,6 @@ public class MainService extends Service {
     	}
     
 	    private Runnable displayValues = new Runnable() {
-	    	
 	    	public void run(){
 	    		mainActivity.setContentView(R.layout.activity_main);
 	        	TextView mphValue = (TextView) mainActivity.findViewById(R.id.mphValue);
