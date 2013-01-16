@@ -18,7 +18,7 @@ public class DataBase {
 		this.mpg = 0;
 		this.amph = 0;
 		this.batteryVoltage = 0;
-		this.logger = new Logger();
+		this.logger = new Logger(getHeader());
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class DataBase {
 		mph = (mph < 999) ? mph + 1 : 0;
 		mpg = (mpg < 999) ? mph + 1 : 0;
 		amph = (amph < 999) ? mph + 1 : 0;
-		batteryVoltage = (batteryVoltage < 12) ? mph + 1 : 0;
+		batteryVoltage = (batteryVoltage < 12) ? batteryVoltage + 1 : 0;
 		return false;
 	}
 	
@@ -41,7 +41,17 @@ public class DataBase {
 	 * @return
 	 */
 	public boolean logData(){
-		return logger.logString(this.toString());
+		boolean retVal = logger.addLine(this.toString());
+		logger.flush();
+		return retVal;
+	}
+	
+	/**
+	 * Returns the header string for what data is in the database.
+	 * @return
+	 */
+	public String getHeader(){
+		return "MPH\tRPM\tMPG";
 	}
 	
 	/**
@@ -49,9 +59,10 @@ public class DataBase {
 	 */
 	@Override
 	public String toString(){
-		return this.mph + "/t"+ this.rpm + "/t" + this.mpg;
+		return this.mph + "\t"+ this.rpm + "\t" + this.mpg;
 		
 	}
+	
 
 	/**
 	 * Getter for RPM

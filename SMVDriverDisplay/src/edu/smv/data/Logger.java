@@ -5,95 +5,102 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Logger extends Thread {
+public class Logger {
+	final String logFileHeader;
+	
 	private List<String> logBuffer;
-	private boolean logToSD;
-	private boolean appendFile;
-	private boolean running;
+	private File logFile;
+	private boolean logInProcess;
+	private boolean logBufferLocked;
+	
 	
 	/**
-	 * Default Constructor
+	 * Default constructor that makes the header line the date.
 	 */
 	public Logger(){
+		this("" + Calendar.getInstance().getTime());
+	}
+	
+	/**
+	 * Constructor
+	 */
+	public Logger(String header){
 		this.logBuffer = new LinkedList<String>();
-		this.running = true;
+		this.logBufferLocked = false;
+		this.logFileHeader = header;
+		this.createNewFile();
 	}
 	
-	/**
-	 * Add the string to logBuffer for the thread to handle
-	 * @param out
-	 * @return
-	 */
-	public boolean logString(String out){
-		// Will this execute if the thread is paused?
-		boolean retVal = logBuffer.add(out);
-		//this.notify();
-		return retVal;
-	}
-	
-	/**
-	 * Override the run() method from thread
-	 */
-	@Override
-	public void run(){
-		while(this.running){
-			String fileName = "" + Calendar.getInstance() + ".txt";
-			File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
-			File logFile = new File(fileDirectory, fileName);
-			AndroidFileIO.createDirectory(fileDirectory);
-			
-			appendFile = true;
-			
-    		while(this.running && this.appendFile){
-    			try {
-    				// Pause Runnable if there's nothing to log.
-    				if(this.logBuffer.isEmpty()){
-    					//this.wait();
-    				}
-    				
-    				// Remove from buffer if a successful write occurs
-    				if(AndroidFileIO.appendFile(logFile, this.logBuffer.get(0))){
-    					this.logBuffer.remove(0);
-    				}
-				//} catch (InterruptedException e) {
-				//	e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-    			
-    		}
-    	}
-	}
-	
-	/**
-	 * Getter for logToSD
-	 * @return
-	 */
-	public boolean isLogToSD() {
-		return logToSD;
-	}
-
-	/**
-	 * Setter for logToSD
-	 * @param logToSD
-	 */
-	public void setLogToSD(boolean logToSD) {
-		this.logToSD = logToSD;
-	}
 	
 	/**
 	 * Log to a new file
 	 */
 	public void createNewFile(){
-		this.appendFile = false;
+		String time = "" + Calendar.getInstance().getTime();
+		time = time.replaceAll(" ", "_");
+		time = time.replaceAll(":", "-");
+		String fileName = time + ".txt";
+		File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
+		
+		if(!fileDirectory.exists()){
+			AndroidFileIO.createDirectory(fileDirectory);
+		}
+		
+		this.logFile = new File(fileDirectory, fileName);
+		AndroidFileIO.writeFile(this.logFile, this.logFileHeader + "\n");
+	}
+	
+	public boolean addLine(String line){
+		boolean retVal = false;
+		
+		if(!logBufferLocked){
+			retVal = logBuffer.add(line);
+		}
+		
+		return retVal;
+	}
+	
+	
+	/**
+	 * Append the data in log buffer to the log file
+	 * @param out
+	 * @return
+	 */
+	public void flush(){
+		Thread loggingThread = new Thread(new Runnable() {
+			 public void run(){
+				 //Wait until any previous threads are done accessing the log
+				 while(logInProcess || !logFile.canWrite());
+				 
+				logBufferLocked = true;
+				List<String> tempLog = new LinkedList<String>();
+				tempLog.addAll(logBuffer);
+				logBuffer.removeAll(tempLog);
+				logBufferLocked = false;
+				
+			    logInProcess = true;
+			    while(!tempLog.isEmpty()){
+			    	AndroidFileIO.appendFile(logFile, tempLog.remove(0) + "\n");
+			    }
+			    logInProcess = false;
+			 }
+		});
+		loggingThread.start();
 	}
 	
 	/**
-	 * Kill the logger thread.
+	 * Return if there's currently a thread logging information to the file
+	 * @return
 	 */
-	public void killLogger(){
-		this.running = false;
-		this.logString("Logger closed at " + System.currentTimeMillis() + ".");
-	}
+	 public boolean getLogInProcess(){
+		 return this.logInProcess;
+	 }
+	 
+		/**
+		 * Kill the logger thread.
+		 */
+		public void killLogger(){
+			throw new UnsupportedOperationException("Method not yet implemented.");
+		}
 	
 }

@@ -94,12 +94,15 @@ public class AndroidFileIO extends android.os.Environment {
 			BufferedWriter output = null;
 			try{
 				if(!file.exists()){
+					File parent = file.getParentFile();
+					if(parent != null && !parent.exists()){
+						createDirectory(parent);
+					}
 					file.createNewFile();
 				}
 				
 				output = new BufferedWriter(new FileWriter(file, appendFile));
 				output.write(data);
-				output.newLine();
 				retVal = true;
 			}catch(Exception e){
 				e.printStackTrace();

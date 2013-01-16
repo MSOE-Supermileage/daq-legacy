@@ -15,7 +15,7 @@ public class MainService extends Service {
 	private DataHandler dataHandler;
 	
 	private final double DISPLAY_REFRESH = .5 * 1000; 	//in milliseconds
-	private final double DATA_LOG		 = 30 * 1000;	//in milliseconds
+	private final double DATA_LOG		 = 15 * 1000;	//in milliseconds
 	
 	
 	public MainService(Activity mainActivity) {
