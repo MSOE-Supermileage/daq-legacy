@@ -2,78 +2,105 @@ package edu.smv.data;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
-import android.os.Environment;
-
-public class Logger extends Thread {
-	private Collection<String> logBuffer;
-	private boolean logToSD;
+public class Logger {
+	final String logFileHeader;
+	
+	private List<String> logBuffer;
+	private File logFile;
+	private boolean logInProcess;
+	private boolean logBufferLocked;
+	
 	
 	/**
-	 * Default Constructor
+	 * Default constructor that makes the header line the date.
 	 */
 	public Logger(){
-		logBuffer = new LinkedList<String>();
+		this("" + Calendar.getInstance().getTime());
 	}
 	
 	/**
-	 * Add the string to logBuffer for the thread to handle
-	 * @param out
-	 * @return
+	 * Constructor
 	 */
-	public boolean logString(String out){
-		// Will this execute if the thread is paused?
-		boolean retVal = logBuffer.add(out);
-		this.notify();
+	public Logger(String header){
+		this.logBuffer = new LinkedList<String>();
+		this.logBufferLocked = false;
+		this.logFileHeader = header;
+		this.createNewFile();
+	}
+	
+	
+	/**
+	 * Log to a new file
+	 */
+	public void createNewFile(){
+		String time = "" + Calendar.getInstance().getTime();
+		time = time.replaceAll(" ", "_");
+		time = time.replaceAll(":", "-");
+		String fileName = time + ".txt";
+		File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
+		
+		if(!fileDirectory.exists()){
+			AndroidFileIO.createDirectory(fileDirectory);
+		}
+		
+		this.logFile = new File(fileDirectory, fileName);
+		AndroidFileIO.writeFile(this.logFile, this.logFileHeader + "\n");
+	}
+	
+	public boolean addLine(String line){
+		boolean retVal = false;
+		
+		if(!logBufferLocked){
+			retVal = logBuffer.add(line);
+		}
+		
 		return retVal;
 	}
 	
+	
 	/**
-	 * Override the run() method from thread
+	 * Append the data in log buffer to the log file
+	 * @param out
+	 * @return
 	 */
-	@Override
-	public void run(){
-//		while(true){
-//			Calendar rightNow = Calendar.getInstance();
-//			File file = new File("Change File Path.txt");
-//			boolean appendFile = true;
-//			
-//    		while(appendFile){
-//    			try {
-//    				// Pause Runnable if there's nothing to log.
-//    				if(logBuffer.isEmpty()){
-//    					this.wait();
-//    				}
-//    				
-//    				//Log Data append data to
-//    			    
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//    			
-//    		}
-//    	}
+	public void flush(){
+		Thread loggingThread = new Thread(new Runnable() {
+			 public void run(){
+				 //Wait until any previous threads are done accessing the log
+				 while(logInProcess || !logFile.canWrite());
+				 
+				logBufferLocked = true;
+				List<String> tempLog = new LinkedList<String>();
+				tempLog.addAll(logBuffer);
+				logBuffer.removeAll(tempLog);
+				logBufferLocked = false;
+				
+			    logInProcess = true;
+			    while(!tempLog.isEmpty()){
+			    	AndroidFileIO.appendFile(logFile, tempLog.remove(0) + "\n");
+			    }
+			    logInProcess = false;
+			 }
+		});
+		loggingThread.start();
 	}
 	
 	/**
-	 * Getter for logToSD
+	 * Return if there's currently a thread logging information to the file
 	 * @return
 	 */
-	public boolean isLogToSD() {
-		return logToSD;
-	}
-
-	/**
-	 * Setter for logToSD
-	 * @param logToSD
-	 */
-	public void setLogToSD(boolean logToSD) {
-		this.logToSD = logToSD;
-	}
+	 public boolean getLogInProcess(){
+		 return this.logInProcess;
+	 }
+	 
+		/**
+		 * Kill the logger thread.
+		 */
+		public void killLogger(){
+			throw new UnsupportedOperationException("Method not yet implemented.");
+		}
 	
 }

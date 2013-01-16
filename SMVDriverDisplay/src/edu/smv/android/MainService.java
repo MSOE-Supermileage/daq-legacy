@@ -15,7 +15,7 @@ public class MainService extends Service {
 	private DataHandler dataHandler;
 	
 	private final double DISPLAY_REFRESH = .5 * 1000; 	//in milliseconds
-	private final double DATA_LOG		 = 30 * 1000;	//in milliseconds
+	private final double DATA_LOG		 = 15 * 1000;	//in milliseconds
 	
 	
 	public MainService(Activity mainActivity) {
@@ -68,14 +68,13 @@ public class MainService extends Service {
 	    			//logData
 	    			if(logData){
 	    				lastTimeLogged = System.currentTimeMillis();
-	    				// data.logData();
+	    				data.logData();
 	    			}
     			}
     		}
     	}
     
 	    private Runnable displayValues = new Runnable() {
-	    	
 	    	public void run(){
 	    		mainActivity.setContentView(R.layout.activity_main);
 	        	TextView mphValue = (TextView) mainActivity.findViewById(R.id.mphValue);

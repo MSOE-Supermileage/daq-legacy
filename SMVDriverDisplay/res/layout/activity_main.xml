@@ -144,13 +144,4 @@
         </TableRow>
     </TableLayout>
 
-    <edu.smv.android.views.CircularGauge
-        android:id="@+id/circularGauge1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="84dp"
-        android:layout_marginTop="26dp"
-        android:layout_toLeftOf="@+id/btnDiagnostics" />
-
 </RelativeLayout>
