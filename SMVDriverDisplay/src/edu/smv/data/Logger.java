@@ -9,16 +9,23 @@ public class Logger {
 	final String logFileHeader;
 	
 	private List<String> logBuffer;
-	private File logFile;
 	private boolean logInProcess;
 	private boolean logBufferLocked;
+	private File logFile;
 	
+	/**
+	 * Get the current time from the logger.
+	 * @return Time as a string.
+	 */
+	static private String getLogTime(){
+		return "" + Calendar.getInstance().getTime();
+	}
 	
 	/**
 	 * Default constructor that makes the header line the date.
 	 */
 	public Logger(){
-		this("" + Calendar.getInstance().getTime());
+		this("" + getLogTime());
 	}
 	
 	/**
@@ -27,7 +34,7 @@ public class Logger {
 	public Logger(String header){
 		this.logBuffer = new LinkedList<String>();
 		this.logBufferLocked = false;
-		this.logFileHeader = header;
+		this.logFileHeader = "Time," + header;
 		this.createNewFile();
 	}
 	
@@ -36,10 +43,10 @@ public class Logger {
 	 * Log to a new file
 	 */
 	public void createNewFile(){
-		String time = "" + Calendar.getInstance().getTime();
+		String time = "" + getLogTime();
 		time = time.replaceAll(" ", "_");
 		time = time.replaceAll(":", "-");
-		String fileName = time + ".txt";
+		String fileName = time + ".csv";
 		File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
 		
 		if(!fileDirectory.exists()){
@@ -63,10 +70,18 @@ public class Logger {
 	
 	/**
 	 * Append the data in log buffer to the log file
-	 * @param out
-	 * @return
 	 */
 	public void flush(){
+		while(!logBuffer.isEmpty()){
+	    	AndroidFileIO.appendFile(logFile, getLogTime() + "," + logBuffer.remove(0) + "\n");
+	    }
+	}
+	
+	
+	/**
+	 * Flush the data using a seperate thread.
+	 */
+	public void flushThread(){
 		Thread loggingThread = new Thread(new Runnable() {
 			 public void run(){
 				 //Wait until any previous threads are done accessing the log
@@ -80,7 +95,7 @@ public class Logger {
 				
 			    logInProcess = true;
 			    while(!tempLog.isEmpty()){
-			    	AndroidFileIO.appendFile(logFile, tempLog.remove(0) + "\n");
+			    	AndroidFileIO.appendFile(logFile, getLogTime() + "," + tempLog.remove(0) + "\n");
 			    }
 			    logInProcess = false;
 			 }
@@ -96,11 +111,11 @@ public class Logger {
 		 return this.logInProcess;
 	 }
 	 
-		/**
-		 * Kill the logger thread.
-		 */
-		public void killLogger(){
-			throw new UnsupportedOperationException("Method not yet implemented.");
-		}
+	/**
+	 * Kill the logger thread.
+	 */
+	public void killLogger(){
+		throw new UnsupportedOperationException("Method not yet implemented.");
+	}
 	
 }

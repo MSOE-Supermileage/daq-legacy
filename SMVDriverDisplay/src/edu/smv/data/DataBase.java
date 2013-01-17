@@ -42,7 +42,7 @@ public class DataBase {
 	 */
 	public boolean logData(){
 		boolean retVal = logger.addLine(this.toString());
-		logger.flush();
+		logger.flushThread();
 		return retVal;
 	}
 	
@@ -51,7 +51,7 @@ public class DataBase {
 	 * @return
 	 */
 	public String getHeader(){
-		return "MPH\tRPM\tMPG";
+		return "MPH,RPM,MPG";
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public class DataBase {
 	 */
 	@Override
 	public String toString(){
-		return this.mph + "\t"+ this.rpm + "\t" + this.mpg;
+		return this.mph + "," + this.rpm + "," + this.mpg;
 		
 	}
 	
