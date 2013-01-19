@@ -16,10 +16,12 @@ public class MainService extends Service {
 	private final double DISPLAY_REFRESH = .25 * 1000; 	//in milliseconds
 	private final double DATA_LOG		 = 15 * 1000;	//in milliseconds
 	
+	private DataBase data;
 	
 	public MainService(Activity mainActivity) {
 		this.mainActivity = mainActivity;
 		this.updateGUI = true;
+		this.data = new DataBase();
 		this.startDataHandler();
 	}
 	
@@ -43,12 +45,6 @@ public class MainService extends Service {
 	}
 	
 	private class DataHandler implements Runnable {
-		private DataBase data;
-		
-		public DataHandler(){
-			data = new DataBase();
-		}
-		
 		public void run(){
     		double lastTimeDisplayed = -1;
     		double lastTimeLogged = -1;
@@ -67,7 +63,7 @@ public class MainService extends Service {
 	    				mainActivity.runOnUiThread(displayValues);
 	    			}
 	    			
-	    			//logData
+	    			// Log Data
 	    			if(logData){
 	    				lastTimeLogged = System.currentTimeMillis();
 	    				data.logData();
@@ -78,7 +74,6 @@ public class MainService extends Service {
     
 	    private Runnable displayValues = new Runnable() {
 	    	public void run(){
-	    		mainActivity.setContentView(R.layout.activity_main);
 	        	TextView mphValue = (TextView) mainActivity.findViewById(R.id.mphValue);
 	        	TextView rpmValue = (TextView) mainActivity.findViewById(R.id.rpmValue);
 	        	TextView mpgValue = (TextView) mainActivity.findViewById(R.id.mpgValue);
