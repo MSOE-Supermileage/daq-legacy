@@ -12,17 +12,15 @@ public class MainService extends Service {
 	
 	private Activity mainActivity;
 	private boolean updateGUI;
-	private DataHandler dataHandler;
 	
-	private final double DISPLAY_REFRESH = .5 * 1000; 	//in milliseconds
+	private final double DISPLAY_REFRESH = .25 * 1000; 	//in milliseconds
 	private final double DATA_LOG		 = 15 * 1000;	//in milliseconds
 	
 	
 	public MainService(Activity mainActivity) {
 		this.mainActivity = mainActivity;
 		this.updateGUI = true;
-		this.dataHandler = new DataHandler();
-		this.dataHandler.start();
+		this.startDataHandler();
 	}
 	
 	@Override
@@ -39,15 +37,19 @@ public class MainService extends Service {
 		this.updateGUI = updateGUI;
 	}
 	
-	private class DataHandler extends Thread {
+	public void startDataHandler(){
+		Thread dataHandler = new Thread(new DataHandler());
+		dataHandler.start();
+	}
+	
+	private class DataHandler implements Runnable {
 		private DataBase data;
 		
 		public DataHandler(){
 			data = new DataBase();
 		}
 		
-		@Override
-    	public void run(){
+		public void run(){
     		double lastTimeDisplayed = -1;
     		double lastTimeLogged = -1;
     		
