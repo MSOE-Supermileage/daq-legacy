@@ -84,6 +84,9 @@ public class MainService extends Service {
 		btnToggleLogger.setText("OFF");
 		btnToggleLogger.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+            	if(data.getLogFile() == null){
+            		data.createNewLog();
+            	}
                 loggerOn = !loggerOn;
                 btnToggleLogger.setChecked(loggerOn);
             }
