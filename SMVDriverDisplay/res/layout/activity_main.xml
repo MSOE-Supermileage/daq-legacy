@@ -45,106 +45,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/TableLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="false"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-
-            <TextView
-                android:id="@+id/lblMPH"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="@string/lblMPH"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblAMPH"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="@string/lblAMPG"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblRPM"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lblRPM"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblMPG"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lblMPG"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:baselineAligned="true" >
-
-            <TextView
-                android:id="@+id/mphValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="@string/mphValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-
-            <TextView
-                android:id="@+id/amphValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="@string/ampgValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-
-            <TextView
-                android:id="@+id/rpmValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="@string/rpmValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-
-            <TextView
-                android:id="@+id/mpgValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="78dp"
-                android:layout_weight="1"
-                android:text="@string/mpgValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-        </TableRow>
-
-    </TableLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -180,5 +80,121 @@
                 android:text="@string/strNewLog" />
         </LinearLayout>
     </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/TableLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="61dp" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/lblMPH"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/lblMPH"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/lblAMPH"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/lblAMPG"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/lblRPM"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/lblRPM"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/lblMPG"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/lblMPG"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:baselineAligned="true" >
+
+            <TextView
+                android:id="@+id/mphValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/mphValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/amphValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/ampgValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/rpmValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/rpmValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+
+            <TextView
+                android:id="@+id/mpgValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="6"
+                android:layout_marginRight="6"
+                android:layout_weight="1"
+                android:text="@string/mpgValue"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="36dp" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>
