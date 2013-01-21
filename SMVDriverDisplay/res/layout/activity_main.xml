@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     android:columnCount="6"
     android:orientation="vertical" >
-
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginLeft="12dp"
         android:orientation="vertical" >
-
+
         <DigitalClock
             android:id="@+id/digitalClock1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginLeft="19dp"
             android:text="@string/digitalClock" />
 
         <LinearLayout
@@ -27,12 +27,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
-
+
             <TextView
                 android:id="@+id/lblBatteryVoltage"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
                 android:text="@string/lblBattery"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -45,13 +44,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </LinearLayout>
-
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
         android:orientation="vertical" >
 
         <TextView
