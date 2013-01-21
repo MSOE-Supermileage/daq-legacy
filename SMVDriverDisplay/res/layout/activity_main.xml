@@ -6,14 +6,6 @@
     android:columnCount="6"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btnDiagnostics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/btnDiagnostics" />
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
@@ -24,11 +16,12 @@
 
         <DigitalClock
             android:id="@+id/digitalClock1"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_marginLeft="19dp"
             android:text="DigitalClock" />
-
+
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="wrap_content"
@@ -37,7 +30,7 @@
 
             <TextView
                 android:id="@+id/lblBatteryVoltage"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
                 android:text="@string/lblBattery"
@@ -143,5 +136,40 @@
                 android:textSize="36dp" />
         </TableRow>
     </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/lblLogger"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ToggleButton
+                android:id="@+id/BTNtoggleLogger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton" />
+
+            <Button
+                android:id="@+id/btnNewLoggerFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strNewLog" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
