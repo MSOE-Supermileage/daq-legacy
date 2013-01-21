@@ -6,12 +6,9 @@
     <string name="mphValue">0.00</string>
     <string name="rpmValue">0.00</string>
     <string name="rpmDisplay">RPM</string>
-    <string name="mpgLabel">MPG</string>
     <string name="mpgValue">0.00</string>
-    <string name="mphLbl">mphLbl</string>
     <string name="mph">MPH</string>
     <string name="batteryValue">12.00V</string>
-    <string name="btnDiagnostics">Diagnostics</string>
     <string name="lblMPH">MPH</string>
     <string name="lblRPM">RPM</string>
     <string name="lblMPG">MPG</string>
@@ -20,5 +17,7 @@
     <string name="ampgValue">0.00</string>
     <string name="lblLogger">Data Logger</string>
     <string name="strNewLog">New Log</string>
+    <string name="strToggleLogger">Toggle Logger</string>
+    <string name="digitalClock">DigitalClock</string>
 
 </resources>
