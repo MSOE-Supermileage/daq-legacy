@@ -142,4 +142,8 @@ public class DataBase {
 		return amph;
 	}
 
+	public void createNewLog() {
+		logger.createNewFile();
+	}
+
 }
