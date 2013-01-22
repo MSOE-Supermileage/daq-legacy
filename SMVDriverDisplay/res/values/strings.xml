@@ -9,5 +9,8 @@
     <string name="amph">Average MPH\n%s</string>
     <string name="rpm">RPM\n%s</string>
     <string name="battery">Battery Voltage: %s</string>
+    <string name="lblLogger">Data Logger</string>
+    <string name="strNewLog">New Log</string>
+    <string name="strToggleLogger">Toggle Logger</string>
 
 </resources>

@@ -6,16 +6,6 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal" >
 
-    <Button
-        android:id="@+id/btnDiagnostics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="@string/btnDiagnostics" />
-
     <TextView
         android:id="@+id/lblBatteryVoltage"
         android:layout_width="wrap_content"
@@ -27,7 +17,7 @@
         android:text="@string/battery"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <DigitalClock
+    <android.widget.DigitalClock
         android:id="@+id/digitalClock1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,4 +75,29 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
+            <Button
+                android:id="@+id/btnNewLoggerFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/strNewLog" />
+
+            <ToggleButton
+                android:id="@+id/BTNtoggleLogger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/btnNewLoggerFile"
+                android:text="@string/strToggleLogger" />
+
+            <TextView
+                android:id="@+id/lblLogger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btnNewLoggerFile"
+                android:layout_alignLeft="@+id/BTNtoggleLogger"
+                android:text="@string/lblLogger"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+     
 </RelativeLayout>
