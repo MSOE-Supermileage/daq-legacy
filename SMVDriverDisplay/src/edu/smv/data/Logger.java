@@ -35,6 +35,7 @@ public class Logger {
 		this.logBuffer = new LinkedList<String>();
 		this.logBufferLocked = false;
 		this.logFileHeader = "Time," + header;
+		this.createNewFile();
 	}
 	
 	
@@ -109,14 +110,6 @@ public class Logger {
 	 public boolean getLogInProcess(){
 		 return this.logInProcess;
 	 }
-	 
-	 /**
-	  * Return the log file
-	  * @return
-	  */
-	 public File getLogFile() {
-			return this.logFile;
-		}
 	 
 	/**
 	 * Kill the logger thread.

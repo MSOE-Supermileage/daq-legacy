@@ -1,6 +1,5 @@
 package edu.smv.data;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -141,14 +140,6 @@ public class DataBase {
 	 */
 	public double getAmph() {
 		return amph;
-	}
-
-	public void createNewLog() {
-		logger.createNewFile();
-	}
-
-	public File getLogFile() {
-		return logger.getLogFile();
 	}
 
 }

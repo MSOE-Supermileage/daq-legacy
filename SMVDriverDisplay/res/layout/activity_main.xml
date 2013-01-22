@@ -4,8 +4,7 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:columnCount="6"
-    android:orientation="vertical" >
+    android:gravity="center_horizontal" >
 
     <Button
         android:id="@+id/btnDiagnostics"
@@ -13,140 +12,77 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:text="@string/btnDiagnostics" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <TextView
+        android:id="@+id/lblBatteryVoltage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:orientation="vertical" >
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/battery"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <!--
-         What version of API are we running? 
-         DigitalClock is deprecated
-         Should use TextClock since API 17
-         -->
-        <DigitalClock
-            android:id="@+id/digitalClock1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="19dp" />
+    <DigitalClock
+        android:id="@+id/digitalClock1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lblBatteryVoltage"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/lblBatteryVoltage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:text="@string/lblBattery"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/bvVoltage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:text="@string/batteryValue"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/TableLayout2"
-        android:layout_width="482dp"
+    <RelativeLayout
+        android:id="@+id/centeredholder"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" >
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/lblMPH"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/lblRPM"
+            android:gravity="center_horizontal"
+            android:text="@string/mph"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/lblMPH"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lblMPH"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/lblAmph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/lblMPH"
+            android:gravity="center_horizontal"
+            android:lines="2"
+            android:text="@string/amph"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/TextView02"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lblAMPG"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:id="@+id/lblRPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/lblMPG"
+            android:gravity="center_horizontal"
+            android:text="@string/rpm"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/lblRPM"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/lblRPM"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblMPG"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="@string/lblMPG"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:baselineAligned="true" >
-
-            <TextView
-                android:id="@+id/mphValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mphValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36sp" />
-
-            <TextView
-                android:id="@+id/amphValue"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:text="@string/ampgValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36sp" />
-
-            <TextView
-                android:id="@+id/rpmValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/rpmValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36sp" />
-
-            <TextView
-                android:id="@+id/mpgValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="78dp"
-                android:layout_weight="1"
-                android:text="@string/mpgValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36sp" />
-        </TableRow>
-    </TableLayout>
+        <TextView
+            android:id="@+id/lblMPG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/mpg"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
 
 </RelativeLayout>
