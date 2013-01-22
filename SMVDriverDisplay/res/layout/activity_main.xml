@@ -1,37 +1,50 @@
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:columnCount="6"
     android:orientation="vertical" >
-
+
+    <Button
+        android:id="@+id/btnDiagnostics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/btnDiagnostics" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
         android:orientation="vertical" >
-
+
+        <!--
+         What version of API are we running? 
+         DigitalClock is deprecated
+         Should use TextClock since API 17
+         -->
         <DigitalClock
             android:id="@+id/digitalClock1"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="@string/digitalClock" />
+            android:layout_marginLeft="19dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
-
+
             <TextView
                 android:id="@+id/lblBatteryVoltage"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
                 android:text="@string/lblBattery"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -44,96 +57,47 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp"
-        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/lblLogger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/lblLogger"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <ToggleButton
-                android:id="@+id/BTNtoggleLogger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/strToggleLogger" />
-
-            <Button
-                android:id="@+id/btnNewLoggerFile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/strNewLog" />
-        </LinearLayout>
-    </LinearLayout>
-
     <TableLayout
         android:id="@+id/TableLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="482dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" >
 
         <TableRow
             android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" >
 
             <TextView
                 android:id="@+id/lblMPH"
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
                 android:layout_weight="1"
                 android:text="@string/lblMPH"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/lblAMPH"
-                android:layout_width="fill_parent"
+                android:id="@+id/TextView02"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
                 android:layout_weight="1"
                 android:text="@string/lblAMPG"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/lblRPM"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="@string/lblRPM"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/lblMPG"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="6dp"
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:text="@string/lblMPG"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -141,58 +105,47 @@
 
         <TableRow
             android:id="@+id/tableRow2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
             android:baselineAligned="true" >
 
             <TextView
                 android:id="@+id/mphValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
                 android:layout_weight="1"
                 android:text="@string/mphValue"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/amphValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="@string/ampgValue"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/rpmValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
                 android:layout_weight="1"
                 android:text="@string/rpmValue"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/mpgValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="78dp"
                 android:layout_weight="1"
                 android:text="@string/mpgValue"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
+                android:textSize="36sp" />
         </TableRow>
     </TableLayout>
 
