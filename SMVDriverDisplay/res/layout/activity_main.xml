@@ -1,199 +1,103 @@
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnCount="6"
-    android:orientation="vertical" >
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal" >
+
+    <TextView
+        android:id="@+id/lblBatteryVoltage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
-        android:orientation="vertical" >
-
-        <DigitalClock
-            android:id="@+id/digitalClock1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="@string/digitalClock" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/battery"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/lblBatteryVoltage"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lblBattery"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/bvVoltage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="17dp"
-                android:text="@string/batteryValue"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <android.widget.DigitalClock
+        android:id="@+id/digitalClock1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="12dp"
-        android:orientation="vertical" >
+        android:layout_above="@+id/lblBatteryVoltage"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/centeredholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
 
         <TextView
-            android:id="@+id/lblLogger"
+            android:id="@+id/lblMPH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/lblLogger"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/lblRPM"
+            android:gravity="center_horizontal"
+            android:text="@string/mph"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
+        <TextView
+            android:id="@+id/lblAmph"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/lblMPH"
+            android:gravity="center_horizontal"
+            android:lines="2"
+            android:text="@string/amph"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <ToggleButton
-                android:id="@+id/BTNtoggleLogger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/strToggleLogger" />
+        <TextView
+            android:id="@+id/lblRPM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/lblMPG"
+            android:gravity="center_horizontal"
+            android:text="@string/rpm"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/lblMPG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/mpg"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
 
             <Button
                 android:id="@+id/btnNewLoggerFile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:text="@string/strNewLog" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TableLayout
-        android:id="@+id/TableLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-
-            <TextView
-                android:id="@+id/lblMPH"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/lblMPH"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblAMPH"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/lblAMPG"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblRPM"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/lblRPM"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/lblMPG"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/lblMPG"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:baselineAligned="true" >
-
-            <TextView
-                android:id="@+id/mphValue"
+            <ToggleButton
+                android:id="@+id/BTNtoggleLogger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/mphValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/btnNewLoggerFile"
+                android:text="@string/strToggleLogger" />
 
             <TextView
-                android:id="@+id/amphValue"
+                android:id="@+id/lblLogger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/ampgValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-
-            <TextView
-                android:id="@+id/rpmValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/rpmValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-
-            <TextView
-                android:id="@+id/mpgValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:text="@string/mpgValue"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="36dp" />
-        </TableRow>
-    </TableLayout>
-
+                android:layout_above="@+id/btnNewLoggerFile"
+                android:layout_alignLeft="@+id/BTNtoggleLogger"
+                android:text="@string/lblLogger"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+     
 </RelativeLayout>
