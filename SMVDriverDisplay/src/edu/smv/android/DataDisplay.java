@@ -16,8 +16,8 @@ public class DataDisplay implements Runnable {
 	private boolean updateGUI;
 	private boolean loggerOn;
 
-	private double refreshDisplay; // in milliseconds
-	private double dataLogRate; // in milliseconds
+	private double refreshDisplay; 	// in milliseconds
+	private double dataLogRate; 	// in milliseconds
 
 	private DataBase data;
 
@@ -93,6 +93,9 @@ public class DataDisplay implements Runnable {
 	}
 
 	
+	/**
+	 * Thread is running.
+	 */
 	public void run() {
 		double lastTimeDisplayed = -1;
 		double lastTimeLogged = -1;
