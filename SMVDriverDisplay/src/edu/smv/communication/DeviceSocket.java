@@ -34,6 +34,27 @@ public class DeviceSocket {
 		return this.deviceID;
 	}
 	
+	public byte[] loadValues(){
+		OutputStream out = this.getOutputStream();
+		InputStream in = this.getInputStream();
+		byte[] dataBuffer = null;
+		
+		try {
+			out.write(0);
+			
+			dataBuffer = new byte[4];
+			in.read(dataBuffer, 0, dataBuffer.length);
+			
+			// Eat rest of bytes
+			while(in.read() > 0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dataBuffer;
+	}
+	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////		Methods Wrapped from BloothSocket		//////////////////////

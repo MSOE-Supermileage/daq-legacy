@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.WindowManager;
 
 public class MainActivity extends Activity {
-	private MainService driverDisplay;
+	private DataDisplay driverDisplay;
 	private final CharSequence TITLE = "MSOE Data Display";
 
     @Override
@@ -19,7 +19,15 @@ public class MainActivity extends Activity {
         // Turn off sleep
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
-        driverDisplay = new MainService(this);
+        // Set Orientation to landscape
+        this.setRequestedOrientation(0);
+        
+        double displayRefresh = .25 * 1000;
+        double logData = 1.0 * 1000;
+        
+        driverDisplay = new DataDisplay(this, displayRefresh, logData);
+        Thread driverDisplayThread = new Thread(driverDisplay);
+        driverDisplayThread.start();
     }
 
     @Override
@@ -45,16 +53,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy(){
     	super.onDestroy();
-    	driverDisplay.stopSelf();
-    	driverDisplay = null; 
+    	driverDisplay.terminateDataDisplay();
     }
     
     @Override
     public void setRequestedOrientation(int orientation){
-    	// Ignore the parameter and
-    	// Force orientation to always be landscape
-    	// http://developer.android.com/reference/android/R.attr.html#screenOrientation
-    	super.setRequestedOrientation(0);
+    	// Do nothing on user orientation change
     }
     
 }

@@ -2,9 +2,12 @@ package edu.smv.data;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.UnsupportedOperationException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 import android.os.Environment;
 
@@ -30,13 +33,26 @@ public class AndroidFileIO extends android.os.Environment {
 	}
 	
 	/**
-	 * readFile - Method not yet implemented.
+	 * readFile - Read a text file and return an array containing each line from the file in an index.
 	 * @param file
 	 * @return
 	 */
-	static public String readFile(File file){
-		throw new UnsupportedOperationException("Method not yet implemented.");
+	static public String[] readFile(File file){
+		List<String> retVal = new LinkedList<String>();
+		
+		try {
+			Scanner scan = new Scanner(file);
+			
+			while(scan.hasNext()){
+				retVal.add(scan.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return (String[]) retVal.toArray();
 	}
+	
 	
 	/**
 	 * createDirectory(File dir) - create a new directory at the location specfied by the passed file.
@@ -61,7 +77,7 @@ public class AndroidFileIO extends android.os.Environment {
 	 * @return
 	 */
 	static public boolean writeFile(File file, String data){
-		return writer(file, data, false);
+		return write(file, data, false);
 	}
 	
 	/**
@@ -71,7 +87,7 @@ public class AndroidFileIO extends android.os.Environment {
 	 * @return
 	 */
 	static public boolean appendFile(File file, String data){
-		return writer(file, data, true);
+		return write(file, data, true);
 	}
 	
 	/**
@@ -81,7 +97,7 @@ public class AndroidFileIO extends android.os.Environment {
 	 * @param appendFile
 	 * @return
 	 */
-	static private boolean writer(File file, String data, boolean appendFile){
+	static private boolean write(File file, String data, boolean appendFile){
 		boolean retVal = false;
 		
 		String state = Environment.getExternalStorageState();
