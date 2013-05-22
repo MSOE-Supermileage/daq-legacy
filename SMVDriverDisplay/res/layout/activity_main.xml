@@ -15,7 +15,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/battery"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="@dimen/smallDisplaySize" />
 
     <android.widget.DigitalClock
         android:id="@+id/digitalClock1"
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/lblBatteryVoltage"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/smallDisplaySize" />
 
     <RelativeLayout
         android:id="@+id/centeredholder"
@@ -41,7 +43,8 @@
             android:layout_toRightOf="@+id/lblRPM"
             android:gravity="center_horizontal"
             android:text="@string/mph"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/largeDisplaySize" />
 
         <TextView
             android:id="@+id/lblAmph"
@@ -52,7 +55,8 @@
             android:gravity="center_horizontal"
             android:lines="2"
             android:text="@string/amph"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/largeDisplaySize" />
 
         <TextView
             android:id="@+id/lblRPM"
@@ -63,7 +67,8 @@
             android:layout_toRightOf="@+id/lblMPG"
             android:gravity="center_horizontal"
             android:text="@string/rpm"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/largeDisplaySize" />
 
         <TextView
             android:id="@+id/lblMPG"
@@ -72,7 +77,9 @@
             android:layout_marginRight="10dp"
             android:gravity="center_horizontal"
             android:text="@string/mpg"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="@dimen/largeDisplaySize" />
+
     </RelativeLayout>
 
             <Button
@@ -81,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:text="@string/strNewLog" />
+                android:text="@string/strNewLog"
+                android:textSize="@dimen/smallDisplaySize" />
 
             <ToggleButton
                 android:id="@+id/BTNtoggleLogger"
@@ -89,7 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/btnNewLoggerFile"
-                android:text="@string/strToggleLogger" />
+                android:text="@string/strToggleLogger"
+                android:textSize="@dimen/smallDisplaySize" />
 
             <TextView
                 android:id="@+id/lblLogger"
@@ -98,6 +107,7 @@
                 android:layout_above="@+id/btnNewLoggerFile"
                 android:layout_alignLeft="@+id/BTNtoggleLogger"
                 android:text="@string/lblLogger"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/smallDisplaySize" />
      
 </RelativeLayout>
