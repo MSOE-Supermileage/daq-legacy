@@ -57,7 +57,7 @@ public class Logger {
 	 * @return boolean - Success of log
 	 */
 	public boolean log(DataBase dataBase) {
-			return AndroidFileIO.appendFile(this.logFile, Logger.getLogTime() + dataBase.getMpg() + dataBase.getRpm() + dataBase.getMpg());
+			return AndroidFileIO.appendFile(this.logFile, Logger.getLogTime() + dataBase.getMpg() + dataBase.getRpm() + dataBase.getMpg() + "\n");
 	}
 	
 }

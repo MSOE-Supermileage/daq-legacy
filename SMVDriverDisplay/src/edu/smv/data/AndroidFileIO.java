@@ -109,6 +109,7 @@ public class AndroidFileIO extends android.os.Environment {
 			
 			BufferedWriter output = null;
 			try{
+				// The follow if block may not be needed, should be reviewed.
 				if(!file.exists()){
 					File parent = file.getParentFile();
 					if(parent != null && !parent.exists()){

@@ -72,15 +72,6 @@ public class DataBase {
 	
 	//////////////////////// Getters and Setters /////////////////////////
 	/////////////////////////////////////////////////////////////////////
-	
-	/**
-	 * Override toString() method to format Data for logging.
-	 */
-	@Override
-	public String toString(){
-		return this.mph + "," + this.rpm + "," + this.mpg;
-		
-	}
 
 	/**
 	 * Getter for RPM
