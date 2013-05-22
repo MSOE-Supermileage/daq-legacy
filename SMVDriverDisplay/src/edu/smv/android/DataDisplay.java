@@ -74,7 +74,7 @@ public class DataDisplay implements Runnable {
 				.findViewById(R.id.btnNewLoggerFile);
 		btnNewLoggerFile.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				data.createNewLog();
+				data.getLogger().createNewFile();
 			}
 		});
 
@@ -83,8 +83,8 @@ public class DataDisplay implements Runnable {
 		btnToggleLogger.setText("OFF");
 		btnToggleLogger.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if (data.getLogFile() == null) {
-					data.createNewLog();
+				if (data.getLogger().getLogFile() == null) {
+					data.getLogger().createNewFile();
 				}
 				loggerOn = !loggerOn;
 				btnToggleLogger.setChecked(loggerOn);
