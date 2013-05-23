@@ -1,65 +1,76 @@
 package edu.smv.android;
 
 import edu.smv.android.R;
-import edu.smv.data.Config;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
-import android.view.WindowManager;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
-	private DataDisplay driverDisplay;
-	private final CharSequence TITLE = "MSOE Data Display";
 
+	/**
+	 * Method gets run when the activity is created.
+	 * @param savedInstanceState
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        Config.loadConfigFile(getApplication());
-        
         this.setContentView(R.layout.activity_main);
-        this.setTitle(this.TITLE);
-        
-        // Turn off sleep
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
-        // Set Orientation to landscape
-        this.setRequestedOrientation(0);
-        
-        driverDisplay = new DataDisplay(this);
-        Thread driverDisplayThread = new Thread(driverDisplay);
-        driverDisplayThread.start();
+        this.addActionListeners();
     }
 
+    
+    /**
+     * Method gets run when creating the options menu
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
     
-    @Override
-    protected void onResume(){
-    	super.onResume();
-    	 // Turn off sleep
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-    	driverDisplay.setUpdateGUI(true);
-    }
     
-    @Override
-    protected void onPause(){
-    	super.onResume();
-    	driverDisplay.setUpdateGUI(false);
-    }
+    /**
+     * Add action listeners to the GUI components on the screen.
+     */
+    private void addActionListeners() {
+		final Button btnDisplay = (Button) findViewById(R.id.btnDisplay);
+		final Button btnConfig = (Button) findViewById(R.id.btnConfigure);
+		final Button btnHelp = (Button) findViewById(R.id.btnHelp);
+		
+		// Handle Display button action
+		btnDisplay.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, DataDisplayActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		// Handle Configure button action
+		btnConfig.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		// Handle Help button action
+		btnHelp.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
     
-    @Override
-    protected void onDestroy(){
-    	super.onDestroy();
-    	driverDisplay.terminateDataDisplay();
-    }
-    
-    @Override
-    public void setRequestedOrientation(int orientation){
-    	// Do nothing on user orientation change
-    }
+//    public void navigateToDataDisplay(View view){
+//    	// Open Display Activity
+//		Intent intent = new Intent(MainActivity.this, DataDisplayActivity.class);
+//		startActivity(intent);
+//    }
     
 }
