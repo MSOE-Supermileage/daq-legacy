@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">SMVDriverDisplay</string>
@@ -12,8 +13,16 @@
     <string name="lblLogger">Data Logger</string>
     <string name="strNewLog">New Log</string>
     <string name="strToggleLogger">Toggle Logger</string>
-
     <string name="configLogRate">125</string>
     <string name="configRefreshRate">250</string>
     <string name="configArdunioAddress">00:11:22:AA:BB:CC</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section1">Section 1</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="strHomeTitle">Home</string>
+    <string name="btnDisplayScreen">Display</string>
+    <string name="btnConfigScreen">Configure</string>
+    <string name="btnHelpScreen">Help</string>
+
 </resources>
