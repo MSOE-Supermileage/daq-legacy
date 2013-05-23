@@ -3,9 +3,21 @@ package edu.smv.data;
 import java.io.File;
 import java.util.Calendar;
 
+import android.content.Context;
+
+import edu.smv.fileIO.AndroidFileIO;
+
 public class Logger {
 	final String logFileHeader;
 	private File logFile;
+	
+	/**
+	 * Returns the default locations for logs.
+	 * @return
+	 */
+	static public File getDefualtLogDirectory(){
+		return new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
+	}
 	
 	/**
 	 * Get the current time from the logger.
@@ -19,7 +31,7 @@ public class Logger {
 	 * Default constructor that makes the header line the date.
 	 */
 	public Logger(){
-		this.logFileHeader = "Time,MPH,RPM,MPG";
+		this.logFileHeader = "Time,MPH,RPM,MPG"; 
 	}
 	
 	
@@ -28,19 +40,19 @@ public class Logger {
 	  * @return
 	  */
 	 public File getLogFile() {
-			return this.logFile;
+		return this.logFile;
 	}
 	
 	
 	/**
 	 * Log to a new file
 	 */
-	public void createNewFile(){
+	public void createNewFile(Context context){
 		String time = "" + getLogTime();
 		time = time.replaceAll(" ", "_");
 		time = time.replaceAll(":", "-");
 		String fileName = time + ".csv";
-		File fileDirectory = new File(AndroidFileIO.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
+		File fileDirectory = new File(Config.getLogDirectory(context));
 		
 		if(!fileDirectory.exists()){
 			AndroidFileIO.createDirectory(fileDirectory);
@@ -57,7 +69,7 @@ public class Logger {
 	 * @return boolean - Success of log
 	 */
 	public boolean log(DataBase dataBase) {
-			return AndroidFileIO.appendFile(this.logFile, Logger.getLogTime() + dataBase.getMpg() + dataBase.getRpm() + dataBase.getMpg());
+			return AndroidFileIO.appendFile(this.logFile, Logger.getLogTime() + "," + dataBase.getMpg()  + "," + dataBase.getRpm()  + "," + dataBase.getMpg() + "\n");
 	}
 	
 }

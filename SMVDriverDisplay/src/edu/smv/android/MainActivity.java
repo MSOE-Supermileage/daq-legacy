@@ -1,6 +1,7 @@
 package edu.smv.android;
 
 import edu.smv.android.R;
+import edu.smv.data.Config;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -13,6 +14,9 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Config.loadConfigFile(getApplication());
+        
         this.setContentView(R.layout.activity_main);
         this.setTitle(this.TITLE);
         
@@ -22,10 +26,7 @@ public class MainActivity extends Activity {
         // Set Orientation to landscape
         this.setRequestedOrientation(0);
         
-        double displayRefresh = .25 * 1000;
-        double logData = 1.0 * 1000;
-        
-        driverDisplay = new DataDisplay(this, displayRefresh, logData);
+        driverDisplay = new DataDisplay(this);
         Thread driverDisplayThread = new Thread(driverDisplay);
         driverDisplayThread.start();
     }
