@@ -1,6 +1,7 @@
 package edu.smv.android;
 
 import edu.smv.android.R;
+import edu.smv.data.Config;
 import edu.smv.data.DataBase;
 import android.app.Activity;
 import android.content.res.Resources;
@@ -16,9 +17,6 @@ public class DataDisplay implements Runnable {
 	private boolean updateGUI;
 	private boolean loggerOn;
 
-	private double refreshDisplay; 	// in milliseconds
-	private double dataLogRate; 	// in milliseconds
-
 	private DataBase data;
 
 	/**
@@ -26,11 +24,8 @@ public class DataDisplay implements Runnable {
 	 * 
 	 * @param dataDisplayActivity
 	 */
-	public DataDisplay(Activity dataDisplayActivity, double refreshDisplay, double dataLogRate) {
+	public DataDisplay(Activity dataDisplayActivity) {
 		this.dataDisplayActivity = dataDisplayActivity;
-		this.refreshDisplay = refreshDisplay;
-		this.dataLogRate = dataLogRate;
-		
 		this.terminateDataDisplay = false;
 		this.updateGUI = true;
 		this.loggerOn = false;
@@ -38,6 +33,7 @@ public class DataDisplay implements Runnable {
 
 		this.addActionListeners();
 	}
+
 
 	/**
 	 * Getter for updateGUI
@@ -74,7 +70,7 @@ public class DataDisplay implements Runnable {
 				.findViewById(R.id.btnNewLoggerFile);
 		btnNewLoggerFile.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				data.getLogger().createNewFile();
+				data.getLogger().createNewFile(dataDisplayActivity);
 			}
 		});
 
@@ -84,7 +80,7 @@ public class DataDisplay implements Runnable {
 		btnToggleLogger.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (data.getLogger().getLogFile() == null) {
-					data.getLogger().createNewFile();
+					data.getLogger().createNewFile(dataDisplayActivity);
 				}
 				loggerOn = !loggerOn;
 				btnToggleLogger.setChecked(loggerOn);
@@ -101,8 +97,8 @@ public class DataDisplay implements Runnable {
 		double lastTimeLogged = -1;
 
 		while (!terminateDataDisplay) {
-			boolean displayData = (updateGUI) && (System.currentTimeMillis() - lastTimeDisplayed >= refreshDisplay);
-			boolean logData = loggerOn && ((System.currentTimeMillis() - lastTimeLogged) >= dataLogRate);
+			boolean displayData = (updateGUI) && (System.currentTimeMillis() - lastTimeDisplayed >= Config.getRefreshRate(dataDisplayActivity));
+			boolean logData = loggerOn && ((System.currentTimeMillis() - lastTimeLogged) >= Config.getLogRate(dataDisplayActivity));
 
 			// Get Data
 			if (displayData || logData) {

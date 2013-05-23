@@ -5,35 +5,59 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import edu.smv.data.Config;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 
 public class DeviceSocket {
 	private BluetoothSocket blueToothSocket;
 	private BluetoothDevice device;
 	private UUID deviceID;
 
-	public DeviceSocket(String deviceAddress) throws IOException {
+	/**
+	 * Constructor
+	 * @param context
+	 * @throws IOException
+	 */
+	public DeviceSocket(Context context) throws IOException {
 		BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-		device = adapter.getRemoteDevice(deviceAddress);
+		device = adapter.getRemoteDevice(Config.getArdunioAddress(context));
 		deviceID = new UUID(0,0);
 
 		blueToothSocket = device.createRfcommSocketToServiceRecord(deviceID);
 	}
 	
+	/**
+	 * Get an Instance of the device
+	 * @return
+	 */
 	public BluetoothDevice getDevice(){
 		return this.device;
 	}
 	
+	/**
+	 * Get an instance of the device socket
+	 * @return
+	 */
 	public BluetoothSocket getBlueToothSocket(){
 		return this.blueToothSocket;
 	}
 	
+	/**
+	 * Get an instance of the UUID for this device
+	 * @return
+	 */
 	public UUID getDeviceID(){
 		return this.deviceID;
 	}
 	
+	/**
+	 * Load values from the device
+	 * @return
+	 */
 	public byte[] loadValues(){
 		OutputStream out = this.getOutputStream();
 		InputStream in = this.getInputStream();

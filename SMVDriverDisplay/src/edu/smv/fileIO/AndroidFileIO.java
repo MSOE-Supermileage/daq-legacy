@@ -1,4 +1,4 @@
-package edu.smv.data;
+package edu.smv.fileIO;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,12 +25,6 @@ public class AndroidFileIO extends android.os.Environment {
 	 * static boolean 	isExternalStorageRemovable()	- Returns whether the primary "external" storage device is removable.
 	 */
 	
-	/**
-	 * AndroidFileIO() - Constructor
-	 */
-	public AndroidFileIO(){
-		super();
-	}
 	
 	/**
 	 * readFile - Read a text file and return an array containing each line from the file in an index.
@@ -133,5 +127,4 @@ public class AndroidFileIO extends android.os.Environment {
 		}
 		return retVal;
 	}
-
 }

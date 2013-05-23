@@ -3,7 +3,6 @@ package edu.smv.data;
 import edu.smv.communication.DeviceSocket;
 
 public class DataBase {
-	private final String arduinoAddress = "00:11:22:AA:BB:CC";
 	private DeviceSocket arduino;
 	
 	private double rpm;
@@ -25,7 +24,7 @@ public class DataBase {
 		this.logger = new Logger();
 		
 //		try {
-//			this.arduino = new DeviceSocket(this.arduinoAddress);
+//			this.arduino = new DeviceSocket();
 //			this.arduino.connect();
 //		} catch (IOException e) {
 //			e.printStackTrace();
