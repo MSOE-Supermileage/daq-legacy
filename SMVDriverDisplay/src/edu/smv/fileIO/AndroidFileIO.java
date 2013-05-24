@@ -31,7 +31,7 @@ public class AndroidFileIO extends android.os.Environment {
 	 * @param file
 	 * @return
 	 */
-	static public String[] readFile(File file){
+	static public List<String> readFile(File file){
 		List<String> retVal = new LinkedList<String>();
 		
 		try {
@@ -43,8 +43,8 @@ public class AndroidFileIO extends android.os.Environment {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		return (String[]) retVal.toArray();
+	
+		return retVal;
 	}
 	
 	
