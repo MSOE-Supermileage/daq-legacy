@@ -14,6 +14,10 @@
     <string name="strNewLog">New Log</string>
     <string name="strToggleLogger">Toggle Logger</string>
     <string name="configLogRate">125</string>
+    
+     <string name="configUUIDHigh">00000000</string>
+     <string name="configUUIDLow">00000000</string>
+    
     <string name="configRefreshRate">250</string>
     <string name="configArdunioAddress">00:11:22:AA:BB:CC</string>
     <string name="title_section3">Section 3</string>
@@ -25,4 +29,17 @@
     <string name="btnConfigScreen">Configure</string>
     <string name="btnHelpScreen">Help</string>
 
+    
+    <string name="lblAddress">Arduino Address</string>
+    <string name="lblUUID">Arduino UUID</string>
+    <string name="lblRefreshRate">Refresh Rate</string>
+    <string name="lblLogRate">Log Rate</string>
+    <string name="lblLogLocation">Log Location</string>	
+    
+    <string name="lblConfigure">I like it when you configure me...</string>
+    
+    <string name="btnOk">OK</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnDefualt">Defualt</string>
+    
 </resources>
