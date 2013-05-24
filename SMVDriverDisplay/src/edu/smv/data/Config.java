@@ -34,9 +34,9 @@ public class Config {
 		output += ARDUINO_ADDRESS_KEY + "=" + Config.getArdunioAddress(context) + "\n";
 		output += REFRESH_RATE_KEY + "=" + Config.getRefreshRate(context) + "\n";
 		output += LOG_RATE_KEY + "=" + Config.getLogRate(context) + "\n";
-		output += LOG_DIRECTORY_KEY + "=" + Config.getLogDirectory(context);
-		output += UUID_HIGH_KEY + "=" + Config.getUUIDHigh(context);
-		output += UUID_LOW_KEY + "=" + Config.getUUIDLow(context);
+		output += LOG_DIRECTORY_KEY + "=" + Config.getLogDirectory(context) + "\n";
+		output += UUID_HIGH_KEY + "=" + Config.getUUIDHigh(context) + "\n";
+		output += UUID_LOW_KEY + "=" + Config.getUUIDLow(context) + "\n";
 		
 		AndroidFileIO.writeFile(getConfigFile(), output);
 	}
