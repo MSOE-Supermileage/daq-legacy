@@ -3,7 +3,6 @@ package edu.smv.android;
 import edu.smv.data.Config;
 import edu.smv.data.Logger;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,6 +39,10 @@ public class ConfigActivity extends Activity {
         return true;
     }
     
+    
+    /**
+     * Add action listener to the GUI components
+     */
     private void addActionListeners(){
     	final Button btnOk = (Button) findViewById(R.id.btnOk);
 		final Button btnDefaults = (Button) findViewById(R.id.btnDefualts);
@@ -49,6 +52,7 @@ public class ConfigActivity extends Activity {
 		btnOk.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				saveConfig();
+				exitConfig();
 			}
 		});
 
@@ -68,12 +72,19 @@ public class ConfigActivity extends Activity {
     }
     
     
+    /**
+     * Load the current configuration into the EditViews
+     */
     private void loadCurrentConfigs(){
     	this.setTextInEditViews(Config.getArdunioAddress(this), Config.getUUIDHigh(this), 
     			Config.getUUIDLow(this), Config.getRefreshRate(this), 
     			Config.getLogRate(this), Config.getLogDirectory(this));
     }
     
+    
+    /**
+     * Load the default configuration into the EditViews
+     */
     private void loadDefaultConfigs(){
     	Resources r = this.getResources();
 		float refreshRate = Float.parseFloat(r.getString(R.string.configRefreshRate));
@@ -86,6 +97,16 @@ public class ConfigActivity extends Activity {
 		this.setTextInEditViews(address, uuidHigh, uuidLow, refreshRate, logRate, logDirectory);
     }
     
+    
+    /**
+     * Set the Text in the EditViews
+     * @param address
+     * @param uuidHigh
+     * @param uuidLow
+     * @param refreshRate
+     * @param logRate
+     * @param logDir
+     */
     private void setTextInEditViews(String address, byte uuidHigh, byte uuidLow, float refreshRate, float logRate, String logDir){
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
     	EditText edit_uuidHigh = (EditText) this.findViewById(R.id.editUUIDHigh);
@@ -102,10 +123,18 @@ public class ConfigActivity extends Activity {
     	edit_logDirectory.setText(logDir);
     }
     
+    
+    /**
+     * Exit the activity
+     */
     private void exitConfig(){
     	this.finish();
     }
     
+    
+    /**
+     * Save the activity
+     */
     private void saveConfig(){
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
     	EditText edit_uuidHigh = (EditText) this.findViewById(R.id.editUUIDHigh);
@@ -128,7 +157,5 @@ public class ConfigActivity extends Activity {
     	Config.setLogRate(this, logRate);
     	Config.setLogDirectory(this, logDir);
     	Config.saveConfigFile(this);
-    	
-    	this.exitConfig();
     }
 }
