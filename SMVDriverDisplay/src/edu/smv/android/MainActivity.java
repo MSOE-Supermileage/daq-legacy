@@ -67,10 +67,4 @@ public class MainActivity extends Activity {
 		});
 	}
     
-//    public void navigateToDataDisplay(View view){
-//    	// Open Display Activity
-//		Intent intent = new Intent(MainActivity.this, DataDisplayActivity.class);
-//		startActivity(intent);
-//    }
-    
 }
