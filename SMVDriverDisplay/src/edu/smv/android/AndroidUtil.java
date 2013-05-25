@@ -2,7 +2,6 @@ package edu.smv.android;
 
 import android.app.Activity;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.WindowManager.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.TextView;
