@@ -5,43 +5,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/addressLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/lblAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editAddress"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/lblAddress" />
 
         <EditText
             android:id="@+id/editAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lblAddress"
             android:ems="10"
             android:inputType="number" />
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/UUIDLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/lblUUID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editUUIDHigh"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/lblUUID" />
 
         <EditText
             android:id="@+id/editUUIDHigh"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/editUUIDLow"
+            android:layout_toRightOf="@+id/lblUUID"
             android:ems="10"
             android:inputType="number" >
 
@@ -52,79 +67,104 @@
             android:id="@+id/editUUIDLow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editUUIDHigh"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:ems="10"
             android:inputType="number" />
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/refreshRateLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/lblRefreshRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editRefershRate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/lblRefreshRate" />
 
         <EditText
             android:id="@+id/editRefershRate"
-            android:layout_width="wrap_content"
+            android:layout_width="448dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lblRefreshRate"
             android:ems="10"
             android:inputType="numberDecimal" />
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/logRateLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/lblLogRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editLogRate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/lblLogRate" />
 
         <EditText
             android:id="@+id/editLogRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lblLogRate"
             android:ems="10"
             android:inputType="numberDecimal" />
+    </RelativeLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/logLocationLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/lblLogLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editLogLocation"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/lblLogLocation" />
 
         <EditText
             android:id="@+id/editLogLocation"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lblLogLocation"
             android:ems="10"
             android:inputType="textUri" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/qouteLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:layout_marginTop="@dimen/margin"
         android:orientation="horizontal" >
 
@@ -134,14 +174,15 @@
             android:layout_height="wrap_content"
             android:text="@string/lblConfigure"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
     </LinearLayout>
- 
+
     <LinearLayout
         android:id="@+id/buttonsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
         <Button
@@ -164,7 +205,6 @@
             android:layout_height="wrap_content"
             android:onClick="cancelConfig"
             android:text="@string/btnCancel" />
-
     </LinearLayout>
 
 </LinearLayout>
