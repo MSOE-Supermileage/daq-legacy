@@ -25,7 +25,11 @@ public class DeviceSocket {
 	public DeviceSocket(Context context) throws IOException {
 		BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 		device = adapter.getRemoteDevice(Config.getArdunioAddress(context));
+<<<<<<< HEAD
 		deviceID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // A Serial over Bluetooth UUID
+=======
+		deviceID = new UUID(Config.getUUIDHigh(context), Config.getUUIDLow(context));
+>>>>>>> Communications updated to work with config file.
 
 		blueToothSocket = device.createRfcommSocketToServiceRecord(deviceID);
 	}
@@ -69,8 +73,6 @@ public class DeviceSocket {
 			dataBuffer = new byte[4];
 			in.read(dataBuffer, 0, dataBuffer.length);
 			
-			// Eat rest of bytes
-			while(in.read() > 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
