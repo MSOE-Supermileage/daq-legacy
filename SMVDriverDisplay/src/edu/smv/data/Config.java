@@ -21,7 +21,7 @@ public class Config {
 	private static byte highByteUUID;
 	private static double refreshRate;
 	private static double logRate;
-	private static String logDirectorty;
+	private static File logDirectorty;
 	
 	
 	/**
@@ -103,7 +103,7 @@ public class Config {
 		
 		Config.setRefreshRate(refreshRate);
 		Config.setLogRate(logRate);
-		Config.setLogDirectory(logDirectory);
+		Config.setLogDirectory(new File(logDirectory));
 		Config.setArdunioAddress(arduinoAddress);
 		Config.setArdunioUUIDHigh(uuidHigh);
 		Config.setArdunioUUIDLow(uuidLow);
@@ -119,7 +119,7 @@ public class Config {
 		Resources r = context.getResources();
 		double refreshRate = Double.parseDouble(r.getString(R.string.configRefreshRate));
 		double logRate = Double.parseDouble(r.getString(R.string.configLogRate));
-		String logDirectory = Logger.getDefualtLogDirectory().getAbsolutePath();
+		File logDirectory = Logger.getDefualtLogDirectory();
 		String arduinoAddress = r.getString(R.string.configArdunioAddress);
 		byte uuidHigh = Byte.parseByte(r.getString(R.string.configUUIDHigh));
 		byte uuidLow = Byte.parseByte(r.getString(R.string.configUUIDLow));
@@ -173,7 +173,7 @@ public class Config {
 	 * Get the log directory from the shared preferences
 	 * @return
 	 */
-	public static String getLogDirectory(){
+	public static File getLogDirectory(){
 		return Config.logDirectorty;
 	}
 	
@@ -182,7 +182,7 @@ public class Config {
 	 * Set the log directory in the shared preferences
 	 * @param logDir
 	 */
-	public static void setLogDirectory(String logDir){
+	public static void setLogDirectory(File logDir){
 		Config.logDirectorty = logDir;
 	}
 	

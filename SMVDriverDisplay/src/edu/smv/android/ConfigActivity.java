@@ -1,14 +1,20 @@
 package edu.smv.android;
 
+import java.io.File;
+
 import edu.smv.data.Config;
 import edu.smv.data.Logger;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 
 public class ConfigActivity extends Activity {
@@ -52,7 +58,6 @@ public class ConfigActivity extends Activity {
 		btnOk.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				saveConfig();
-				exitConfig();
 			}
 		});
 
@@ -78,7 +83,7 @@ public class ConfigActivity extends Activity {
     private void loadCurrentConfigs(){
     	this.setTextInEditViews(Config.getArdunioAddress(), Config.getUUIDHigh(), 
     			Config.getUUIDLow(), Config.getRefreshRate(), 
-    			Config.getLogRate(), Config.getLogDirectory());
+    			Config.getLogRate(), Config.getLogDirectory().getAbsolutePath());
     }
     
     
@@ -135,7 +140,7 @@ public class ConfigActivity extends Activity {
     /**
      * Save the activity
      */
-    private void saveConfig(){
+    private void saveConfig(){  	
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
     	EditText edit_uuidHigh = (EditText) this.findViewById(R.id.editUUIDHigh);
     	EditText edit_uuidLow = (EditText) this.findViewById(R.id.editUUIDLow);
@@ -143,12 +148,38 @@ public class ConfigActivity extends Activity {
     	EditText edit_logRate = (EditText) this.findViewById(R.id.editLogRate);
     	EditText edit_logDirectory = (EditText) this.findViewById(R.id.editLogLocation);
     	
-    	String address = edit_address.getText().toString();
-    	byte uuidHigh = Byte.parseByte(edit_uuidHigh.getText().toString());
-    	byte uuidLow = Byte.parseByte(edit_uuidLow.getText().toString());
-    	float refreshRate = Float.parseFloat(edit_refreshRate.getText().toString());
-    	float logRate = Float.parseFloat(edit_logRate.getText().toString());
-    	String logDir = edit_logDirectory.getText().toString();
+    	String address = null;
+    	byte uuidHigh = -1;
+    	byte uuidLow = -1;
+    	double refreshRate = -1;
+    	double logRate = -1;
+    	File logDir = null;
+    	
+    	address = edit_address.getText().toString();
+    	
+    	try{
+    		uuidHigh = Byte.parseByte(edit_uuidHigh.getText().toString());
+    		uuidLow = Byte.parseByte(edit_uuidLow.getText().toString());
+    	}catch(NumberFormatException e){
+    		this.showMessage("The high byte and low byte of the UUID must be a byte.");
+    		return;
+    	}
+    	
+    	try{
+    		refreshRate = Double.parseDouble(edit_refreshRate.getText().toString());
+    	}catch(NumberFormatException e){
+    		this.showMessage("The refresh rate must be a double.");
+    		return;
+    	}
+    	
+    	try{
+    		logRate = Double.parseDouble(edit_logRate.getText().toString());
+    	}catch(NumberFormatException e){
+    		this.showMessage("The log rate must be a double.");
+    		return;
+    	}
+    	
+    	logDir = new File(edit_logDirectory.getText().toString());
     	
     	Config.setArdunioAddress(address);
     	Config.setArdunioUUIDHigh(uuidHigh);
@@ -157,5 +188,33 @@ public class ConfigActivity extends Activity {
     	Config.setLogRate(logRate);
     	Config.setLogDirectory(logDir);
     	Config.saveConfigFile(this);
+    	exitConfig();
+    }
+    
+    
+    /** 
+     * Show a message to the user using a popup window.
+     * @param text
+     */
+    private void showMessage(String text){
+    	PopupWindow popupWindow = new PopupWindow(this);
+    	
+    	// Add a text view to the popup
+    	TextView textView = new TextView(this);
+    	popupWindow.setContentView(textView);
+    	LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    	textView.setLayoutParams(layoutParams);
+    	textView.setText(text);
+    	
+    	// Allows popup to disappear when screen is pressed
+    	popupWindow.setOutsideTouchable(true);
+    	
+    	// Must set popup size for it to be visible
+    	popupWindow.setHeight((int) (this.getCurrentFocus().getHeight() * .75));
+    	popupWindow.setWidth((int) (this.getCurrentFocus().getWidth() * 0.75));
+    	
+    	// Display popup in the center of the screen
+    	popupWindow.showAtLocation(this.getCurrentFocus(), Gravity.CENTER, 0, 0);
+    	popupWindow.update();
     }
 }

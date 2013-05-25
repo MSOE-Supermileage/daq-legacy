@@ -50,7 +50,7 @@ public class Logger {
 		time = time.replaceAll(" ", "_");
 		time = time.replaceAll(":", "-");
 		String fileName = time + ".csv";
-		File fileDirectory = new File(Config.getLogDirectory());
+		File fileDirectory = Config.getLogDirectory();
 		
 		if(!fileDirectory.exists()){
 			AndroidFileIO.createDirectory(fileDirectory);
