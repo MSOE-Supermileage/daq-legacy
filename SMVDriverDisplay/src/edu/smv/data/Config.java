@@ -21,11 +21,7 @@ public class Config {
 	private static byte highByteUUID;
 	private static double refreshRate;
 	private static double logRate;
-<<<<<<< HEAD
 	private static File logDirectorty;
-=======
-	private static String logDirectorty;
->>>>>>> Configuration uses a static class instead of shared preferances.
 	
 	
 	/**
@@ -41,7 +37,7 @@ public class Config {
 	 * Save the configurations to a config file
 	 * @param context
 	 */
-	public static void saveConfigFile(){
+	public static void saveConfigFile(Context context){
 		String output = "";
 		output += ARDUINO_ADDRESS_KEY + "=" + Config.getArdunioAddress() + "\n";
 		output += REFRESH_RATE_KEY + "=" + Config.getRefreshRate() + "\n";
@@ -49,15 +45,11 @@ public class Config {
 		output += LOG_DIRECTORY_KEY + "=" + Config.getLogDirectory() + "\n";
 		output += UUID_HIGH_KEY + "=" + Config.getUUIDHigh() + "\n";
 		output += UUID_LOW_KEY + "=" + Config.getUUIDLow() + "\n";
-<<<<<<< HEAD
 		
 		File configDirectory = new File(Config.getConfigFile(context).getParent());
 		if(!configDirectory.exists()){
 			AndroidFileIO.createDirectory(configDirectory);
-		}
-=======
->>>>>>> Configuration uses a static class instead of shared preferances.
-		
+		}	
 		AndroidFileIO.writeFile(getConfigFile(context), output);
 	}
 
@@ -67,13 +59,8 @@ public class Config {
 	 * @param context
 	 */
 	public static void loadCurrentConfig(Context context){
-<<<<<<< HEAD
 		if(Config.getConfigFile(context).exists()){
 			Config.loadConfigurationFile(context);
-=======
-		if(Config.getConfigFile().exists()){
-			Config.loadConfigurationFile();
->>>>>>> Configuration uses a static class instead of shared preferances.
 		}else{
 			Config.configLoadDefualts(context);
 		}
@@ -83,11 +70,7 @@ public class Config {
 	/**
 	 * Load configurations from context file
 	 */
-<<<<<<< HEAD
 	public static void loadConfigurationFile(Context context){
-=======
-	public static void loadConfigurationFile(){
->>>>>>> Configuration uses a static class instead of shared preferances.
 		float refreshRate = -1;
 		float logRate = -1;
 		String logDirectory = null;
@@ -95,11 +78,7 @@ public class Config {
 		byte uuidHigh = 0;
 		byte uuidLow = 0;
 		
-<<<<<<< HEAD
 		for(String line : AndroidFileIO.readFile(getConfigFile(context))){
-=======
-		for(String line : AndroidFileIO.readFile(getConfigFile())){
->>>>>>> Configuration uses a static class instead of shared preferances.
 			String[] tokens = line.split("=");
 			
 			if(tokens[0].equalsIgnoreCase(REFRESH_RATE_KEY)){
@@ -123,11 +102,7 @@ public class Config {
 		
 		Config.setRefreshRate(refreshRate);
 		Config.setLogRate(logRate);
-<<<<<<< HEAD
 		Config.setLogDirectory(new File(logDirectory));
-=======
-		Config.setLogDirectory(logDirectory);
->>>>>>> Configuration uses a static class instead of shared preferances.
 		Config.setArdunioAddress(arduinoAddress);
 		Config.setArdunioUUIDHigh(uuidHigh);
 		Config.setArdunioUUIDLow(uuidLow);
@@ -143,11 +118,7 @@ public class Config {
 		Resources r = context.getResources();
 		double refreshRate = Double.parseDouble(r.getString(R.string.configRefreshRate));
 		double logRate = Double.parseDouble(r.getString(R.string.configLogRate));
-<<<<<<< HEAD
 		File logDirectory = Logger.getDefualtLogDirectory();
-=======
-		String logDirectory = Logger.getDefualtLogDirectory().getAbsolutePath();
->>>>>>> Configuration uses a static class instead of shared preferances.
 		String arduinoAddress = r.getString(R.string.configArdunioAddress);
 		byte uuidHigh = Byte.parseByte(r.getString(R.string.configUUIDHigh));
 		byte uuidLow = Byte.parseByte(r.getString(R.string.configUUIDLow));
@@ -201,11 +172,7 @@ public class Config {
 	 * Get the log directory from the shared preferences
 	 * @return
 	 */
-<<<<<<< HEAD
 	public static File getLogDirectory(){
-=======
-	public static String getLogDirectory(){
->>>>>>> Configuration uses a static class instead of shared preferances.
 		return Config.logDirectorty;
 	}
 	
@@ -214,11 +181,7 @@ public class Config {
 	 * Set the log directory in the shared preferences
 	 * @param logDir
 	 */
-<<<<<<< HEAD
 	public static void setLogDirectory(File logDir){
-=======
-	public static void setLogDirectory(String logDir){
->>>>>>> Configuration uses a static class instead of shared preferances.
 		Config.logDirectorty = logDir;
 	}
 	
