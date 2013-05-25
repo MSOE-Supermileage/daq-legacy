@@ -5,9 +5,11 @@ import java.io.File;
 import edu.smv.data.Config;
 import edu.smv.data.Logger;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +41,36 @@ public class ConfigActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    
+    /**
+     * Method called when a menu item is selected
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+    	Intent intent;
+    	 // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.menu_Home:
+	        	intent = new Intent(ConfigActivity.this, MainActivity.class);
+				startActivity(intent);
+	            return true;
+	        case R.id.menu_Display:
+	        	intent = new Intent(ConfigActivity.this, DataDisplayActivity.class);
+				startActivity(intent);
+	            return true;
+	        case R.id.menu_Configure:
+	        	//Do not change to self.
+	            return true;
+	        case R.id.menu_Help:
+	        	intent = new Intent(ConfigActivity.this, HelpActivity.class);
+				startActivity(intent);
+	            return true;
+	        default:
+	            return this.onOptionsItemSelected(item);
+	    }
     }
     
     

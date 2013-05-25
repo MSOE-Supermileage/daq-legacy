@@ -4,8 +4,10 @@ import edu.smv.android.R;
 import edu.smv.data.Config;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 
 public class DataDisplayActivity extends Activity {
@@ -37,6 +39,36 @@ public class DataDisplayActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    
+    /**
+     * Method called when a menu item is selected
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+    	Intent intent;
+    	 // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.menu_Home:
+	        	intent = new Intent(DataDisplayActivity.this, MainActivity.class);
+				startActivity(intent);
+	            return true;
+	        case R.id.menu_Display:
+	        	//Do not change to self.
+	            return true;
+	        case R.id.menu_Configure:
+	        	intent = new Intent(DataDisplayActivity.this, ConfigActivity.class);
+				startActivity(intent);
+	            return true;
+	        case R.id.menu_Help:
+	        	intent = new Intent(DataDisplayActivity.this, HelpActivity.class);
+				startActivity(intent);
+	            return true;
+	        default:
+	            return this.onOptionsItemSelected(item);
+	    }
     }
     
     @Override

@@ -2,7 +2,11 @@
 <resources>
 
     <string name="app_name">SMVDriverDisplay</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_Home">Home</string>
+    <string name="menu_Display">Display</string>
+    <string name="menu_Configure">Configure</string>
+     <string name="menu_Help">Help</string>
+    
     <string name="title_activity_main">MSOE Data Display</string>
     <string name="btnDiagnostics">Diagnostics</string>
     <string name="mph">MPH\n%s</string>
