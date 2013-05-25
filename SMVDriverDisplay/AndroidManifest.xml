@@ -34,6 +34,7 @@
         <activity
             android:name="edu.smv.android.DataDisplayActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="landscape"
             android:parentActivityName="edu.smv.android.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +44,7 @@
         <activity
             android:name="edu.smv.android.ConfigActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="landscape"
             android:parentActivityName="edu.smv.android.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,6 +54,7 @@
          <activity
             android:name="edu.smv.android.HelpActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="landscape"
             android:parentActivityName="edu.smv.android.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

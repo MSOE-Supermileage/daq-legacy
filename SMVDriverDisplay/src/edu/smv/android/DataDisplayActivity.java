@@ -4,6 +4,7 @@ import edu.smv.android.R;
 import edu.smv.data.Config;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.view.Menu;
 import android.view.WindowManager;
 
@@ -25,6 +26,7 @@ public class DataDisplayActivity extends Activity {
         
         // Set Orientation to landscape
         this.setRequestedOrientation(0);
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         
         driverDisplay = new DataDisplay(this);
         Thread driverDisplayThread = new Thread(driverDisplay);
