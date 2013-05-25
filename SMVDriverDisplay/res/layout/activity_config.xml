@@ -41,37 +41,25 @@
         android:layout_marginRight="@dimen/margin"
         android:orientation="horizontal" >
 
+        <EditText
+            android:id="@+id/editUUID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/lblUUID"
+            android:ems="10"
+            android:inputType="number" />
+
         <TextView
             android:id="@+id/lblUUID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editUUIDHigh"
+            android:layout_alignBaseline="@+id/editUUID"
+            android:layout_alignBottom="@+id/editUUID"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:text="@string/lblUUID" />
 
-        <EditText
-            android:id="@+id/editUUIDHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/editUUIDLow"
-            android:layout_toRightOf="@+id/lblUUID"
-            android:ems="10"
-            android:inputType="number" >
-
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/editUUIDLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editUUIDHigh"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:ems="10"
-            android:inputType="number" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -13,12 +13,10 @@ public class Config {
 	public final static String REFRESH_RATE_KEY  = "Display_Refresh_Rate";
 	public final static String LOG_RATE_KEY = "Log_Rate";
 	public final static String LOG_DIRECTORY_KEY = "Log_Directory";
-	public final static String  UUID_LOW_KEY = "Arduino_UUID_LOW";
-	public final static String  UUID_HIGH_KEY = "Arduino_UUID_HIGH";
+	public final static String  UUID_KEY = "Arduino_UUID_STRING";
 	
 	private static String arudinoAddress;
-	private static byte lowByteUUID;
-	private static byte highByteUUID;
+	private static String UUID_STRING;
 	private static double refreshRate;
 	private static double logRate;
 	private static File logDirectorty;
@@ -43,8 +41,7 @@ public class Config {
 		output += REFRESH_RATE_KEY + "=" + Config.getRefreshRate() + "\n";
 		output += LOG_RATE_KEY + "=" + Config.getLogRate() + "\n";
 		output += LOG_DIRECTORY_KEY + "=" + Config.getLogDirectory() + "\n";
-		output += UUID_HIGH_KEY + "=" + Config.getUUIDHigh() + "\n";
-		output += UUID_LOW_KEY + "=" + Config.getUUIDLow() + "\n";
+		output += UUID_KEY + "=" + Config.getUUID_STRING() + "\n";
 		
 		File configDirectory = new File(Config.getConfigFile(context).getParent());
 		if(!configDirectory.exists()){
@@ -75,8 +72,7 @@ public class Config {
 		float logRate = -1;
 		String logDirectory = null;
 		String arduinoAddress = null;
-		byte uuidHigh = 0;
-		byte uuidLow = 0;
+		String uuid = null;
 		
 		for(String line : AndroidFileIO.readFile(getConfigFile(context))){
 			String[] tokens = line.split("=");
@@ -93,10 +89,8 @@ public class Config {
 				logDirectory = tokens[1];
 			}else if (tokens[0].equalsIgnoreCase(ARDUINO_ADDRESS_KEY)){
 				arduinoAddress = tokens[1];
-			}else if (tokens[0].equalsIgnoreCase(UUID_LOW_KEY)){
-				uuidLow = Byte.parseByte(tokens[1]);
-			}else if (tokens[0].equalsIgnoreCase(UUID_HIGH_KEY)){
-				uuidHigh = Byte.parseByte(tokens[1]);
+			}else if (tokens[0].equalsIgnoreCase(UUID_KEY)){
+				uuid = tokens[1];
 			}
 		}
 		
@@ -104,8 +98,7 @@ public class Config {
 		Config.setLogRate(logRate);
 		Config.setLogDirectory(new File(logDirectory));
 		Config.setArdunioAddress(arduinoAddress);
-		Config.setArdunioUUIDHigh(uuidHigh);
-		Config.setArdunioUUIDLow(uuidLow);
+		Config.setArdunioUUID(uuid);
 	}
 	
 	
@@ -120,15 +113,13 @@ public class Config {
 		double logRate = Double.parseDouble(r.getString(R.string.configLogRate));
 		File logDirectory = Logger.getDefualtLogDirectory();
 		String arduinoAddress = r.getString(R.string.configArdunioAddress);
-		byte uuidHigh = Byte.parseByte(r.getString(R.string.configUUIDHigh));
-		byte uuidLow = Byte.parseByte(r.getString(R.string.configUUIDLow));
+		String uuid = r.getString(R.string.configArdunioUUID);
 		
 		Config.setRefreshRate(refreshRate);
 		Config.setLogRate(logRate);
 		Config.setLogDirectory(logDirectory);
 		Config.setArdunioAddress(arduinoAddress);
-		Config.setArdunioUUIDHigh(uuidHigh);
-		Config.setArdunioUUIDLow(uuidLow);
+		Config.setArdunioUUID(uuid);
 	}
 	
 	
@@ -203,22 +194,13 @@ public class Config {
 		Config.arudinoAddress = address;
 	}
 
-	/**
-	 * Set the high byte for the UUID
-	 * @param uuidHigh
-	 */
-	public static void setArdunioUUIDHigh(byte uuidHigh) {
-		Config.highByteUUID = uuidHigh;
-		
-	}
-
 
 	/**
 	 * Set the high byte for the UUID
 	 * @param uuidLow
 	 */
-	public static void setArdunioUUIDLow(byte uuidLow) {
-		Config.lowByteUUID = uuidLow;
+	public static void setArdunioUUID(String uuidLow) {
+		Config.UUID_STRING = uuidLow;
 		
 	}
 
@@ -227,16 +209,8 @@ public class Config {
 	 * Get the high byte for the UUID
 	 * @return
 	 */
-	public static byte getUUIDHigh() {
-		return Config.highByteUUID;
+	public static String getUUID_STRING() {
+		return Config.UUID_STRING;
 	}
 	
-	
-	/**
-	 * Get the low byte for the UUID
-	 * @return
-	 */
-	public static byte getUUIDLow() {
-		return Config.lowByteUUID;
-	}
 }

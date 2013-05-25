@@ -14,10 +14,7 @@
     <string name="strNewLog">New Log</string>
     <string name="strToggleLogger">Toggle Logger</string>
     <string name="configLogRate">125</string>
-    
-     <string name="configUUIDHigh">00000000</string>
-     <string name="configUUIDLow">00000000</string>
-    
+    <string name="configArdunioUUID">00001101-0000-1000-8000-00805F9B34FB</string>
     <string name="configRefreshRate">250</string>
     <string name="configArdunioAddress">00:11:22:AA:BB:CC</string>
     <string name="title_section3">Section 3</string>

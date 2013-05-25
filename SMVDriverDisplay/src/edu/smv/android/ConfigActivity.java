@@ -81,9 +81,8 @@ public class ConfigActivity extends Activity {
      * Load the current configuration into the EditViews
      */
     private void loadCurrentConfigs(){
-    	this.setTextInEditViews(Config.getArdunioAddress(), Config.getUUIDHigh(), 
-    			Config.getUUIDLow(), Config.getRefreshRate(), 
-    			Config.getLogRate(), Config.getLogDirectory().getAbsolutePath());
+    	this.setTextInEditViews(Config.getArdunioAddress(), Config.getUUID_STRING(), 
+    			Config.getRefreshRate(), Config.getLogRate(), Config.getLogDirectory().getAbsolutePath());
     }
     
     
@@ -96,10 +95,9 @@ public class ConfigActivity extends Activity {
 		float logRate = Float.parseFloat(r.getString(R.string.configLogRate));
 		String logDirectory = Logger.getDefualtLogDirectory().getAbsolutePath();
 		String address = r.getString(R.string.configArdunioAddress);
-		byte uuidHigh = Byte.parseByte(r.getString(R.string.configUUIDHigh));
-		byte uuidLow = Byte.parseByte(r.getString(R.string.configUUIDLow));
+		String uuid = r.getString(R.string.configArdunioUUID);
 		
-		this.setTextInEditViews(address, uuidHigh, uuidLow, refreshRate, logRate, logDirectory);
+		this.setTextInEditViews(address, uuid, refreshRate, logRate, logDirectory);
     }
     
     
@@ -112,17 +110,15 @@ public class ConfigActivity extends Activity {
      * @param e
      * @param logDir
      */
-    private void setTextInEditViews(String address, byte uuidHigh, byte uuidLow, double d, double e, String logDir){
+    private void setTextInEditViews(String address, String uuid, double d, double e, String logDir){
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
-    	EditText edit_uuidHigh = (EditText) this.findViewById(R.id.editUUIDHigh);
-    	EditText edit_uuidLow = (EditText) this.findViewById(R.id.editUUIDLow);
+    	EditText edit_uuid = (EditText) this.findViewById(R.id.editUUID);
     	EditText edit_refreshRate = (EditText) this.findViewById(R.id.editRefershRate);
     	EditText edit_logRate = (EditText) this.findViewById(R.id.editLogRate);
     	EditText edit_logDirectory = (EditText) this.findViewById(R.id.editLogLocation);
     	
     	edit_address.setText(address);
-    	edit_uuidHigh.setText("" + uuidHigh);
-    	edit_uuidLow.setText("" + uuidLow);
+    	edit_uuid.setText(uuid);
     	edit_refreshRate.setText("" + d);
     	edit_logRate.setText("" + e);
     	edit_logDirectory.setText(logDir);
@@ -142,28 +138,20 @@ public class ConfigActivity extends Activity {
      */
     private void saveConfig(){  	
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
-    	EditText edit_uuidHigh = (EditText) this.findViewById(R.id.editUUIDHigh);
-    	EditText edit_uuidLow = (EditText) this.findViewById(R.id.editUUIDLow);
+    	EditText edit_uuid = (EditText) this.findViewById(R.id.editUUID);
     	EditText edit_refreshRate = (EditText) this.findViewById(R.id.editRefershRate);
     	EditText edit_logRate = (EditText) this.findViewById(R.id.editLogRate);
     	EditText edit_logDirectory = (EditText) this.findViewById(R.id.editLogLocation);
     	
     	String address = null;
-    	byte uuidHigh = -1;
-    	byte uuidLow = -1;
+    	String uuid = null;
     	double refreshRate = -1;
     	double logRate = -1;
     	File logDir = null;
     	
     	address = edit_address.getText().toString();
     	
-    	try{
-    		uuidHigh = Byte.parseByte(edit_uuidHigh.getText().toString());
-    		uuidLow = Byte.parseByte(edit_uuidLow.getText().toString());
-    	}catch(NumberFormatException e){
-    		this.showMessage("The high byte and low byte of the UUID must be a byte.");
-    		return;
-    	}
+    	uuid = edit_uuid.getText().toString();
     	
     	try{
     		refreshRate = Double.parseDouble(edit_refreshRate.getText().toString());
@@ -182,8 +170,7 @@ public class ConfigActivity extends Activity {
     	logDir = new File(edit_logDirectory.getText().toString());
     	
     	Config.setArdunioAddress(address);
-    	Config.setArdunioUUIDHigh(uuidHigh);
-    	Config.setArdunioUUIDLow(uuidLow);
+    	Config.setArdunioUUID(uuid);
     	Config.setRefreshRate(refreshRate);
     	Config.setLogRate(logRate);
     	Config.setLogDirectory(logDir);
