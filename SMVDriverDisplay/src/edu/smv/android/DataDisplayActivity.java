@@ -15,7 +15,7 @@ public class DataDisplayActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        Config.loadConfigFile(getApplication());
+        Config.loadCurrentConfig(getApplication());
         
         this.setContentView(R.layout.activity_datadisplay);
         this.setTitle(this.TITLE);

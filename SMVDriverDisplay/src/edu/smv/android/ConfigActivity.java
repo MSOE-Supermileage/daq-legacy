@@ -22,7 +22,7 @@ public class ConfigActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_config);
         
-        Config.loadConfigFile(this);
+        Config.loadCurrentConfig(this);
         this.loadCurrentConfigs();
         this.addActionListeners();
     }
@@ -76,9 +76,9 @@ public class ConfigActivity extends Activity {
      * Load the current configuration into the EditViews
      */
     private void loadCurrentConfigs(){
-    	this.setTextInEditViews(Config.getArdunioAddress(this), Config.getUUIDHigh(this), 
-    			Config.getUUIDLow(this), Config.getRefreshRate(this), 
-    			Config.getLogRate(this), Config.getLogDirectory(this));
+    	this.setTextInEditViews(Config.getArdunioAddress(), Config.getUUIDHigh(), 
+    			Config.getUUIDLow(), Config.getRefreshRate(), 
+    			Config.getLogRate(), Config.getLogDirectory());
     }
     
     
@@ -103,11 +103,11 @@ public class ConfigActivity extends Activity {
      * @param address
      * @param uuidHigh
      * @param uuidLow
-     * @param refreshRate
-     * @param logRate
+     * @param d
+     * @param e
      * @param logDir
      */
-    private void setTextInEditViews(String address, byte uuidHigh, byte uuidLow, float refreshRate, float logRate, String logDir){
+    private void setTextInEditViews(String address, byte uuidHigh, byte uuidLow, double d, double e, String logDir){
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
     	EditText edit_uuidHigh = (EditText) this.findViewById(R.id.editUUIDHigh);
     	EditText edit_uuidLow = (EditText) this.findViewById(R.id.editUUIDLow);
@@ -118,8 +118,8 @@ public class ConfigActivity extends Activity {
     	edit_address.setText(address);
     	edit_uuidHigh.setText("" + uuidHigh);
     	edit_uuidLow.setText("" + uuidLow);
-    	edit_refreshRate.setText("" + refreshRate);
-    	edit_logRate.setText("" + logRate);
+    	edit_refreshRate.setText("" + d);
+    	edit_logRate.setText("" + e);
     	edit_logDirectory.setText(logDir);
     }
     
@@ -150,12 +150,12 @@ public class ConfigActivity extends Activity {
     	float logRate = Float.parseFloat(edit_logRate.getText().toString());
     	String logDir = edit_logDirectory.getText().toString();
     	
-    	Config.setArdunioAddress(this, address);
-    	Config.setArdunioUUIDHigh(this, uuidHigh);
-    	Config.setArdunioUUIDLow(this, uuidLow);
-    	Config.setRefreshRate(this, refreshRate);
-    	Config.setLogRate(this, logRate);
-    	Config.setLogDirectory(this, logDir);
-    	Config.saveConfigFile(this);
+    	Config.setArdunioAddress(address);
+    	Config.setArdunioUUIDHigh(uuidHigh);
+    	Config.setArdunioUUIDLow(uuidLow);
+    	Config.setRefreshRate(refreshRate);
+    	Config.setLogRate(logRate);
+    	Config.setLogDirectory(logDir);
+    	Config.saveConfigFile();
     }
 }

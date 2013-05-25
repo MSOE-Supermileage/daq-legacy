@@ -10,7 +10,6 @@ import edu.smv.data.Config;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
 
 public class DeviceSocket {
 	private BluetoothSocket blueToothSocket;
@@ -22,14 +21,10 @@ public class DeviceSocket {
 	 * @param context
 	 * @throws IOException
 	 */
-	public DeviceSocket(Context context) throws IOException {
+	public DeviceSocket() throws IOException {
 		BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-		device = adapter.getRemoteDevice(Config.getArdunioAddress(context));
-<<<<<<< HEAD
-		deviceID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // A Serial over Bluetooth UUID
-=======
-		deviceID = new UUID(Config.getUUIDHigh(context), Config.getUUIDLow(context));
->>>>>>> Communications updated to work with config file.
+		device = adapter.getRemoteDevice(Config.getArdunioAddress());
+		deviceID = new UUID(Config.getUUIDHigh(), Config.getUUIDLow());
 
 		blueToothSocket = device.createRfcommSocketToServiceRecord(deviceID);
 	}
@@ -124,21 +119,14 @@ public class DeviceSocket {
 	}
 
 	public OutputStream getOutputStream(){
-		try {
-			return blueToothSocket.getOutputStream();
-		} catch (IOException e) {
-			for(int x = 0; x<25; x++)
-				System.err.println("Shouldn't happen but just in case... I'm in DeviceSocket.java");
-			e.printStackTrace();
-			return null;
-		}
+		return getOutputStream();
 	}
 	
 	public BluetoothDevice getRemoteDevice(){
-		return blueToothSocket.getRemoteDevice();
+		return getRemoteDevice();
 	}
 	
 	public boolean isConnected(){
-		return blueToothSocket.isConnected();
+		return isConnected();
 	}
 }
