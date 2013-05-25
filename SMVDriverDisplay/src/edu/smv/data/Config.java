@@ -28,8 +28,8 @@ public class Config {
 	 * Get the config file
 	 * @return
 	 */
-	public static File getConfigFile(){
-		return new File(Logger.getDefualtLogDirectory().getAbsolutePath() + "/MSOE_SMV_CONFIG.ini");
+	public static File getConfigFile(Context context){
+		return new File(context.getFilesDir() + "/MSOE_SMV_CONFIG.ini");
 	}
 	
 	
@@ -37,7 +37,7 @@ public class Config {
 	 * Save the configurations to a config file
 	 * @param context
 	 */
-	public static void saveConfigFile(){
+	public static void saveConfigFile(Context context){
 		String output = "";
 		output += ARDUINO_ADDRESS_KEY + "=" + Config.getArdunioAddress() + "\n";
 		output += REFRESH_RATE_KEY + "=" + Config.getRefreshRate() + "\n";
@@ -46,7 +46,12 @@ public class Config {
 		output += UUID_HIGH_KEY + "=" + Config.getUUIDHigh() + "\n";
 		output += UUID_LOW_KEY + "=" + Config.getUUIDLow() + "\n";
 		
-		AndroidFileIO.writeFile(getConfigFile(), output);
+		File configDirectory = new File(Config.getConfigFile(context).getParent());
+		if(!configDirectory.exists()){
+			AndroidFileIO.createDirectory(configDirectory);
+		}
+		
+		AndroidFileIO.writeFile(getConfigFile(context), output);
 	}
 
 
@@ -55,8 +60,8 @@ public class Config {
 	 * @param context
 	 */
 	public static void loadCurrentConfig(Context context){
-		if(Config.getConfigFile().exists()){
-			Config.loadConfigurationFile();
+		if(Config.getConfigFile(context).exists()){
+			Config.loadConfigurationFile(context);
 		}else{
 			Config.configLoadDefualts(context);
 		}
@@ -66,7 +71,7 @@ public class Config {
 	/**
 	 * Load configurations from context file
 	 */
-	public static void loadConfigurationFile(){
+	public static void loadConfigurationFile(Context context){
 		float refreshRate = -1;
 		float logRate = -1;
 		String logDirectory = null;
@@ -74,7 +79,7 @@ public class Config {
 		byte uuidHigh = 0;
 		byte uuidLow = 0;
 		
-		for(String line : AndroidFileIO.readFile(getConfigFile())){
+		for(String line : AndroidFileIO.readFile(getConfigFile(context))){
 			String[] tokens = line.split("=");
 			
 			if(tokens[0].equalsIgnoreCase(REFRESH_RATE_KEY)){

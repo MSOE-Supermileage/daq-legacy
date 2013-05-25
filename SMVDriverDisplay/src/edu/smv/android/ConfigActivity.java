@@ -156,6 +156,6 @@ public class ConfigActivity extends Activity {
     	Config.setRefreshRate(refreshRate);
     	Config.setLogRate(logRate);
     	Config.setLogDirectory(logDir);
-    	Config.saveConfigFile();
+    	Config.saveConfigFile(this);
     }
 }
