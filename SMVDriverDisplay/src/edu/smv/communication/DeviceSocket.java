@@ -25,7 +25,7 @@ public class DeviceSocket {
 	public DeviceSocket(Context context) throws IOException {
 		BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 		device = adapter.getRemoteDevice(Config.getArdunioAddress(context));
-		deviceID = new UUID(0,0);
+		deviceID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // A Serial over Bluetooth UUID
 
 		blueToothSocket = device.createRfcommSocketToServiceRecord(deviceID);
 	}
@@ -121,8 +121,15 @@ public class DeviceSocket {
 		return retVal;
 	}
 
-	public OutputStream getOutputStream() throws IOException{
-		return blueToothSocket.getOutputStream();
+	public OutputStream getOutputStream(){
+		try {
+			return blueToothSocket.getOutputStream();
+		} catch (IOException e) {
+			for(int x = 0; x<25; x++)
+				System.err.println("Shouldn't happen but just in case... I'm in DeviceSocket.java");
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public BluetoothDevice getRemoteDevice(){
