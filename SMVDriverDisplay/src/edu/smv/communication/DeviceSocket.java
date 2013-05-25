@@ -121,15 +121,15 @@ public class DeviceSocket {
 		return retVal;
 	}
 
-	public OutputStream getOutputStream(){
-		return getOutputStream();
+	public OutputStream getOutputStream() throws IOException{
+		return blueToothSocket.getOutputStream();
 	}
 	
 	public BluetoothDevice getRemoteDevice(){
-		return getRemoteDevice();
+		return blueToothSocket.getRemoteDevice();
 	}
 	
 	public boolean isConnected(){
-		return isConnected();
+		return blueToothSocket.isConnected();
 	}
 }
