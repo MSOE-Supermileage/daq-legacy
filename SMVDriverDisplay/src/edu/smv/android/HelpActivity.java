@@ -2,9 +2,11 @@ package edu.smv.android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 
 
 public class HelpActivity extends Activity {
@@ -17,10 +19,13 @@ public class HelpActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_help);
+        
+        WebView view = (WebView) this.findViewById(R.id.webView1);
+		view.loadUrl("file:///android_asset/help.html");
     }
 
-    
-    /**
+
+	/**
      * Method gets run when creating the options menu
      * @param menu
      * @return
