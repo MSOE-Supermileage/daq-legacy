@@ -3,6 +3,8 @@ package edu.smv.data;
 import java.io.File;
 import java.util.Calendar;
 
+import android.content.Context;
+
 import edu.smv.fileIO.AndroidFileIO;
 
 public class Logger {
@@ -45,12 +47,12 @@ public class Logger {
 	/**
 	 * Log to a new file
 	 */
-	public void createNewFile(){
+	public void createNewFile(Context context){
 		String time = "" + getLogTime();
 		time = time.replaceAll(" ", "_");
 		time = time.replaceAll(":", "-");
 		String fileName = time + ".csv";
-		File fileDirectory = Config.getLogDirectory();
+		File fileDirectory = Config.getLogDirectory(context);
 		
 		if(!fileDirectory.exists()){
 			AndroidFileIO.createDirectory(fileDirectory);

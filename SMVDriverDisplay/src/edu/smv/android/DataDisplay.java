@@ -70,7 +70,7 @@ public class DataDisplay implements Runnable {
 				.findViewById(R.id.btnNewLoggerFile);
 		btnNewLoggerFile.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				data.getLogger().createNewFile();
+				data.getLogger().createNewFile(dataDisplayActivity);
 			}
 		});
 
@@ -80,7 +80,7 @@ public class DataDisplay implements Runnable {
 		btnToggleLogger.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (data.getLogger().getLogFile() == null) {
-					data.getLogger().createNewFile();
+					data.getLogger().createNewFile(dataDisplayActivity);
 				}
 				loggerOn = !loggerOn;
 				btnToggleLogger.setChecked(loggerOn);
@@ -97,8 +97,8 @@ public class DataDisplay implements Runnable {
 		double lastTimeLogged = -1;
 
 		while (!terminateDataDisplay) {
-			boolean displayData = (updateGUI) && (System.currentTimeMillis() - lastTimeDisplayed >= Config.getRefreshRate());
-			boolean logData = loggerOn && ((System.currentTimeMillis() - lastTimeLogged) >= Config.getLogRate());
+			boolean displayData = (updateGUI) && (System.currentTimeMillis() - lastTimeDisplayed >= Config.getRefreshRate(dataDisplayActivity));
+			boolean logData = loggerOn && ((System.currentTimeMillis() - lastTimeLogged) >= Config.getLogRate(dataDisplayActivity));
 
 			// Get Data
 			if (displayData || logData) {

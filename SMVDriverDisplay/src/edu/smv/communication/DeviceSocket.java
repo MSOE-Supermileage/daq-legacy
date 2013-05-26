@@ -24,8 +24,8 @@ public class DeviceSocket {
          */
         public DeviceSocket(Context context) throws IOException {
                 BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-                device = adapter.getRemoteDevice(Config.getArdunioAddress());
-                deviceID = UUID.fromString(Config.getUUID_STRING()); // A Serial over Bluetooth UUID
+                device = adapter.getRemoteDevice(Config.getArdunioAddress(context));
+                deviceID = UUID.fromString(Config.getUUID_STRING(context)); // A Serial over Bluetooth UUID
                 blueToothSocket = device.createRfcommSocketToServiceRecord(deviceID);
         }
         
@@ -82,6 +82,10 @@ public class DeviceSocket {
         //////////////////////////////////////////////////////////////////////////////////////////
         
         
+        /**
+         * Connect to he bluetooth socket
+         * @return
+         */
         public boolean connect(){
                 boolean retVal = true;
                 
@@ -94,6 +98,11 @@ public class DeviceSocket {
                 return retVal;
         }
         
+        
+        /**
+         * Close the bluetooth socket
+         * @return
+         */
         public boolean close(){
                 boolean retVal = true;
                 
@@ -106,6 +115,11 @@ public class DeviceSocket {
                 return retVal;
         }
         
+        
+        /**
+         * Get the input stream from the blueooth socket
+         * @return
+         */
         public InputStream getInputStream(){
                 InputStream retVal = null;
                 
@@ -118,6 +132,11 @@ public class DeviceSocket {
                 return retVal;
         }
 
+        
+        /**
+         * Get the output stream from the bluetooth device
+         * @return
+         */
         public OutputStream getOutputStream(){
                 try {
                         return blueToothSocket.getOutputStream();
@@ -129,10 +148,20 @@ public class DeviceSocket {
                 }
         }
         
+        
+        /**
+         * Get the outputstream from the bluetooth device
+         * @return
+         */
         public BluetoothDevice getRemoteDevice(){
                 return blueToothSocket.getRemoteDevice();
         }
         
+        
+        /**
+         * Get if the bluetooth device connected
+         * @return
+         */
         public boolean isConnected(){
                 return blueToothSocket.isConnected();
         }

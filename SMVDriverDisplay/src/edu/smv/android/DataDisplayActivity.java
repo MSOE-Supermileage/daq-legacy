@@ -1,40 +1,38 @@
 package edu.smv.android;
 
 import edu.smv.android.R;
-import edu.smv.data.Config;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
 public class DataDisplayActivity extends Activity {
 	private DataDisplay driverDisplay;
-	private final CharSequence TITLE = "MSOE Data Display";
 
+	
+	/**
+	 * Method is called when the activity is created
+	 */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        Config.loadCurrentConfig(getApplication());
-        
         this.setContentView(R.layout.activity_datadisplay);
-        this.setTitle(this.TITLE);
         
         // Turn off sleep
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
-        // Set Orientation to landscape
-        this.setRequestedOrientation(0);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        
+        //Start display thread
         driverDisplay = new DataDisplay(this);
         Thread driverDisplayThread = new Thread(driverDisplay);
         driverDisplayThread.start();
     }
 
+    
+    /**
+     * Method is called when the menu is created
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
@@ -71,6 +69,10 @@ public class DataDisplayActivity extends Activity {
 	    }
     }
     
+    
+    /**
+     * Method is called when the activity is resumed
+     */
     @Override
     protected void onResume(){
     	super.onResume();
@@ -79,21 +81,23 @@ public class DataDisplayActivity extends Activity {
     	driverDisplay.setUpdateGUI(true);
     }
     
+    
+    /**
+     * Method is called when the activity is paused
+     */
     @Override
     protected void onPause(){
     	super.onResume();
     	driverDisplay.setUpdateGUI(false);
     }
     
+    
+    /**
+     * Method is called when the activity is destroyed
+     */
     @Override
     protected void onDestroy(){
     	super.onDestroy();
     	driverDisplay.terminateDataDisplay();
     }
-    
-    @Override
-    public void setRequestedOrientation(int orientation){
-    	// Do nothing on user orientation change
-    }
-    
 }

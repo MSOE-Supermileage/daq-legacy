@@ -26,7 +26,6 @@ public class ConfigActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_config);
         
-        Config.loadCurrentConfig(this);
         this.loadCurrentConfigs();
         this.addActionListeners();
     }
@@ -109,8 +108,8 @@ public class ConfigActivity extends Activity {
      * Load the current configuration into the EditViews
      */
     private void loadCurrentConfigs(){
-    	this.setTextInEditViews(Config.getArdunioAddress(), Config.getUUID_STRING(), 
-    			Config.getRefreshRate(), Config.getLogRate(), Config.getLogDirectory().getAbsolutePath());
+    	this.setTextInEditViews(Config.getArdunioAddress(this), Config.getUUID_STRING(this), 
+    			Config.getRefreshRate(this), Config.getLogRate(this), Config.getLogDirectory(this).getAbsolutePath());
     }
     
     
@@ -173,8 +172,8 @@ public class ConfigActivity extends Activity {
     	
     	String address = null;
     	String uuid = null;
-    	double refreshRate = -1;
-    	double logRate = -1;
+    	float refreshRate = -1;
+    	float logRate = -1;
     	File logDir = null;
     	
     	address = edit_address.getText().toString();
@@ -182,27 +181,26 @@ public class ConfigActivity extends Activity {
     	uuid = edit_uuid.getText().toString();
     	
     	try{
-    		refreshRate = Double.parseDouble(edit_refreshRate.getText().toString());
+    		refreshRate = Float.parseFloat(edit_refreshRate.getText().toString());
     	}catch(NumberFormatException e){
-    		AndroidUtil.showMessage(this, "The refresh rate must be a double.");
+    		AndroidUtil.showMessage(this, "The refresh rate must be a float.");
     		return;
     	}
     	
     	try{
-    		logRate = Double.parseDouble(edit_logRate.getText().toString());
+    		logRate = Float.parseFloat(edit_logRate.getText().toString());
     	}catch(NumberFormatException e){
-    		AndroidUtil.showMessage(this, "The log rate must be a double.");
+    		AndroidUtil.showMessage(this, "The log rate must be a float.");
     		return;
     	}
     	
     	logDir = new File(edit_logDirectory.getText().toString());
     	
-    	Config.setArdunioAddress(address);
-    	Config.setArdunioUUID(uuid);
-    	Config.setRefreshRate(refreshRate);
-    	Config.setLogRate(logRate);
-    	Config.setLogDirectory(logDir);
-    	Config.saveConfigFile(this);
+    	Config.setArdunioAddress(this, address);
+    	Config.setArdunioUUID(this, uuid);
+    	Config.setRefreshRate(this, refreshRate);
+    	Config.setLogRate(this, logRate);
+    	Config.setLogDirectory(this, logDir);
     	exitConfig();
     }
 }

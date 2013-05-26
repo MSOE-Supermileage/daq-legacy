@@ -3,9 +3,10 @@ package edu.smv.data;
 import java.io.File;
 
 import edu.smv.android.R;
-import edu.smv.fileIO.AndroidFileIO;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 
 public class Config {
@@ -15,111 +16,27 @@ public class Config {
 	public final static String LOG_DIRECTORY_KEY = "Log_Directory";
 	public final static String  UUID_KEY = "Arduino_UUID_STRING";
 	
-	private static String arudinoAddress;
-	private static String UUID_STRING;
-	private static double refreshRate;
-	private static double logRate;
-	private static File logDirectorty;
+	public static final int MODE = Context.MODE_PRIVATE;
+	public static final String PREF_NAME = "CONFIG";
 	
 	
 	/**
-	 * Get the config file
+	 * Get an instance of the shared preferences
+	 * @param context
 	 * @return
 	 */
-	public static File getConfigFile(Context context){
-		return new File(context.getFilesDir() + "/MSOE_SMV_CONFIG.ini");
+	public static SharedPreferences getPreferences(Context context) {
+		return context.getSharedPreferences(PREF_NAME, MODE);
 	}
-	
+		
 	
 	/**
-	 * Save the configurations to a config file
+	 * Get an instance of the SharedPreference Editor
 	 * @param context
+	 * @return
 	 */
-	public static void saveConfigFile(Context context){
-		String output = "";
-		output += ARDUINO_ADDRESS_KEY + "=" + Config.getArdunioAddress() + "\n";
-		output += REFRESH_RATE_KEY + "=" + Config.getRefreshRate() + "\n";
-		output += LOG_RATE_KEY + "=" + Config.getLogRate() + "\n";
-		output += LOG_DIRECTORY_KEY + "=" + Config.getLogDirectory() + "\n";
-		output += UUID_KEY + "=" + Config.getUUID_STRING() + "\n";
-		
-		File configDirectory = new File(Config.getConfigFile(context).getParent());
-		if(!configDirectory.exists()){
-			AndroidFileIO.createDirectory(configDirectory);
-		}	
-		AndroidFileIO.writeFile(getConfigFile(context), output);
-	}
-
-
-	/**
-	 * Load configurations from config file, or use defualt configurations
-	 * @param context
-	 */
-	public static void loadCurrentConfig(Context context){
-		if(Config.getConfigFile(context).exists()){
-			Config.loadConfigurationFile(context);
-		}else{
-			Config.configLoadDefualts(context);
-		}
-	}
-	
-	
-	/**
-	 * Load configurations from context file
-	 */
-	public static void loadConfigurationFile(Context context){
-		float refreshRate = -1;
-		float logRate = -1;
-		String logDirectory = null;
-		String arduinoAddress = null;
-		String uuid = null;
-		
-		for(String line : AndroidFileIO.readFile(getConfigFile(context))){
-			String[] tokens = line.split("=");
-			
-			if(tokens[0].equalsIgnoreCase(REFRESH_RATE_KEY)){
-				try{
-					refreshRate = Float.parseFloat(tokens[1]);
-				} catch(NumberFormatException e) {/* Do nothing. */}
-			}else if (tokens[0].equalsIgnoreCase(LOG_RATE_KEY)){
-				try{
-					logRate = Float.parseFloat(tokens[1]);
-				} catch(NumberFormatException e) {/* Do nothing. */}
-			}else if (tokens[0].equalsIgnoreCase(LOG_DIRECTORY_KEY)){
-				logDirectory = tokens[1];
-			}else if (tokens[0].equalsIgnoreCase(ARDUINO_ADDRESS_KEY)){
-				arduinoAddress = tokens[1];
-			}else if (tokens[0].equalsIgnoreCase(UUID_KEY)){
-				uuid = tokens[1];
-			}
-		}
-		
-		Config.setRefreshRate(refreshRate);
-		Config.setLogRate(logRate);
-		Config.setLogDirectory(new File(logDirectory));
-		Config.setArdunioAddress(arduinoAddress);
-		Config.setArdunioUUID(uuid);
-	}
-	
-	
-	/**
-	 * Load the default configuration files from R.string.
-	 * @param context
-	 */
-	public static void configLoadDefualts(Context context){
-		// Since config file doesn't exist use default values in R.string.
-		Resources r = context.getResources();
-		double refreshRate = Double.parseDouble(r.getString(R.string.configRefreshRate));
-		double logRate = Double.parseDouble(r.getString(R.string.configLogRate));
-		File logDirectory = Logger.getDefualtLogDirectory();
-		String arduinoAddress = r.getString(R.string.configArdunioAddress);
-		String uuid = r.getString(R.string.configArdunioUUID);
-		
-		Config.setRefreshRate(refreshRate);
-		Config.setLogRate(logRate);
-		Config.setLogDirectory(logDirectory);
-		Config.setArdunioAddress(arduinoAddress);
-		Config.setArdunioUUID(uuid);
+	public static Editor getEditor(Context context) {
+		return getPreferences(context).edit();
 	}
 	
 	
@@ -127,8 +44,8 @@ public class Config {
 	 * Get the refresh rate from shared preferences
 	 * @return
 	 */
-	public static double getRefreshRate(){
-		return Config.refreshRate;
+	public static float getRefreshRate(Context context){
+		return getPreferences(context).getFloat(Config.REFRESH_RATE_KEY, Config.getDefaultRefreshRate(context));
 	}
 	
 	
@@ -136,8 +53,17 @@ public class Config {
 	 * Set the refresh rate in shared preferences
 	 * @param refreshRate
 	 */
-	public static void setRefreshRate(double refreshRate){
-		Config.refreshRate = refreshRate;
+	public static void setRefreshRate(Context context, float refreshRate){
+		getEditor(context).putFloat(Config.REFRESH_RATE_KEY, refreshRate).commit();
+	}
+	
+	
+	/**
+	 * Get the default value for ArdunioAddress
+	 */
+	public static float getDefaultRefreshRate(Context context) {
+		Resources r = context.getResources();
+		return Float.parseFloat(r.getString(R.string.configRefreshRate));
 	}
 	
 	
@@ -145,8 +71,8 @@ public class Config {
 	 * Get the log rate from the shared preferences
 	 * @return
 	 */
-	public static double getLogRate(){
-		return Config.logRate;
+	public static float getLogRate(Context context){
+		return getPreferences(context).getFloat(Config.LOG_RATE_KEY, Config.getDefaultLogRate(context));
 	}
 	
 	
@@ -154,8 +80,17 @@ public class Config {
 	 * Set the log rate in the shared preferences
 	 * @param logRate
 	 */
-	public static void setLogRate(double logRate){
-		Config.logRate = logRate;
+	public static void setLogRate(Context context , float logRate){
+		getEditor(context).putFloat(Config.LOG_RATE_KEY	, logRate).commit();
+	}
+	
+	
+	/**
+	 * Get the default value for ArdunioAddress
+	 */
+	public static float getDefaultLogRate(Context context) {
+		Resources r = context.getResources();
+		return Float.parseFloat(r.getString(R.string.configLogRate));
 	}
 	
 	
@@ -163,8 +98,8 @@ public class Config {
 	 * Get the log directory from the shared preferences
 	 * @return
 	 */
-	public static File getLogDirectory(){
-		return Config.logDirectorty;
+	public static File getLogDirectory(Context context){
+		return new File(getPreferences(context).getString(Config.LOG_DIRECTORY_KEY, Config.getDefualtLogDirectory(context).toString()));
 	}
 	
 	
@@ -172,8 +107,16 @@ public class Config {
 	 * Set the log directory in the shared preferences
 	 * @param logDir
 	 */
-	public static void setLogDirectory(File logDir){
-		Config.logDirectorty = logDir;
+	public static void setLogDirectory(Context context, File logDir){
+		getEditor(context).putString(Config.LOG_DIRECTORY_KEY, logDir.toString()).commit();
+	}
+	
+	
+	/**
+	 * Get the default value for ArdunioAddress
+	 */
+	public static File getDefualtLogDirectory(Context context) {
+		return Logger.getDefualtLogDirectory();
 	}
 	
 	
@@ -181,8 +124,8 @@ public class Config {
 	 * Get the ardunio address from the shared preferences
 	 * @return
 	 */
-	public static String getArdunioAddress(){
-		return Config.arudinoAddress;
+	public static String getArdunioAddress(Context context){
+		return getPreferences(context).getString(Config.ARDUINO_ADDRESS_KEY, Config.getDefualtArdunioAddress(context));
 	}
 	
 	
@@ -190,18 +133,26 @@ public class Config {
 	 * Set the ardunio address in the shared preferences
 	 * @param address
 	 */
-	public static void setArdunioAddress(String address){
-		Config.arudinoAddress = address;
+	public static void setArdunioAddress(Context context, String address){
+		getEditor(context).putString(Config.ARDUINO_ADDRESS_KEY, address).commit();
+	}
+	
+	
+	/**
+	 * Get the default value for ArdunioAddress
+	 */
+	public static String getDefualtArdunioAddress(Context context) {
+		Resources r = context.getResources();
+		return r.getString(R.string.configArdunioAddress);
 	}
 
 
 	/**
-	 * Set the high byte for the UUID
+	 * Set the UUID
 	 * @param uuidLow
 	 */
-	public static void setArdunioUUID(String uuidLow) {
-		Config.UUID_STRING = uuidLow;
-		
+	public static void setArdunioUUID(Context context, String uuid) {
+		getEditor(context).putString(Config.UUID_KEY, uuid).commit();
 	}
 
 	
@@ -209,8 +160,15 @@ public class Config {
 	 * Get the high byte for the UUID
 	 * @return
 	 */
-	public static String getUUID_STRING() {
-		return Config.UUID_STRING;
+	public static String getUUID_STRING(Context context) {
+		return getPreferences(context).getString(Config.UUID_KEY, Config.getDefualtUUID_String(context));
 	}
 	
+	/**
+	 * Get the default value for UUID
+	 */
+	public static String getDefualtUUID_String(Context context) {
+		Resources r = context.getResources();
+		return r.getString(R.string.configArdunioUUID);
+	}	
 }
