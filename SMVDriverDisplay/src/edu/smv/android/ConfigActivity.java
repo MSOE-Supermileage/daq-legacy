@@ -116,15 +116,14 @@ public class ConfigActivity extends Activity {
     /**
      * Load the default configuration into the EditViews
      */
-    private void loadDefaultConfigs(){
-    	Resources r = this.getResources();
-		float refreshRate = Float.parseFloat(r.getString(R.string.configRefreshRate));
-		float logRate = Float.parseFloat(r.getString(R.string.configLogRate));
-		String logDirectory = Logger.getDefualtLogDirectory().getAbsolutePath();
-		String address = r.getString(R.string.configArdunioAddress);
-		String uuid = r.getString(R.string.configArdunioUUID);
-		
-		this.setTextInEditViews(address, uuid, refreshRate, logRate, logDirectory);
+    private void loadDefaultConfigs(){		
+		this.setTextInEditViews(
+				Config.getDefualtArdunioAddress(this), 
+				Config.getDefualtUUID_String(this),
+				Config.getDefaultRefreshRate(this),
+				Config.getDefaultLogRate(this),
+				Config.getDefualtLogDirectory(this).toString()
+				);
     }
     
     
@@ -137,7 +136,7 @@ public class ConfigActivity extends Activity {
      * @param e
      * @param logDir
      */
-    private void setTextInEditViews(String address, String uuid, double d, double e, String logDir){
+    private void setTextInEditViews(String address, String uuid, float d, float e, String logDir){
     	EditText edit_address = (EditText) this.findViewById(R.id.editAddress);
     	EditText edit_uuid = (EditText) this.findViewById(R.id.editUUID);
     	EditText edit_refreshRate = (EditText) this.findViewById(R.id.editRefershRate);
