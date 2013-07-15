@@ -8,8 +8,8 @@ import android.content.Context;
 import edu.smv.fileIO.AndroidFileIO;
 
 public class Logger {
-	final String logFileHeader;
-	private File logFile;
+	private static String logCSVHeader = "Time,MPG,RPM,MPG";
+	private static File logFileCSV;
 	
 	/**
 	 * Returns the default locations for logs.
@@ -27,27 +27,11 @@ public class Logger {
 		return "" + Calendar.getInstance().getTime();
 	}
 	
-	/**
-	 * Default constructor that makes the header line the date.
-	 */
-	public Logger(){
-		this.logFileHeader = "Time,MPH,RPM,MPG"; 
-	}
-	
-	
-	 /**
-	  * Return the log file
-	  * @return
-	  */
-	 public File getLogFile() {
-		return this.logFile;
-	}
-	
 	
 	/**
 	 * Log to a new file
 	 */
-	public void createNewFile(Context context){
+	public static void createNewFileCSV(Context context){
 		String time = "" + getLogTime();
 		time = time.replaceAll(" ", "_");
 		time = time.replaceAll(":", "-");
@@ -58,18 +42,42 @@ public class Logger {
 			AndroidFileIO.createDirectory(fileDirectory);
 		}
 		
-		this.logFile = new File(fileDirectory, fileName);
-		AndroidFileIO.writeFile(this.logFile, this.logFileHeader + "\n");
+		logFileCSV = new File(fileDirectory, fileName);
+		AndroidFileIO.writeFile(logFileCSV, Logger.logCSVHeader + "\n");
 	}
 
+	
+	/**
+	 * Get an isntance of the CSV Log File.
+	 */
+	public static File getCSVLogFile(){
+		return Logger.logFileCSV;
+	}
+	
+	
+	public static String getCSVHeader(){
+		return Logger.logCSVHeader;
+	}
+	
+	
+	public static void setCSVHeader(String header){
+		Logger.logCSVHeader = header;
+	}
+	
 	
 	/**
 	 * Log the current state of the database to the log file.
 	 * @param dataBase
 	 * @return boolean - Success of log
 	 */
-	public boolean log(DataBase dataBase) {
-			return AndroidFileIO.appendFile(this.logFile, Logger.getLogTime() + "," + dataBase.getMpg()  + "," + dataBase.getRpm()  + "," + dataBase.getMpg() + "\n");
+	public static boolean logToCSV(DataBase dataBase) {
+		boolean retVal = true;
+		
+		for(DataNode node : dataBase.getDataNodes()){
+			retVal = retVal && AndroidFileIO.appendFile(Logger.logFileCSV, Logger.getLogTime() + "," + node.getMpg()  + "," + node.getRpm()  + "," + node.getMpg() + "\n");
+		}
+		
+		return retVal;
 	}
 	
 }

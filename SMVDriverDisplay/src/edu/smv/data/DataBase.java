@@ -1,36 +1,45 @@
 package edu.smv.data;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+import android.app.Activity;
+
+import edu.smv.android.AndroidUtil;
 import edu.smv.communication.DeviceSocket;
 
 public class DataBase {
 	private DeviceSocket arduino;
 	
-	private double rpm;
-	private double mph;
-	private double amph;
-	private double mpg;
-	private double batteryVoltage;
-	private Logger logger;
+	private Activity activity;
+	private List<DataNode> dataNodes;
+	
 	
 	/**
 	 * Default Constructor
 	 */
-	public DataBase(){
-		this.rpm = 0;
-		this.mpg = 0;
-		this.mpg = 0;
-		this.amph = 0;
-		this.batteryVoltage = 0;
-		this.logger = new Logger();
+	public DataBase(Activity activity){
+		this.activity = activity;
+		this.dataNodes = new LinkedList<DataNode>();
 		
-//		try {
-//			this.arduino = new DeviceSocket();
-//			this.arduino.connect();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			this.arduino = new DeviceSocket(activity);
+			this.arduino.connect();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
+	
+	
+	/**
+	 * Reset all the values in the data base
+	 */
+	private void resetDataBase() {
+		dataNodes.clear();
+	}
+
 	
 	/**
 	 * Load Data values from Arduino into database
@@ -40,22 +49,20 @@ public class DataBase {
 	 */
 	public boolean loadFromArduino(){
 		boolean retVal = false;		
-
+//		double rpm, mpg, mph, bv;
+//
 //		byte[] data = this.arduino.loadValues();
 //		if(data != null){
-//			retVal = true;	
-//			this.rpm = data[0];
-//			this.mpg = data[1];
-//			this.mpg = data[2];
-//			this.batteryVoltage = data[3];	
+//			retVal = true;  
+//			rpm = data[0];
+//			mph = data[1];
+//			mpg = data[2];
+//			bv = data[3];
+//		this.dataNodes.add(new DataNode(-1, mph, mpg, rpm, -1, bv));
 //		} 
 		
-		// Temp Values
-		this.mph++;
-		this.rpm++;
-		this.amph++;
-		this.mpg++;
-		
+		this.dataNodes.add(new DataNode(-1, Math.random() * 100, Math.random() * 100, Math.random() * 100,
+				Math.random() * 100, Math.random() * 100));
 		return retVal;
 	}
 
@@ -64,60 +71,59 @@ public class DataBase {
 	 * Send data to the logger
 	 * @return
 	 */
-	public boolean logData(){
-		return logger.log(this);
+	public boolean logData(boolean resetDataBase){
+		boolean retVal = Logger.logToCSV(this);
+		
+		if(resetDataBase && retVal){
+			this.resetDataBase();
+		}else if(resetDataBase && !retVal){
+			AndroidUtil.showMessage(this.activity, "Unable to log data, so database wasn't cleared.");
+		}
+		
+		return retVal;
+	}
+
+	/**
+	 * getLatestMPH() - Get the latest MPH
+	 * @return
+	 */
+	public double getLatestMPH(){
+		double retVal = -1;
+		
+		if(Config.getUseGPS(activity)){
+			retVal = dataNodes.get(dataNodes.size()-1).getGpsMPH();
+		}else{
+			retVal = dataNodes.get(dataNodes.size()-1).getArduinoMPH();
+		}
+		
+		return retVal;
+	}
+
+
+	/**
+	 * @return the dataNodes
+	 */
+	public List<DataNode> getDataNodes() {
+		return dataNodes;
+	}
+
+	public double getLatestRPM() {
+		return dataNodes.get(dataNodes.size()).getRpm();
+	}
+
+
+	public double getLatestMPG() {
+		return dataNodes.get(dataNodes.size()).getMpg();
+	}
+
+
+	public double getLatestAMPH() {
+		return dataNodes.get(dataNodes.size()).getAmph();
+	}
+
+
+	public double getLatestBatteryVoltage() {
+		return dataNodes.get(dataNodes.size()).getBatteryVoltage();
 	}
 	
-	
-	//////////////////////// Getters and Setters /////////////////////////
-	/////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Getter for RPM
-	 * @return
-	 */
-	public double getRpm() {
-		return rpm;
-	}
-
-	/**
-	 * Getter or MPH
-	 * @return
-	 */
-	public double getMph() {
-		return mph;
-	}
-
-	/**
-	 * Getter for MPG
-	 * @return
-	 */
-	public double getMpg() {
-		return mpg;
-	}
-
-	/**
-	 * Getter for battery voltage
-	 * @return
-	 */
-	public double getBatteryVoltage() {
-		return batteryVoltage;
-	}
-
-	/**
-	 * Getter for average mph
-	 * @return
-	 */
-	public double getAmph() {
-		return amph;
-	}
-	
-	/**
-	 * Getter for logger
-	 * @return
-	 */
-	public Logger getLogger(){
-		return this.logger;
-	}
-
 }

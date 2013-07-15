@@ -15,6 +15,7 @@ public class Config {
 	public final static String LOG_RATE_KEY = "Log_Rate";
 	public final static String LOG_DIRECTORY_KEY = "Log_Directory";
 	public final static String  UUID_KEY = "Arduino_UUID_STRING";
+	public final static String USE_GPS = "USE_GPS";
 	
 	public static final int MODE = Context.MODE_PRIVATE;
 	public static final String PREF_NAME = "CONFIG";
@@ -170,5 +171,23 @@ public class Config {
 	public static String getDefualtUUID_String(Context context) {
 		Resources r = context.getResources();
 		return r.getString(R.string.configArdunioUUID);
-	}	
+	}
+	
+	
+	/**
+	 * Get the ardunio address from the shared preferences
+	 * @return
+	 */
+	public static boolean getUseGPS(Context context){
+		return getPreferences(context).getBoolean(USE_GPS, false);
+	}
+	
+	
+	/**
+	 * Set the ardunio address in the shared preferences
+	 * @param address
+	 */
+	public static void setUseGPS(Context context, boolean useGPS){
+		getEditor(context).putBoolean(USE_GPS, useGPS);
+	}
 }
