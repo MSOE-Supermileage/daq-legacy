@@ -23,12 +23,12 @@ public class DataBase {
 		this.activity = activity;
 		this.dataNodes = new LinkedList<DataNode>();
 		
-		try {
-			this.arduino = new DeviceSocket(activity);
-			this.arduino.connect();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			this.arduino = new DeviceSocket(activity);
+//			this.arduino.connect();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 	
@@ -82,6 +82,15 @@ public class DataBase {
 		
 		return retVal;
 	}
+	
+
+	/**
+	 * @return the dataNodes
+	 */
+	public List<DataNode> getDataNodes() {
+		return dataNodes;
+	}
+	
 
 	/**
 	 * getLatestMPH() - Get the latest MPH
@@ -99,31 +108,24 @@ public class DataBase {
 		return retVal;
 	}
 
-
-	/**
-	 * @return the dataNodes
-	 */
-	public List<DataNode> getDataNodes() {
-		return dataNodes;
-	}
-
+	
 	public double getLatestRPM() {
-		return dataNodes.get(dataNodes.size()).getRpm();
+		return dataNodes.get(dataNodes.size()-1).getRpm();
 	}
 
 
 	public double getLatestMPG() {
-		return dataNodes.get(dataNodes.size()).getMpg();
+		return dataNodes.get(dataNodes.size()-1).getMpg();
 	}
 
 
 	public double getLatestAMPH() {
-		return dataNodes.get(dataNodes.size()).getAmph();
+		return dataNodes.get(dataNodes.size()-1).getAmph();
 	}
 
 
 	public double getLatestBatteryVoltage() {
-		return dataNodes.get(dataNodes.size()).getBatteryVoltage();
+		return dataNodes.get(dataNodes.size()-1).getBatteryVoltage();
 	}
 	
 }
