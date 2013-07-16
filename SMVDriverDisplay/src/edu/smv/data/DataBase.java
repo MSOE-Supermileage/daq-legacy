@@ -23,12 +23,12 @@ public class DataBase {
 		this.activity = activity;
 		this.dataNodes = new LinkedList<DataNode>();
 		
-//		try {
-//			this.arduino = new DeviceSocket(activity);
-//			this.arduino.connect();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			this.arduino = new DeviceSocket(activity);
+			this.arduino.connect();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -49,17 +49,17 @@ public class DataBase {
 	 */
 	public boolean loadFromArduino(){
 		boolean retVal = false;		
-//		double rpm, mpg, mph, bv;
-//
-//		byte[] data = this.arduino.loadValues();
-//		if(data != null){
-//			retVal = true;  
-//			rpm = data[0];
-//			mph = data[1];
-//			mpg = data[2];
-//			bv = data[3];
-//		this.dataNodes.add(new DataNode(-1, mph, mpg, rpm, -1, bv));
-//		} 
+		double rpm, mpg, mph, bv;
+
+		byte[] data = this.arduino.loadValues();
+		if(data != null){
+			retVal = true;  
+			rpm = data[0];
+			mph = data[1];
+			mpg = data[2];
+			bv = data[3];
+		this.dataNodes.add(new DataNode(-1, mph, mpg, rpm, -1, bv));
+		} 
 		
 		this.dataNodes.add(new DataNode(-1, Math.random() * 100, Math.random() * 100, Math.random() * 100,
 				Math.random() * 100, Math.random() * 100));

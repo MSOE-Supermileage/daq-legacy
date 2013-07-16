@@ -114,7 +114,7 @@ public class DataDisplay implements Runnable {
 				// Log Data
 				if (logData) {
 					lastTimeLogged = System.currentTimeMillis();
-					data.logData(false);
+					data.logData(true);
 				}
 			}
 		}
