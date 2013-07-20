@@ -2,6 +2,7 @@ package edu.smv.data;
 
 import java.io.File;
 
+import edu.smv.android.*;
 import edu.smv.android.R;
 
 import android.content.Context;
@@ -117,7 +118,7 @@ public class Config {
 	 * Get the default value for ArdunioAddress
 	 */
 	public static File getDefualtLogDirectory(Context context) {
-		return Logger.getDefualtLogDirectory();
+		return AndroidUtil.getDefualtLogDirectory();
 	}
 	
 	

@@ -1,19 +1,24 @@
 package edu.smv.data;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
 
-import edu.smv.android.AndroidUtil;
-import edu.smv.communication.DeviceSocket;
+
+import edu.smv.android.*;
+import edu.smv.communication.*;
+import edu.smv.data.structure.*;
+import edu.smv.fileIO.FileIO;
 
 public class DataBase {
 	private DeviceSocket arduino;
 	
-	private Activity activity;
 	private List<DataNode> dataNodes;
+	private Activity activity;
+	private DataNode currentNode;
 	
 	
 	/**
@@ -21,10 +26,11 @@ public class DataBase {
 	 */
 	public DataBase(Activity activity){
 		this.activity = activity;
-		this.dataNodes = new LinkedList<DataNode>();
+		this.currentNode = null;
+		this.resetDataBase();
 		
 		try {
-			this.arduino = new DeviceSocket(activity);
+			this.arduino = new DeviceSocket(this.activity);
 			this.arduino.connect();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -36,8 +42,8 @@ public class DataBase {
 	/**
 	 * Reset all the values in the data base
 	 */
-	private void resetDataBase() {
-		dataNodes.clear();
+	public void resetDataBase() {
+		this.dataNodes = new LinkedList<DataNode>();
 	}
 
 	
@@ -49,8 +55,9 @@ public class DataBase {
 	 */
 	public boolean loadFromArduino(){
 		boolean retVal = false;		
-		double rpm, mpg, mph, bv;
+		//double rpm, mpg, mph, bv;
 
+		/*
 		byte[] data = this.arduino.loadValues();
 		if(data != null){
 			retVal = true;  
@@ -60,9 +67,10 @@ public class DataBase {
 			bv = data[3];
 		this.dataNodes.add(new DataNode(-1, mph, mpg, rpm, -1, bv));
 		} 
+		*/
 		
-		this.dataNodes.add(new DataNode(-1, Math.random() * 100, Math.random() * 100, Math.random() * 100,
-				Math.random() * 100, Math.random() * 100));
+		this.currentNode = new DataNode(-1, Math.random() * 100, Math.random() * 100, Math.random() * 100,
+				Math.random() * 100, Math.random() * 100);
 		return retVal;
 	}
 
@@ -71,16 +79,8 @@ public class DataBase {
 	 * Send data to the logger
 	 * @return
 	 */
-	public boolean logData(boolean resetDataBase){
-		boolean retVal = Logger.logToCSV(this);
-		
-		if(resetDataBase && retVal){
-			this.resetDataBase();
-		}else if(resetDataBase && !retVal){
-			AndroidUtil.showMessage(this.activity, "Unable to log data, so database wasn't cleared.");
-		}
-		
-		return retVal;
+	public boolean logData(){	
+		return this.dataNodes.add(this.currentNode);
 	}
 	
 
@@ -90,42 +90,39 @@ public class DataBase {
 	public List<DataNode> getDataNodes() {
 		return dataNodes;
 	}
-	
+
 
 	/**
-	 * getLatestMPH() - Get the latest MPH
-	 * @return
+	 * @return the currentNode
 	 */
-	public double getLatestMPH(){
-		double retVal = -1;
+	public DataNode getCurrentNode() {
+		return currentNode;
+	}
+
+
+	/**
+	 * Save the database
+	 */
+	public void saveNodes() {
+		Runnable saveDataBase = new Runnable(){
+			public void run() {
+				String time = AndroidUtil.getTime();
+				time = time.replaceAll(" ", "_");
+				time = time.replaceAll(":", "-");
+				final String fileName = time + "." + DataNode.fileType;
+				final File fileDirectory = Config.getLogDirectory(activity);
+                
+                if(!fileDirectory.exists()){
+                        FileIO.createDirectory(fileDirectory);
+                }
+                
+                final File file = new File(fileDirectory, fileName);
+                FileIO.saveDataNodes(file, getDataNodes());
+			}
+		};
 		
-		if(Config.getUseGPS(activity)){
-			retVal = dataNodes.get(dataNodes.size()-1).getGpsMPH();
-		}else{
-			retVal = dataNodes.get(dataNodes.size()-1).getArduinoMPH();
-		}
-		
-		return retVal;
-	}
-
-	
-	public double getLatestRPM() {
-		return dataNodes.get(dataNodes.size()-1).getRpm();
-	}
-
-
-	public double getLatestMPG() {
-		return dataNodes.get(dataNodes.size()-1).getMpg();
-	}
-
-
-	public double getLatestAMPH() {
-		return dataNodes.get(dataNodes.size()-1).getAmph();
-	}
-
-
-	public double getLatestBatteryVoltage() {
-		return dataNodes.get(dataNodes.size()-1).getBatteryVoltage();
+		Thread savingThread = new Thread(saveDataBase);
+		savingThread.start();
 	}
 	
 }

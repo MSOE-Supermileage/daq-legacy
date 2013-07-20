@@ -3,7 +3,6 @@ package edu.smv.android;
 import edu.smv.android.R;
 import edu.smv.data.Config;
 import edu.smv.data.DataBase;
-import edu.smv.data.Logger;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.view.View;
@@ -67,11 +66,11 @@ public class DataDisplay implements Runnable {
 	 * Add Action Listeners on the GUI
 	 */
 	private void addActionListeners() {
-		final Button btnNewLoggerFile = (Button) dataDisplayActivity
+		final Button btnNew = (Button) dataDisplayActivity
 				.findViewById(R.id.btnNewLoggerFile);
-		btnNewLoggerFile.setOnClickListener(new View.OnClickListener() {
+		btnNew.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Logger.createNewFileCSV(dataDisplayActivity);
+				data.resetDataBase();
 			}
 		});
 
@@ -80,11 +79,16 @@ public class DataDisplay implements Runnable {
 		btnToggleLogger.setText("OFF");
 		btnToggleLogger.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if (Logger.getCSVLogFile() == null) {
-					Logger.createNewFileCSV(dataDisplayActivity);
-				}
 				loggerOn = !loggerOn;
 				btnToggleLogger.setChecked(loggerOn);
+			}
+		});
+		
+		final Button btnSave = (Button) dataDisplayActivity
+				.findViewById(R.id.btnSave);
+		btnSave.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				data.saveNodes();
 			}
 		});
 	}
@@ -114,7 +118,7 @@ public class DataDisplay implements Runnable {
 				// Log Data
 				if (logData) {
 					lastTimeLogged = System.currentTimeMillis();
-					data.logData(true);
+					data.logData();
 				}
 			}
 		}
@@ -161,11 +165,11 @@ public class DataDisplay implements Runnable {
 
 			}
 			
-			mphValue.setText(String.format(mphStr, data.getLatestMPH()));
-			rpmValue.setText(String.format(rpmStr, data.getLatestRPM()));
-			mpgValue.setText(String.format(mpgStr, data.getLatestMPG()));
-			amphValue.setText(String.format(amphStr, data.getLatestAMPH()));
-			batteryVoltage.setText(String.format(batteryStr, data.getLatestBatteryVoltage()));
+			mphValue.setText(String.format(mphStr, data.getCurrentNode().getArduinoMPH()));
+			rpmValue.setText(String.format(rpmStr, data.getCurrentNode().getRpm()));
+			mpgValue.setText(String.format(mpgStr, data.getCurrentNode().getMpg()));
+			amphValue.setText(String.format(amphStr, data.getCurrentNode().getAmph()));
+			batteryVoltage.setText(String.format(batteryStr, data.getCurrentNode().getBatteryVoltage()));
 		}
 	};
 }

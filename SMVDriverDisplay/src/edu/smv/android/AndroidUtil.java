@@ -1,5 +1,8 @@
 package edu.smv.android;
 
+import java.io.File;
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.view.Gravity;
 import android.view.WindowManager.LayoutParams;
@@ -33,4 +36,22 @@ public class AndroidUtil {
     	popupWindow.showAtLocation(activity.getCurrentFocus(), Gravity.CENTER, 0, 0);
     	popupWindow.update();
     }
+    
+    
+    /**
+	 * Returns the default locations for logs.
+	 * @return
+	 */
+	static public File getDefualtLogDirectory(){
+		return new File(android.os.Environment.getExternalStorageDirectory().getAbsoluteFile() + "/MSOE_SMV");
+	}
+	
+	
+	/**
+	 * Get the current time as a string
+	 * @return
+	 */
+	static public String getTime(){
+		return "" + Calendar.getInstance().getTime();
+	}
 }

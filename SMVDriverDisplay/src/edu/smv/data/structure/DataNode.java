@@ -1,13 +1,16 @@
-/**
- * 
- */
-package edu.smv.data;
+package edu.smv.data.structure;
+
+import java.io.Serializable;
 
 /**
  * @author Mark
  *
  */
-public class DataNode {
+public class DataNode implements Serializable{
+	private static final long serialVersionUID = -266995844146268302L;
+
+	public static final String fileType = "5MVL0G";
+	
 	private double gpsMPH;
 	private double arduinoMPH;
 	private double mpg;
@@ -15,6 +18,10 @@ public class DataNode {
 	private double amph;
 	private double batteryVoltage;
 	
+	public static String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	public DataNode( double gpsMPH, double arduinoMPH, double mpg, double rpm, double amph, double batteryVoltage) {
 		this.gpsMPH = gpsMPH;

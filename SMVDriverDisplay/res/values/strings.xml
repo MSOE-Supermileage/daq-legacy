@@ -42,5 +42,6 @@
     <string name="btnOk">OK</string>
     <string name="btnCancel">Cancel</string>
     <string name="btnDefualt">Defualt</string>
+    <string name="strSave">Save</string>
     
 </resources>

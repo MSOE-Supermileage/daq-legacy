@@ -92,23 +92,34 @@
                 android:text="@string/strNewLog"
                 android:textSize="@dimen/smallDisplaySize" />
 
+            <TextView
+                android:id="@+id/lblLogger"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btnNewLoggerFile"
+                android:layout_alignLeft="@+id/BTNtoggleLogger"
+                android:layout_alignParentRight="true"
+                android:text="@string/lblLogger"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/smallDisplaySize" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/btnNewLoggerFile"
+                android:text="@string/strSave"
+                android:textSize="@dimen/smallDisplaySize" />
+
             <ToggleButton
                 android:id="@+id/BTNtoggleLogger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/btnNewLoggerFile"
+                android:layout_toLeftOf="@+id/btnSave"
                 android:text="@string/strToggleLogger"
-                android:textSize="@dimen/smallDisplaySize" />
-
-            <TextView
-                android:id="@+id/lblLogger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/btnNewLoggerFile"
-                android:layout_alignLeft="@+id/BTNtoggleLogger"
-                android:text="@string/lblLogger"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="@dimen/smallDisplaySize" />
      
 </RelativeLayout>
