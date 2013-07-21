@@ -1,13 +1,19 @@
 package edu.smv.logview;
 
-import java.awt.BorderLayout;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
+
 import edu.smv.data.structure.DataNode;
 
 public class Main extends JFrame {
 	private static final long serialVersionUID = -8572684314913790609L;
 	private final String title = "DataView 5000";
+	private MapPanel mapPanel;
+	private ListPanel listPanel;
+	private DataPanel dataPanel;
+	
 	private List<DataNode> dataNodes;
 	private DataNode currentNode;
 
@@ -23,15 +29,23 @@ public class Main extends JFrame {
 	 * Constructor
 	 */
 	public Main(){
+		this.dataNodes = new LinkedList<DataNode>();
+		
+		this.mapPanel = new MapPanel(this);
+		this.listPanel = new ListPanel(this);
+		this.dataPanel = new DataPanel(this);
+		
+		JSplitPane northSouthsplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.mapPanel, this.dataPanel);
+		JSplitPane westEastsplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, northSouthsplitPane, this.listPanel);
+	
 		this.setJFrameProperties();
 		this.setJMenuBar(new MenuBar(this));
-		//this.add(comp)
+		this.add(westEastsplitPane);
 		this.pack();
 	}
 
 	private void setJFrameProperties(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
 		this.setTitle(this.title);
 		this.setVisible(true);
 	}
@@ -54,5 +68,18 @@ public class Main extends JFrame {
 
 	public void setCurrentNode(DataNode currentNode) {
 		this.currentNode = currentNode;
+	}
+
+
+	public void refreshAll() {
+		this.listPanel.refreshList();
+		this.mapPanel.refreshMap();
+		this.dataPanel.refreshData();
+		this.revalidate();
+	}
+	
+	public void refreshDataPanel() {
+		this.dataPanel.refreshData();
+		this.revalidate();
 	}
 }

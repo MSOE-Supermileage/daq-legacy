@@ -7,9 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.List;
@@ -18,10 +16,10 @@ import edu.smv.data.structure.DataNode;
 
 public class FileIO {
 
-	@SuppressWarnings({ "resource", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public static List<DataNode> loadDataNodes(File file) {
 		List<DataNode> nodes = null;
-		ObjectInput input = null;
+		ObjectInputStream input = null;
 		
 		 try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
@@ -51,7 +49,7 @@ public class FileIO {
 	}
 
 	public static void saveDataNodes(File file, List<DataNode> dataNodes) {
-		ObjectOutput output = null;
+		ObjectOutputStream output = null;
 		
 		try {
 			output = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)));

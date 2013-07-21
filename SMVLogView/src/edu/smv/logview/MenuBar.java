@@ -115,6 +115,7 @@ public class MenuBar extends JMenuBar {
 		if(chooserRetVal == JFileChooser.APPROVE_OPTION){
 			File file = chooser.getSelectedFile();
 			this.mainApplication.setDataNodes(FileIO.loadDataNodes(file));
+			this.mainApplication.refreshAll();
 		}
 	}
 	
