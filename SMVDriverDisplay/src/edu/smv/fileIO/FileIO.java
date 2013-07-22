@@ -2,10 +2,12 @@ package edu.smv.fileIO;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -62,6 +64,7 @@ public class FileIO {
 			e.printStackTrace();
 		} finally {
 			try {
+				output.flush();
 				output.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -85,6 +88,40 @@ public class FileIO {
     	}catch(Exception e){
     		e.printStackTrace();
     	}
+    	return retVal;
+    }
+    
+    
+    /**
+     * Write a string to a text file
+     * @param file
+     * @param output
+     * @return
+     */
+    static public boolean writeTextFile(File file, String output){
+    	boolean retVal = false;
+    	BufferedWriter writer = null;
+    	
+    	try {
+    		writer = new BufferedWriter(new FileWriter(file));
+    		writer.write(output);
+    		retVal= true;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+    	
     	return retVal;
     }
 

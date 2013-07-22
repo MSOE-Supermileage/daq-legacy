@@ -43,6 +43,18 @@ public class DataNode implements Serializable{
 				"Battery Voltage" + this.batteryVoltage;
 	}
 	
+	
+	public static String getCSVheader() {
+		return "Name,Data,GpsMPH,ArduinoMPH,Average mph,Mpg,Rpm,Battery Voltage";
+	}
+	
+	
+	public String getCSVline() {
+		return this.name + "," + this.date + "," + this.gpsMPH + "," + this.arduinoMPH + "," + this.amph
+				+ "," + this.mpg + "," + this.rpm + "," + this.batteryVoltage;
+	}
+
+	
 	/**
 	 * @return the gpsMPH
 	 */

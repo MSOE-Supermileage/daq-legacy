@@ -41,6 +41,7 @@ public class Main extends JFrame {
 		this.setJFrameProperties();
 		this.setJMenuBar(new MenuBar(this));
 		this.add(westEastsplitPane);
+		
 		this.pack();
 	}
 

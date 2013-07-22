@@ -43,6 +43,14 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		
+		JMenuItem export = new JMenuItem("Export");
+		export.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				export();
+			}
+		});
+		
 		JMenuItem goLive = new JMenuItem("Go Live");
 		goLive.addActionListener(new ActionListener() {
 			@Override
@@ -59,6 +67,14 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		
+		JMenuItem helpItem = new JMenuItem("Help");
+		helpItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				help();
+			}
+		});
+		
 		JMenuItem about = new JMenuItem("About");
 		about.addActionListener(new ActionListener() {
 			@Override
@@ -69,18 +85,24 @@ public class MenuBar extends JMenuBar {
 		
 		file.add(open);
 		file.add(saveAs);
+		file.add(export);
 		file.add(goLive);
 		file.add(exit);
+		help.add(helpItem);
 		help.add(about);
 		
 		this.add(file);
 		this.add(help);
 	}
 
-
-	protected void about() {
+	protected void help() {
 		// TODO: Create a more informative help message
 		JOptionPane.showMessageDialog(this.mainApplication, "No one can help you now...", "Help", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	protected void about() {
+		// TODO: Create a more informative about message
+		JOptionPane.showMessageDialog(this.mainApplication, "Author: M@rk 7u7k0w5k1", "About", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 
@@ -92,6 +114,24 @@ public class MenuBar extends JMenuBar {
 	protected void goLive() {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(this.mainApplication, "This feature is not yet available.", "Go Live", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	
+	protected void export(){
+		JFileChooser chooser = new JFileChooser();
+		
+		int chooserRetVal = chooser.showSaveDialog(this);
+		if(chooserRetVal == JFileChooser.APPROVE_OPTION){
+			File file = chooser.getSelectedFile();
+			
+			String output = DataNode.getCSVheader();
+			
+			for(DataNode node : this.mainApplication.getDataNodes()){
+				output += "\n" + node.getCSVline();
+			}
+			
+			FileIO.writeTextFile(file, output);
+		}
 	}
 
 
@@ -110,6 +150,7 @@ public class MenuBar extends JMenuBar {
 	protected void open() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new SMVFileFilter());
+		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		
 		int chooserRetVal = chooser.showOpenDialog(this);
 		if(chooserRetVal == JFileChooser.APPROVE_OPTION){
@@ -121,18 +162,17 @@ public class MenuBar extends JMenuBar {
 	
 	
 	protected class SMVFileFilter extends FileFilter {
+		//TODO: Get filter working correctly
 		@Override
 		public boolean accept(File file) {
 			boolean retVal = file.isDirectory();
 			
 			if(!retVal){
 				try{
-					String[] tokens = file.getAbsolutePath().split(".");
+					String[] tokens = file.getAbsolutePath().toString().split(".");
 					String extension = tokens[tokens.length-1];
-					retVal = (extension == DataNode.fileType);
-				} catch(Exception e){
-					// Do nothing
-				}
+					retVal = (extension.equalsIgnoreCase(DataNode.fileType));
+				} catch(Exception e){ /* Do nothing */ 	}
 			}
 			return retVal;
 		}
