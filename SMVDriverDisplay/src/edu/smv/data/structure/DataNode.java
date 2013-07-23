@@ -40,7 +40,7 @@ public class DataNode implements Serializable{
 				"Average mph: " + this.amph + "\n" + 
 				"Mpg: " + this.mpg + "\n" + 
 				"Rpm: " + this.rpm +  "\n" + 
-				"Battery Voltage" + this.batteryVoltage;
+				"Battery Voltage: " + this.batteryVoltage;
 	}
 	
 	

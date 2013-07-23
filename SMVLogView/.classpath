@@ -3,5 +3,16 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SMVDriverDisplay"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/gdal.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/jogl.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/jogl-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/plugin.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/vpf-symbols.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/worldwind.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/worldwindx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mark/Downloads/jogl/Jars/gluegen-rt-natives-windows-amd64.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mark/Downloads/jogl/Jars/jogl-all-natives-windows-amd64.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
