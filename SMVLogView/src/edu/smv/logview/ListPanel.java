@@ -22,6 +22,7 @@ public class ListPanel extends JScrollPane {
 		this.main = main;
 		this.underlyingPanel = new JPanel();
 		this.setViewportView(underlyingPanel);
+		this.setPreferredSize(new java.awt.Dimension(150, -1));
 		this.refreshList();
 	}
 	

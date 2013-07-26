@@ -52,7 +52,7 @@ public class MapPanel extends JPanel {
 		
 		this.worldCanvas.setPreferredSize(new java.awt.Dimension(500, 400));
 		this.worldCanvas.setModel(new BasicModel());
-        
+		
 		this.setMinimumSize(worldCanvas.getSize());
         this.add(worldCanvas);
 	}
@@ -100,4 +100,5 @@ public class MapPanel extends JPanel {
 	private void flyTo(Position pos){
 		//TODO: 
 	}
+	
 }

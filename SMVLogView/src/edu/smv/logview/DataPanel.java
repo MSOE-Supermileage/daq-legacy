@@ -22,6 +22,7 @@ public class DataPanel extends JScrollPane {
 		this.underlyingPanel.add(this.dataLabel);
 		
 		this.setViewportView(underlyingPanel);
+		this.setPreferredSize(new java.awt.Dimension(-1, 200));
 		this.refreshData();
 	}
 
