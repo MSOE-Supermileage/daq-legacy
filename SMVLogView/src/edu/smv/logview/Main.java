@@ -3,7 +3,10 @@ package edu.smv.logview;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JPopupMenu;
 import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.ToolTipManager;
 
 import edu.smv.data.structure.DataNode;
 
@@ -13,6 +16,7 @@ public class Main extends JFrame {
 	private MapPanel mapPanel;
 	private ListPanel listPanel;
 	private DataPanel dataPanel;
+	private GraphPanel graphPanel;
 	
 	private List<DataNode> dataNodes;
 	private DataNode currentNode;
@@ -29,13 +33,22 @@ public class Main extends JFrame {
 	 * Constructor
 	 */
 	public Main(){
+		// Prevent tooltips and menus from being light weight so they get drawn over the Worldwind canvas
+		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
+		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
+		
 		this.dataNodes = new LinkedList<DataNode>();
 		
 		this.mapPanel = new MapPanel(this);
 		this.listPanel = new ListPanel(this);
 		this.dataPanel = new DataPanel(this);
+		this.graphPanel = new GraphPanel();
 		
-		JSplitPane northSouthsplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.mapPanel, this.dataPanel);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.addTab("Map", this.mapPanel);
+		tabbedPane.addTab("Graph", this.graphPanel);
+		
+		JSplitPane northSouthsplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tabbedPane, this.dataPanel);
 		JSplitPane westEastsplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, northSouthsplitPane, this.listPanel);
 	
 		this.setJFrameProperties();

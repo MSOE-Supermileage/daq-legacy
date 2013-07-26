@@ -53,7 +53,7 @@ public class DataBase {
 	 * This needs to be redesigned.
 	 * @return
 	 */
-	public boolean loadFromArduino(){
+	public boolean loadDataNode(){
 		boolean retVal = false;		
 		//double rpm, mpg, mph, bv;
 

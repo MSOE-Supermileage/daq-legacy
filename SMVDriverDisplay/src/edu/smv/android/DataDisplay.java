@@ -107,7 +107,7 @@ public class DataDisplay implements Runnable {
 
 			// Get Data
 			if (displayData || logData) {
-				data.loadFromArduino();
+				data.loadDataNode();
 
 				// Display Data
 				if (displayData) {
@@ -165,7 +165,7 @@ public class DataDisplay implements Runnable {
 
 			}
 			
-			mphValue.setText(String.format(mphStr, data.getCurrentNode().getArduinoMPH()));
+			mphValue.setText(String.format(mphStr, data.getCurrentNode().getMph()));
 			rpmValue.setText(String.format(rpmStr, data.getCurrentNode().getRpm()));
 			mpgValue.setText(String.format(mpgStr, data.getCurrentNode().getMpg()));
 			amphValue.setText(String.format(amphStr, data.getCurrentNode().getAmph()));

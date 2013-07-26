@@ -12,7 +12,5 @@
 	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/vpf-symbols.jar"/>
 	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/worldwind.jar"/>
 	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMVLogView/Dependendies/worldwind-1.5.0/worldwindx.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mark/Downloads/jogl/Jars/gluegen-rt-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mark/Downloads/jogl/Jars/jogl-all-natives-windows-amd64.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
