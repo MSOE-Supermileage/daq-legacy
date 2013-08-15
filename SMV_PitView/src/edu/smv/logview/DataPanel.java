@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.structure.*;
 
 public class DataPanel extends JScrollPane {
 	private static final long serialVersionUID = 7250747468294010946L;

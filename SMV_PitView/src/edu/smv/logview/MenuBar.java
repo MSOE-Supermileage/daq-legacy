@@ -171,7 +171,7 @@ public class MenuBar extends JMenuBar {
 				try{
 					String[] tokens = file.getAbsolutePath().toString().split(".");
 					String extension = tokens[tokens.length-1];
-					retVal = (extension.equalsIgnoreCase(DataNode.fileType));
+					retVal = (extension.equalsIgnoreCase(DataNode.FILE_TYPE));
 				} catch(Exception e){ /* Do nothing */ 	}
 			}
 			return retVal;
@@ -179,7 +179,7 @@ public class MenuBar extends JMenuBar {
 
 		@Override
 		public String getDescription() {
-			return "*." + DataNode.fileType;
+			return "*." + DataNode.FILE_TYPE;
 		}
 	}
 }

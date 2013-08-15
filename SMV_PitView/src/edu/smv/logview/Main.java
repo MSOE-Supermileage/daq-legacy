@@ -8,7 +8,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ToolTipManager;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.structure.*;
 
 public class Main extends JFrame {
 	private static final long serialVersionUID = -8572684314913790609L;

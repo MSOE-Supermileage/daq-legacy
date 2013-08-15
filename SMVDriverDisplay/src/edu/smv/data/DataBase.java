@@ -1,24 +1,29 @@
 package edu.smv.data;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 
 
 import edu.smv.android.*;
 import edu.smv.communication.*;
-import edu.smv.data.structure.*;
+import edu.smv.data.structure.DataNode;
 import edu.smv.fileIO.FileIO;
 
 public class DataBase {
 	private DeviceSocket arduino;
+	private LocationProvider locationProvider;
 	
-	private List<DataNode> dataNodes;
-	private Activity activity;
 	private DataNode currentNode;
+	private List<DataNode> dataNodes;
+	
+	private Activity activity;
 	
 	
 	/**
@@ -29,13 +34,16 @@ public class DataBase {
 		this.currentNode = null;
 		this.resetDataBase();
 		
+		/*
 		try {
 			this.arduino = new DeviceSocket(this.activity);
 			this.arduino.connect();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		
+		this.locationProvider = this.getLocationProvider();
 	}
 	
 	
@@ -48,30 +56,26 @@ public class DataBase {
 
 	
 	/**
-	 * Load Data values from Arduino into database
-	 * Not yet tested.
-	 * This needs to be redesigned.
-	 * @return
+	 * Load Data values into database
 	 */
-	public boolean loadDataNode(){
-		boolean retVal = false;		
-		//double rpm, mpg, mph, bv;
+	public void loadDataNode(){	
+		double rpm, batteryVoltage;
 
 		/*
 		byte[] data = this.arduino.loadValues();
 		if(data != null){
-			retVal = true;  
 			rpm = data[0];
-			mph = data[1];
-			mpg = data[2];
-			bv = data[3];
-		this.dataNodes.add(new DataNode(-1, mph, mpg, rpm, -1, bv));
+			batteryVoltage = data[1];
 		} 
 		*/
 		
-		this.currentNode = new DataNode(-1, Math.random() * 100, Math.random() * 100, Math.random() * 100,
-				Math.random() * 100, Math.random() * 100);
-		return retVal;
+		// Fake Values for testing
+		rpm = Math.round(Math.random() * 7000);
+		batteryVoltage = Math.round(Math.random() * 12);
+		
+		Location location = new Location(this.locationProvider.getName());
+		
+		this.currentNode = new DataNode(location, rpm, batteryVoltage);
 	}
 
 	
@@ -109,11 +113,11 @@ public class DataBase {
 				String time = AndroidUtil.getTime();
 				time = time.replaceAll(" ", "_");
 				time = time.replaceAll(":", "-");
-				final String fileName = time + "." + DataNode.fileType;
+				final String fileName = time + "." + DataNode.FILE_TYPE;
 				final File fileDirectory = Config.getLogDirectory(activity);
                 
                 if(!fileDirectory.exists()){
-                        FileIO.createDirectory(fileDirectory);
+                	FileIO.createDirectory(fileDirectory);
                 }
                 
                 final File file = new File(fileDirectory, fileName);
@@ -125,4 +129,30 @@ public class DataBase {
 		savingThread.start();
 	}
 	
+	
+	/**
+	 * Get a handle for the phones location provider
+	 * 
+	 * Gives a preference to providers that do not require cell or network service
+	 * 
+	 * @return locationProvider
+	 */
+	private LocationProvider getLocationProvider(){
+		LocationManager manager =  (LocationManager) this.activity.getSystemService(Context.LOCATION_SERVICE);
+		LocationProvider locationProvider = null;
+		
+
+		List<String> providers = manager.getAllProviders();
+		
+		for(String provider: providers){
+			System.err.println(provider);
+			LocationProvider lp =  manager.getProvider(provider);
+			
+			if(locationProvider == null || (!lp.requiresCell() && !lp.requiresNetwork())){
+				locationProvider = lp;
+			}
+		}
+		
+		return locationProvider;
+	}
 }

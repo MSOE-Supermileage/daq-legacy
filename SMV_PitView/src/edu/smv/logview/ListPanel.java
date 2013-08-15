@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.structure.*;
 
 public class ListPanel extends JScrollPane {
 	private static final long serialVersionUID = 5693982072116941641L;

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.location.Location;
-
 /**
  * @author Mark
  *
@@ -26,22 +24,6 @@ public class DataNode implements Serializable{
 	private double rpm;
 	private double amph;
 	private double batteryVoltage;
-	
-	
-	/**
-	 * Constructor
-	 * @param location
-	 * @param mpg
-	 * @param rpm
-	 * @param amph
-	 * @param batteryVoltage
-	 */
-	public DataNode(Location location, double rpm, double batteryVoltage) {
-		this(	location.getSpeed(), rpm, batteryVoltage, 
-				 location.getLatitude(), 
-				 location.getLongitude(), 
-				 location.getAltitude());
-	}
 	
 	
 	/**

@@ -12,6 +12,7 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name="edu.smv.android.MSOE_Data_Display"
