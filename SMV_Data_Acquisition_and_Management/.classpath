@@ -3,5 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SMV_Common"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMV_Data_Acquisition_and_Management/Dependencies/jfreechart-1.0.15/jfreechart-1.0.15/lib/jcommon-1.0.18.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMV_Data_Acquisition_and_Management/Dependencies/jfreechart-1.0.15/jfreechart-1.0.15/lib/jfreechart-1.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMV_Data_Acquisition_and_Management/Dependencies/jfreechart-1.0.15/jfreechart-1.0.15/lib/jfreechart-1.0.15-experimental.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
