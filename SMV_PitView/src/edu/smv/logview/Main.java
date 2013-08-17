@@ -116,8 +116,6 @@ public class Main extends JFrame {
 	 * Refresh everything.
 	 */
 	public void refreshAll() {
-		this.driverDisplay.refresh(getCurrentNode());
-		this.dataPanel.refreshData();
 		this.listPanel.refreshList();
 		this.mapPanel.refreshMap();
 		
