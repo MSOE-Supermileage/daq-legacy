@@ -49,8 +49,8 @@ public class Main extends JFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Map", this.mapPanel);
-		tabbedPane.addTab("Graph", this.graphPanel);
 		tabbedPane.addTab("DriverDisplay", this.driverDisplay);
+		tabbedPane.addTab("Graph", this.graphPanel);
 		
 		JSplitPane northSouthsplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tabbedPane, this.dataPanel);
 		JSplitPane westEastsplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, northSouthsplitPane, this.listPanel);

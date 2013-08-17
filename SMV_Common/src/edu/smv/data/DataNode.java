@@ -28,6 +28,20 @@ public class DataNode implements Serializable{
 	
 	/**
 	 * Constructor
+	 * @param speed
+	 * @param rpm
+	 * @param batteryVoltage
+	 * @param latitude
+	 * @param longitude
+	 * @param altitude
+	 */
+	public DataNode(double speed, double rpm, double batteryVoltage, double latitude, double longitude, double altitude){
+		this(Calendar.getInstance().getTime().toString(), speed, rpm, batteryVoltage, latitude, longitude, altitude);
+	}
+	
+	
+	/**
+	 * Constructor
 	 * @param mph
 	 * @param mpg
 	 * @param rpm
@@ -37,9 +51,9 @@ public class DataNode implements Serializable{
 	 * @param longitude
 	 * @param altitude
 	 */
-	public DataNode(double speed, double rpm, double batteryVoltage, double latitude, double longitude, double altitude){
+	public DataNode(String name, double speed, double rpm, double batteryVoltage, double latitude, double longitude, double altitude){
 		this.date = Calendar.getInstance().getTime();
-		this.name = Calendar.getInstance().getTime().toString();
+		this.name = name;
 		
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -92,15 +106,15 @@ public class DataNode implements Serializable{
 	 * @return What each node contains as a csv
 	 */
 	public static String getCSVheader() {
-		return "Name,Data,mph,Average mph,Mpg,Rpm,Battery Voltage";
+		return "Name,Date,Mph,Average Mph,Mpg,Rpm,Battery Voltage";
 	}
 	
 	/**
 	 * @return node as a csv
 	 */
 	public String getCSVline() {
-		return this.name + "," + this.date + "," + this.getMpg() + "," + this.amph
-				+ "," + this.mpg + "," + this.rpm + "," + this.batteryVoltage;
+		return this.getName() + "," + this.getDate() + "," + this.getMph()+ "," + this.getAmph()
+				+ "," + this.getMpg() + "," + this.getRpm() + "," + this.getBatteryVoltage();
 	}
 
 	
