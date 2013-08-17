@@ -145,7 +145,7 @@ public class ListPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(main.getDataNodes() != null){
+				if(main.getDataNodes() != null && main.getDataNodes().size() > 0){
 					int newIndex = 0;
 				
 					if(main.getCurrentNode() != null){
@@ -165,7 +165,7 @@ public class ListPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(main.getDataNodes() != null){
+				if(main.getDataNodes() != null && main.getDataNodes().size() > 0){
 					int newIndex = 0;
 				
 					if(main.getCurrentNode() != null){
