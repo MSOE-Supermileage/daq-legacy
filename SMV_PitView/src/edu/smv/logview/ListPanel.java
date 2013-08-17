@@ -1,8 +1,11 @@
 package edu.smv.logview;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,26 +13,36 @@ import javax.swing.JScrollPane;
 
 import edu.smv.data.*;
 
-public class ListPanel extends JScrollPane {
+public class ListPanel extends JPanel {
 	private static final long serialVersionUID = 5693982072116941641L;
+	private JScrollPane underlyingScrollPane;
 	private JPanel underlyingPanel;
-	private DataNodeButton currentSelection;
-	private Main main;
-
 	
+	private List<DataNodeButton> dataButtons;
+	private JButton nextJButton;
+	private JButton previousJButton;
+	
+	private Main main;
 	
 	public ListPanel(Main main) {
 		this.main = main;
 		this.underlyingPanel = new JPanel();
-		this.setViewportView(underlyingPanel);
-		this.setPreferredSize(new java.awt.Dimension(150, -1));
+	
+		this.setLayout(new BorderLayout());
+		
+		this.underlyingScrollPane = new JScrollPane();
+		this.underlyingScrollPane.setViewportView(underlyingPanel);
+		this.add(this.underlyingScrollPane, BorderLayout.CENTER);
+		this.add(this.getNodeNavigationPanel(), BorderLayout.SOUTH);
+		
 		this.refreshList();
 	}
-	
-	
+
+
 	public void refreshList(){
-		underlyingPanel.removeAll();
+		this.underlyingPanel.removeAll();
 		this.underlyingPanel.setLayout(new GridLayout(main.getDataNodes().size(), 1));
+		this.dataButtons = new ArrayList<DataNodeButton>(main.getDataNodes().size());
 		
 		for(DataNode node : main.getDataNodes()){
 			DataNodeButton button = new DataNodeButton(node);
@@ -39,25 +52,21 @@ public class ListPanel extends JScrollPane {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					DataNodeButton source = (DataNodeButton) e.getSource();
+					setSelectedNode(source.getNode(), main.getCurrentNode());
 					main.setCurrentNode(source.getNode());
-					
-					if(currentSelection != null){
-						currentSelection.setEnabled(true);
-					}
-					
-					currentSelection = source;
-					currentSelection.setEnabled(false);
-					
-					main.refreshDataPanel();
 				}
 				
 			});
 			
-			
-			underlyingPanel.add(button);
+			this.underlyingPanel.add(button);
+			this.dataButtons.add(button);
 		}
 		
-		underlyingPanel.validate();
+		this.underlyingScrollPane.setPreferredSize(this.getSize());
+		
+		this.underlyingPanel.validate();
+		this.underlyingScrollPane.validate();
+		this.validate();
 	}
 	
 	
@@ -78,5 +87,97 @@ public class ListPanel extends JScrollPane {
 		public void setNode(DataNode node) {
 			this.node = node;
 		}
+		
+		@Override
+		public boolean equals(Object obj){
+			try{
+				DataNodeButton that = (DataNodeButton) obj;
+				return this.node.equals(that.node);
+			}catch (ClassCastException cce) {
+				return false;
+			}
+		}
+		
+	}
+	
+	
+	private JPanel getNodeNavigationPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(1,2));
+		
+		this.previousJButton  = new JButton("Previous");
+		this.previousJButton.addActionListener( new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(main.getDataNodes() != null){
+					int newIndex = 0;
+				
+					if(main.getCurrentNode() != null){
+						int oldIndex = main.getDataNodes().indexOf(main.getCurrentNode());
+						newIndex = oldIndex > 0 ? oldIndex - 1: oldIndex ;
+					}
+				
+					setSelectedNode(main.getDataNodes().get(newIndex), main.getCurrentNode());
+					main.setCurrentNode(main.getDataNodes().get(newIndex));
+				}
+			}
+			
+		});
+		
+		this.nextJButton = new JButton("Next");
+		this.nextJButton.addActionListener( new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(main.getDataNodes() != null){
+					int newIndex = 0;
+				
+					if(main.getCurrentNode() != null){
+						int oldIndex = main.getDataNodes().indexOf(main.getCurrentNode());
+						newIndex = oldIndex < main.getDataNodes().size() -1 ? oldIndex + 1: oldIndex ;
+					}
+				
+					setSelectedNode(main.getDataNodes().get(newIndex), main.getCurrentNode());
+					main.setCurrentNode(main.getDataNodes().get(newIndex));
+				}
+			}
+		});
+		
+		
+		panel.add(this.previousJButton);
+		panel.add(this.nextJButton);
+		
+		panel.setSize(this.getWidth(), 20);
+		
+		return panel;
+	}
+	
+	
+	public void setSelectedNode(DataNode newNode, DataNode oldNode){
+		int oldIndex;
+		int newIndex;
+		
+		if(oldNode !=null){
+			oldIndex = dataButtons.indexOf(new DataNodeButton(oldNode));
+		}else{
+			oldIndex = -1;
+		}
+		
+		if(newNode !=null){
+			newIndex = dataButtons.indexOf(new DataNodeButton(newNode));
+		}else{
+			newIndex = -1;
+		}
+		
+		if(oldIndex != -1){
+			dataButtons.get(oldIndex).setEnabled(true);
+		}
+		
+		if(newIndex != -1){
+			this.dataButtons.get(newIndex).setEnabled(false);
+		}
+		
+		main.refreshDataPanel();
 	}
 }

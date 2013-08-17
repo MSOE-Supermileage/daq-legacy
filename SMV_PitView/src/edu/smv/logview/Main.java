@@ -94,11 +94,6 @@ public class Main extends JFrame {
 	public void refreshAll() {
 		this.listPanel.refreshList();
 		this.mapPanel.refreshMap();
-		this.dataPanel.refreshData();
-		
-		if(getCurrentNode() != null){
-		
-		}
 		
 		this.revalidate();
 	}

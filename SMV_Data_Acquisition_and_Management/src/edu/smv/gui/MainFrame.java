@@ -21,6 +21,7 @@ public class MainFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(TITLE);
 		this.setVisible(true);
+		this.setResizable(false);
 	}
 
 
