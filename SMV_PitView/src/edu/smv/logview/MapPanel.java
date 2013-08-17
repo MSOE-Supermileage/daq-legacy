@@ -43,6 +43,11 @@ public class MapPanel extends JPanel {
 	private List<PointPlacemark> mapPoints;
 	private Main main;
 	
+	
+	/**
+	 * Constructor
+	 * @param main
+	 */
 	public MapPanel(Main main) {
 		this.main = main;
 		
@@ -58,6 +63,9 @@ public class MapPanel extends JPanel {
 	}
 
 	
+	/**
+	 * Refresh the ma
+	 */
 	public void refreshMap() {
 		this.removeAllRenderables();
 		
@@ -71,6 +79,13 @@ public class MapPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Place a marker on the map
+	 * @param latitude
+	 * @param longitude
+	 * @param elevation
+	 * @return
+	 */
 	private PointPlacemark addPlaceMarker(double latitude, double longitude, double elevation){
 		Position position = Position.fromDegrees(latitude, longitude, elevation);
 		PointPlacemark mapPoint = new PointPlacemark(position);
@@ -91,12 +106,20 @@ public class MapPanel extends JPanel {
 	}
 
 	
+	/**
+	 * Remove a marker from the map
+	 * @param mapPoint
+	 */
 	@SuppressWarnings("unused")
 	private void removePlaceMarker(PointPlacemark mapPoint){
 		this.layer.removeRenderable(mapPoint);
 	}
 	
 	
+	/**
+	 * Goto a specific position on the map
+	 * @param pos
+	 */
 	private void flyTo(Position pos){
 		//TODO: 
 	}

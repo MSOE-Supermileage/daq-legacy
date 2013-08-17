@@ -24,6 +24,7 @@ public class Main extends JFrame {
 	private DataNode currentNode;
 
 	/**
+	 * Program Driver
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -62,6 +63,10 @@ public class Main extends JFrame {
 		this.pack();
 	}
 
+	
+	/**
+	 * Set the properties for this JFrame
+	 */
 	private void setJFrameProperties(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(this.title);
@@ -69,21 +74,37 @@ public class Main extends JFrame {
 	}
 
 
+	/**
+	 * Getter for the dataNodes
+	 * @return
+	 */
 	public List<DataNode> getDataNodes() {
 		return dataNodes;
 	}
 
 
+	/**
+	 * Setter for the dataNodes
+	 * @param dataNodes
+	 */
 	public void setDataNodes(List<DataNode> dataNodes) {
 		this.dataNodes = dataNodes;
 	}
 
 
+	/**
+	 * Getter for the current node
+	 * @return
+	 */
 	public DataNode getCurrentNode() {
 		return currentNode;
 	}
 
 
+	/**
+	 * Setter for the current node
+	 * @param currentNode
+	 */
 	public void setCurrentNode(DataNode currentNode) {
 		this.currentNode = currentNode;
 		this.driverDisplay.refresh(getCurrentNode());
@@ -91,13 +112,22 @@ public class Main extends JFrame {
 	}
 
 
+	/**
+	 * Refresh everything.
+	 */
 	public void refreshAll() {
+		this.driverDisplay.refresh(getCurrentNode());
+		this.dataPanel.refreshData();
 		this.listPanel.refreshList();
 		this.mapPanel.refreshMap();
 		
 		this.revalidate();
 	}
 	
+	
+	/**
+	 * Refresh the data panel
+	 */
 	public void refreshDataPanel() {
 		this.dataPanel.refreshData();
 		this.revalidate();

@@ -18,6 +18,11 @@ import edu.smv.data.DataNode;
 
 public class FileIO {
 
+	/**
+	 * Load a binary file of a list of nodes.
+	 * @param file
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static List<DataNode> loadDataNodes(File file) {
 		List<DataNode> nodes = null;
@@ -50,6 +55,12 @@ public class FileIO {
 		return nodes;
 	}
 
+	
+	/**
+	 * Save a binary file of a List of nodes.
+	 * @param file
+	 * @param dataNodes
+	 */
 	public static void saveDataNodes(File file, List<DataNode> dataNodes) {
 		ObjectOutputStream output = null;
 		

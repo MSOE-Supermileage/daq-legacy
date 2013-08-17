@@ -24,6 +24,10 @@ public class ListPanel extends JPanel {
 	
 	private Main main;
 	
+	/**
+	 * Constructor
+	 * @param main
+	 */
 	public ListPanel(Main main) {
 		this.main = main;
 		this.underlyingPanel = new JPanel();
@@ -39,6 +43,9 @@ public class ListPanel extends JPanel {
 	}
 
 
+	/**
+	 * Refresh the list
+	 */
 	public void refreshList(){
 		this.underlyingPanel.removeAll();
 		this.underlyingPanel.setLayout(new GridLayout(main.getDataNodes().size(), 1));
@@ -70,24 +77,48 @@ public class ListPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * A wrapper class to store the DataNode in the button it's connected too.
+	 * @author Mark
+	 *
+	 */
 	private class DataNodeButton extends JButton {
 		private static final long serialVersionUID = 4104739325804709085L;
 		private DataNode node;
 		
+		
+		/**
+		 * Constructor
+		 * @param node
+		 */
 		public DataNodeButton(DataNode node){
 			super();
 			this.setNode(node);
 			this.setText(node.getName());
 		}
 
+		
+		/**
+		 * Getter for the node
+		 * @return
+		 */
 		public DataNode getNode() {
 			return node;
 		}
 
+		
+		/**
+		 * Setter for the node
+		 * @param node
+		 */
 		public void setNode(DataNode node) {
 			this.node = node;
 		}
 		
+		
+		/**
+		 * New equals method that compares the node wrapped in the class
+		 */
 		@Override
 		public boolean equals(Object obj){
 			try{
@@ -101,6 +132,10 @@ public class ListPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Get a navigation panel that lets you set the next and previous node
+	 * @return
+	 */
 	private JPanel getNodeNavigationPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1,2));
@@ -154,6 +189,11 @@ public class ListPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Disable the current node that is selected and enabled the previous node that was selected.
+	 * @param newNode
+	 * @param oldNode
+	 */
 	public void setSelectedNode(DataNode newNode, DataNode oldNode){
 		int oldIndex;
 		int newIndex;

@@ -7,6 +7,7 @@ import edu.smv.gui.MainFrame;
 public class ProgramDriver {
 
 	/**
+	 * Program Driver
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -18,6 +19,8 @@ public class ProgramDriver {
 			DataNode node = cape.getDataNode();
 			gui.refresh(node);
 			
+			
+			// Refresh rate
 			try {
 				Thread.sleep((long) (.5 * 1000));
 			} catch (InterruptedException e) {

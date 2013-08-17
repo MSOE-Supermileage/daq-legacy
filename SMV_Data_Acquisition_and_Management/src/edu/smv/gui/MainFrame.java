@@ -10,6 +10,10 @@ public class MainFrame extends JFrame{
 	private static final String TITLE = "Data Acquisition and Managment";
 	private DriverDisplay driverDisplay = new DriverDisplay();
 
+	
+	/**
+	 * Constructor
+	 */
 	public MainFrame(){
 		this.add(driverDisplay);
 		this.setJFrameProperties();
@@ -17,6 +21,9 @@ public class MainFrame extends JFrame{
 	}
 	
 	
+	/**
+	 * Set the properties to the JFrame
+	 */
 	private void setJFrameProperties(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(TITLE);
@@ -25,6 +32,10 @@ public class MainFrame extends JFrame{
 	}
 
 
+	/**
+	 * Refresh the data on the GUI
+	 * @param node
+	 */
 	public void refresh(DataNode node) {
 		driverDisplay.refresh(node);
 	}

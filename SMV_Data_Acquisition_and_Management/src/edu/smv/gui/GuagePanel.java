@@ -30,11 +30,19 @@ public class GuagePanel extends JPanel {
 	private DefaultValueDataset mphDataset;
 	
 	
+	/**
+	 * Constructor
+	 */
 	public GuagePanel(){
 		this(0,0);
 	}
 	
 	
+	/**
+	 * Constructor
+	 * @param startingValueRPM
+	 * @param startingValueMPH
+	 */
 	public GuagePanel(double startingValueRPM, double startingValueMPH){
         this.rpmDataset = new DefaultValueDataset(startingValueRPM);
         this.mphDataset = new DefaultValueDataset(startingValueMPH);
@@ -44,16 +52,27 @@ public class GuagePanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Set the value on the MPH Gauge
+	 * @param value
+	 */
 	public void setValueMPH(double value){
 		this.mphDataset.setValue(value);
 	}
 	
 	
+	/**
+	 * Set the value of the RPM Gauge
+	 * @param value
+	 */
 	public void setValueRPM(double value){
 		this.rpmDataset.setValue(value/1000.0);
 	}
 	
 	
+	/**
+	 * Add the MPH Gauge to the panel
+	 */
 	private void addDialMPH(){
         DialPlot plot = new DialPlot();
         plot.setView(0.0, 0.0, 1.0, 1.0);
@@ -94,6 +113,10 @@ public class GuagePanel extends JPanel {
         this.add(cp);
 	}
 	
+	
+	/**
+	 * Add the RPM Gauge to the panel
+	 */
 	private void addDialRPM(){
         DialPlot plot = new DialPlot();
         plot.setView(0.0, 0.0, 1.0, 1.0);

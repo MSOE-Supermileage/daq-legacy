@@ -13,6 +13,10 @@ public class DataPanel extends JScrollPane {
 	private JTextArea dataLabel;
 	private Main main;
 	
+	/**
+	 * Constructor
+	 * @param main
+	 */
 	public DataPanel(Main main) {
 		this.main = main;
 		this.dataLabel = new JTextArea();
@@ -26,6 +30,10 @@ public class DataPanel extends JScrollPane {
 		this.refreshData();
 	}
 
+	
+	/**
+	 * Refresh the data in the edit box
+	 */
 	public void refreshData() {
 		String text = null;
 		DataNode currentNode = this.main.getCurrentNode();

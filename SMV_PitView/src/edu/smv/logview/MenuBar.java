@@ -95,28 +95,45 @@ public class MenuBar extends JMenuBar {
 		this.add(help);
 	}
 
+	
+	/**
+	 * Method called when help is pressed
+	 */
 	protected void help() {
 		// TODO: Create a more informative help message
 		JOptionPane.showMessageDialog(this.mainApplication, "No one can help you now...", "Help", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	
+	/**
+	 * Method called when about is pressed
+	 */
 	protected void about() {
 		// TODO: Create a more informative about message
 		JOptionPane.showMessageDialog(this.mainApplication, "Author: M@rk 7u7k0w5k1", "About", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 
+	/**
+	 * Method called when exit is pressed
+	 */
 	protected void exit() {
 		System.exit(0);
 	}
 
 
+	/**
+	 * Method called when Go Live is pressed
+	 */
 	protected void goLive() {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(this.mainApplication, "This feature is not yet available.", "Go Live", JOptionPane.WARNING_MESSAGE);
 	}
 	
 	
+	/**
+	 * Method called when export is pressed
+	 */
 	protected void export(){
 		JFileChooser chooser = new JFileChooser();
 		
@@ -135,6 +152,9 @@ public class MenuBar extends JMenuBar {
 	}
 
 
+	/**
+	 * Method called when save as is pressed
+	 */
 	protected void saveAs() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new SMVFileFilter());
@@ -147,6 +167,9 @@ public class MenuBar extends JMenuBar {
 	}
 
 
+	/**
+	 * Method called when open is pressed
+	 */
 	protected void open() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileFilter(new SMVFileFilter());
@@ -161,6 +184,11 @@ public class MenuBar extends JMenuBar {
 	}
 	
 	
+	/**
+	 * FileFilter
+	 * @author Mark
+	 *
+	 */
 	protected class SMVFileFilter extends FileFilter {
 		//TODO: Get filter working correctly
 		@Override

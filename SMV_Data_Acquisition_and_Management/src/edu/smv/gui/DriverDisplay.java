@@ -18,11 +18,18 @@ public class DriverDisplay extends JPanel {
 	}
 	
 	
+	/**
+	 * Add components to the driver display
+	 */
 	private void addComponents(){
 		this.add(guagePanel = new GuagePanel());
 	}
 
 
+	/**
+	 * Refresh the data on the driver display
+	 * @param node
+	 */
 	public void refresh(DataNode node) {
 		guagePanel.setValueMPH(node.getMph());
 		guagePanel.setValueRPM(node.getRpm());
