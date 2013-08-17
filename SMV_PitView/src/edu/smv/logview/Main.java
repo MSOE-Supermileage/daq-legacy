@@ -8,7 +8,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ToolTipManager;
 
-import edu.smv.data.structure.*;
+import edu.smv.data.*;
+import edu.smv.gui.DriverDisplay;
 
 public class Main extends JFrame {
 	private static final long serialVersionUID = -8572684314913790609L;
@@ -17,6 +18,7 @@ public class Main extends JFrame {
 	private ListPanel listPanel;
 	private DataPanel dataPanel;
 	private GraphPanel graphPanel;
+	private DriverDisplay driverDisplay;
 	
 	private List<DataNode> dataNodes;
 	private DataNode currentNode;
@@ -43,10 +45,12 @@ public class Main extends JFrame {
 		this.listPanel = new ListPanel(this);
 		this.dataPanel = new DataPanel(this);
 		this.graphPanel = new GraphPanel();
+		this.driverDisplay = new DriverDisplay();
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Map", this.mapPanel);
 		tabbedPane.addTab("Graph", this.graphPanel);
+		tabbedPane.addTab("DriverDisplay", this.driverDisplay);
 		
 		JSplitPane northSouthsplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tabbedPane, this.dataPanel);
 		JSplitPane westEastsplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, northSouthsplitPane, this.listPanel);
@@ -82,6 +86,8 @@ public class Main extends JFrame {
 
 	public void setCurrentNode(DataNode currentNode) {
 		this.currentNode = currentNode;
+		this.driverDisplay.refresh(getCurrentNode());
+		this.dataPanel.refreshData();
 	}
 
 
@@ -89,6 +95,11 @@ public class Main extends JFrame {
 		this.listPanel.refreshList();
 		this.mapPanel.refreshMap();
 		this.dataPanel.refreshData();
+		
+		if(getCurrentNode() != null){
+		
+		}
+		
 		this.revalidate();
 	}
 	

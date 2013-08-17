@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.DataNode;
 import edu.smv.fileIO.FileIO;
 
 public class MenuBar extends JMenuBar {

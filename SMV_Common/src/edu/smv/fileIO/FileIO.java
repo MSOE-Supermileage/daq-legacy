@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.List;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.DataNode;
 
 public class FileIO {
 

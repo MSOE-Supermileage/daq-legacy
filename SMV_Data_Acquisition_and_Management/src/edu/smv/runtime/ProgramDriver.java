@@ -1,7 +1,7 @@
 package edu.smv.runtime;
 
 import edu.smv.cape.Cape;
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.DataNode;
 import edu.smv.gui.MainFrame;
 
 public class ProgramDriver {

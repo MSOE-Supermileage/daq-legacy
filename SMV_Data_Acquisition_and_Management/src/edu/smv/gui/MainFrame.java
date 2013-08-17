@@ -2,21 +2,17 @@ package edu.smv.gui;
 
 import javax.swing.JFrame;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.DataNode;
 
-public class MainFrame extends JFrame {
-	private static final long serialVersionUID = -4346683533200820317L;
+public class MainFrame extends JFrame{
+
+	private static final long serialVersionUID = 1010815932172777393L;
 	private static final String TITLE = "Data Acquisition and Managment";
-	
-	private GuagePanel guagePanel;
-	
-	
-	/**
-	 * Constructor
-	 */
+	private DriverDisplay driverDisplay = new DriverDisplay();
+
 	public MainFrame(){
+		this.add(driverDisplay);
 		this.setJFrameProperties();
-		this.addComponents();
 		this.pack();
 	}
 	
@@ -26,15 +22,10 @@ public class MainFrame extends JFrame {
 		this.setTitle(TITLE);
 		this.setVisible(true);
 	}
-	
-	
-	private void addComponents(){
-		this.add(guagePanel = new GuagePanel());
-	}
 
 
 	public void refresh(DataNode node) {
-		guagePanel.setValueMPH(node.getMph());
-		guagePanel.setValueRPM(node.getRpm());
+		driverDisplay.refresh(node);
 	}
+
 }

@@ -1,6 +1,6 @@
 package edu.smv.cape;
 
-import edu.smv.data.structure.DataNode;
+import edu.smv.data.DataNode;
 
 
 /**

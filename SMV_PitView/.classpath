@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMV_PitView/Dependendies/worldwind-1.5.0/jogl-natives-windows-amd64.jar"/>
 	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMV_PitView/Dependendies/worldwind-1.5.0/worldwind.jar"/>
 	<classpathentry kind="lib" path="C:/GIT Storage/msoe-smv-ee-system/SMV_PitView/Dependendies/worldwind-1.5.0/worldwindx.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SMV_Data_Acquisition_and_Management"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

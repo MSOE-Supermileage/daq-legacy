@@ -1,4 +1,4 @@
-package edu.smv.data.structure;
+package edu.smv.data;
 
 import java.io.Serializable;
 import java.util.Calendar;
