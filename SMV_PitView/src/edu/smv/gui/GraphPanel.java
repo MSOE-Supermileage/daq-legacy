@@ -1,4 +1,4 @@
-package edu.smv.logview;
+package edu.smv.gui;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

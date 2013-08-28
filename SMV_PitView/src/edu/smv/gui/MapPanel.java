@@ -1,4 +1,4 @@
-package edu.smv.logview;
+package edu.smv.gui;
 
 // Map is built off of http://worldwind.arc.nasa.gov/java/index.html
 // Online API: http://builds.worldwind.arc.nasa.gov/worldwind-releases/1.5/docs/api/index.html
@@ -41,14 +41,14 @@ public class MapPanel extends JPanel {
 	private WorldWindowGLCanvas worldCanvas;
 	private RenderableLayer layer;
 	private List<PointPlacemark> mapPoints;
-	private Main main;
+	private MainFrame main;
 	
 	
 	/**
 	 * Constructor
 	 * @param main
 	 */
-	public MapPanel(Main main) {
+	public MapPanel(MainFrame main) {
 		this.main = main;
 		
 		this.worldCanvas = new WorldWindowGLCanvas();

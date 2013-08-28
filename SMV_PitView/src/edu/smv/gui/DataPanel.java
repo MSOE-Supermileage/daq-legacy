@@ -1,4 +1,4 @@
-package edu.smv.logview;
+package edu.smv.gui;
 
 import java.awt.GridLayout;
 import javax.swing.JPanel;
@@ -11,13 +11,13 @@ public class DataPanel extends JScrollPane {
 	private static final long serialVersionUID = 7250747468294010946L;
 	private JPanel underlyingPanel;
 	private JTextArea dataLabel;
-	private Main main;
+	private MainFrame main;
 	
 	/**
 	 * Constructor
 	 * @param main
 	 */
-	public DataPanel(Main main) {
+	public DataPanel(MainFrame main) {
 		this.main = main;
 		this.dataLabel = new JTextArea();
 		

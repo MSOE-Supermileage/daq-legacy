@@ -1,4 +1,4 @@
-package edu.smv.logview;
+package edu.smv.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,12 +16,12 @@ import edu.smv.fileIO.FileIO;
 
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 168849161387643717L;
-	private Main mainApplication;
+	private MainFrame mainApplication;
 	
 	/**
 	 * Add a Menu
 	 */
-	public MenuBar(Main main) {
+	public MenuBar(MainFrame main) {
 		this.mainApplication = main;
 		
 		JMenu file = new JMenu("File");

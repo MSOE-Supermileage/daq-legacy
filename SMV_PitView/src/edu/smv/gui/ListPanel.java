@@ -1,4 +1,4 @@
-package edu.smv.logview;
+package edu.smv.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -22,13 +22,13 @@ public class ListPanel extends JPanel {
 	private JButton nextJButton;
 	private JButton previousJButton;
 	
-	private Main main;
+	private MainFrame main;
 	
 	/**
 	 * Constructor
 	 * @param main
 	 */
-	public ListPanel(Main main) {
+	public ListPanel(MainFrame main) {
 		this.main = main;
 		this.underlyingPanel = new JPanel();
 	

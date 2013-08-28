@@ -1,7 +1,7 @@
-package edu.smv.logview;
+package edu.smv.gui;
 
-import java.util.LinkedList;
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.JSplitPane;
@@ -11,7 +11,7 @@ import javax.swing.ToolTipManager;
 import edu.smv.data.*;
 import edu.smv.gui.DriverDisplay;
 
-public class Main extends JFrame {
+public class MainFrame extends JFrame {
 	private static final long serialVersionUID = -8572684314913790609L;
 	private final String title = "DataView 5000";
 	private MapPanel mapPanel;
@@ -22,25 +22,20 @@ public class Main extends JFrame {
 	
 	private List<DataNode> dataNodes;
 	private DataNode currentNode;
-
-	/**
-	 * Program Driver
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new Main();
-	}
 	
 	
 	/**
 	 * Constructor
+	 * @param currentNode 
+	 * @param dataNodes 
 	 */
-	public Main(){
+	public MainFrame(List<DataNode> dataNodes, DataNode currentNode){
 		// Prevent tooltips and menus from being light weight so they get drawn over the Worldwind canvas
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 		
-		this.dataNodes = new LinkedList<DataNode>();
+		this.dataNodes = dataNodes;
+		this.currentNode = currentNode;
 		
 		this.mapPanel = new MapPanel(this);
 		this.listPanel = new ListPanel(this);
