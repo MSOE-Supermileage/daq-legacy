@@ -1,4 +1,4 @@
-package edu.smv.gui;
+package edu.smv.gui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

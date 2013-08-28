@@ -3,6 +3,7 @@ package edu.smv.runtime;
 import edu.smv.cape.Cape;
 import edu.smv.data.DataNode;
 import edu.smv.gui.MainFrame;
+import edu.smv.networking.Server;
 
 public class ProgramDriver {
 
@@ -13,6 +14,7 @@ public class ProgramDriver {
 	public static void main(String[] args) {
 		Cape cape = new Cape();
 		MainFrame gui = new MainFrame();
+		Server server = new Server(1234);
 		
 		// Run forever. The program will exit by an action listener in MainFrame.
 		while(true){

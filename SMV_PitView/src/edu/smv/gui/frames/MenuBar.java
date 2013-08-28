@@ -1,4 +1,4 @@
-package edu.smv.gui;
+package edu.smv.gui.frames;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.smv.data.DataNode;
-import edu.smv.gui.MainFrame;
+import edu.smv.gui.frames.MainFrame;
 
 public class ProgramDriver {
 

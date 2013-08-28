@@ -1,11 +1,13 @@
-package edu.smv.gui;
+package edu.smv.gui.frames;
 
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import edu.smv.data.*;
+
 
 public class DataPanel extends JScrollPane {
 	private static final long serialVersionUID = 7250747468294010946L;

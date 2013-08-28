@@ -1,4 +1,4 @@
-package edu.smv.gui;
+package edu.smv.gui.frames;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
