@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Mark
  *
  */
-public class DataNode implements Serializable{
+public class DataNode implements Serializable {
 	private static final long serialVersionUID = -266995844146268302L;
 	
 	public static final double MILES_IN_A_METER = 0.000621371192;

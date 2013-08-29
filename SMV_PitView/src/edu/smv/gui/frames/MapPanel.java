@@ -26,7 +26,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-import edu.smv.data.*;
+import edu.smv.data.DataNode;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Position;

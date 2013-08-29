@@ -8,7 +8,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ToolTipManager;
 
-import edu.smv.data.*;
+import edu.smv.data.DataNode;
 import edu.smv.gui.DriverDisplay;
 
 public class MainFrame extends JFrame {
