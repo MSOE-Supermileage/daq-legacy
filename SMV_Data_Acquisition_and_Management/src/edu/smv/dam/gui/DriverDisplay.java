@@ -1,8 +1,8 @@
-package edu.smv.gui;
+package edu.smv.dam.gui;
 
 import javax.swing.JPanel;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 public class DriverDisplay extends JPanel {
 	private static final long serialVersionUID = -4346683533200820317L;

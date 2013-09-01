@@ -1,16 +1,16 @@
-package edu.smv.gui.networking;
+package edu.smv.gui.pitview.networking;
 
 import java.io.IOException;
 
-import edu.smv.data.DataNode;
-import edu.smv.gui.frames.*;
+import edu.smv.common.data.DataNode;
+import edu.smv.gui.pitview.frames.*;
 
-public class ThreadedClient extends Thread{
+public class ClientHandler extends Thread{
 	private MainFrame main;
 	private Client clientHandle;
 	private boolean terminate = false;
 	
-	public ThreadedClient(String host, int port, MainFrame main) throws IOException{
+	public ClientHandler(String host, int port, MainFrame main) throws IOException{
 		this.main = main;
 		clientHandle = new Client (host, port);
 	}

@@ -1,4 +1,4 @@
-package edu.smv.gui.frames;
+package edu.smv.gui.pitview.frames;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;

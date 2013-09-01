@@ -1,11 +1,11 @@
-package edu.smv.runtime;
+package edu.smv.pitview.runtime;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.smv.data.DataNode;
-import edu.smv.gui.frames.MainFrame;
+import edu.smv.common.data.DataNode;
+import edu.smv.gui.pitview.frames.MainFrame;
 
 public class ProgramDriver {
 

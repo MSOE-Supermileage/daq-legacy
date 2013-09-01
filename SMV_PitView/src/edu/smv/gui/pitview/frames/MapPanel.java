@@ -1,4 +1,4 @@
-package edu.smv.gui.frames;
+package edu.smv.gui.pitview.frames;
 
 // Map is built off of http://worldwind.arc.nasa.gov/java/index.html
 // Online API: http://builds.worldwind.arc.nasa.gov/worldwind-releases/1.5/docs/api/index.html
@@ -26,7 +26,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Position;

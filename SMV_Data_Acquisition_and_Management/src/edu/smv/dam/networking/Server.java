@@ -1,10 +1,10 @@
-package edu.smv.networking;
+package edu.smv.dam.networking;
 
 import java.net.*;
 import java.util.List;
 import java.io.*;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 
 /**

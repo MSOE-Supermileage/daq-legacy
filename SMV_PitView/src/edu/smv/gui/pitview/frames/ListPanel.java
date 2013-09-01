@@ -1,4 +1,4 @@
-package edu.smv.gui.frames;
+package edu.smv.gui.pitview.frames;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 public class ListPanel extends JPanel {
 	private static final long serialVersionUID = 5693982072116941641L;

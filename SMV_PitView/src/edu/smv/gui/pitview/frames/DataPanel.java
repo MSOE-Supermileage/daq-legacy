@@ -1,4 +1,4 @@
-package edu.smv.gui.frames;
+package edu.smv.gui.pitview.frames;
 
 import java.awt.GridLayout;
 
@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 
 public class DataPanel extends JScrollPane {

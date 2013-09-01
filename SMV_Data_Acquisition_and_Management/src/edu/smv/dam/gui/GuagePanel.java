@@ -1,4 +1,4 @@
-package edu.smv.gui;
+package edu.smv.dam.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;

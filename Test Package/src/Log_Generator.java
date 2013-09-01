@@ -2,8 +2,8 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.smv.data.DataNode;
-import edu.smv.fileIO.FileIO;
+import edu.smv.common.data.DataNode;
+import edu.smv.common.fileIO.FileIO;
 
 
 public class Log_Generator {

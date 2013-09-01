@@ -1,8 +1,8 @@
-package edu.smv.gui;
+package edu.smv.dam.gui;
 
 import javax.swing.JFrame;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 public class MainFrame extends JFrame{
 

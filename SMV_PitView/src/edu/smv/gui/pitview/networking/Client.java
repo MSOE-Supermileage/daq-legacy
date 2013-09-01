@@ -1,11 +1,11 @@
-package edu.smv.gui.networking;
+package edu.smv.gui.pitview.networking;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 public class Client {
 	private String host;

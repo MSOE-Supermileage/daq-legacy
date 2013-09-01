@@ -1,4 +1,4 @@
-package edu.smv.gui.frames;
+package edu.smv.gui.pitview.frames;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,9 +12,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
-import edu.smv.data.DataNode;
-import edu.smv.fileIO.FileIO;
-import edu.smv.gui.networking.ThreadedClient;
+import edu.smv.common.data.DataNode;
+import edu.smv.common.fileIO.FileIO;
+import edu.smv.gui.pitview.networking.ClientHandler;
 
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 168849161387643717L;
@@ -131,7 +131,7 @@ public class MenuBar extends JMenuBar {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(this.mainApplication, "This feature is connecting to 0.0.0.0 on port 1234.", "Go Live", JOptionPane.WARNING_MESSAGE);
 		try {
-			ThreadedClient threadedClient= new ThreadedClient("0.0.0.0", 1234, this.mainApplication);
+			ClientHandler threadedClient= new ClientHandler("0.0.0.0", 1234, this.mainApplication);
 			threadedClient.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -1,4 +1,4 @@
-package edu.smv.fileIO;
+package edu.smv.common.fileIO;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.List;
 
-import edu.smv.data.DataNode;
+import edu.smv.common.data.DataNode;
 
 public class FileIO {
 
