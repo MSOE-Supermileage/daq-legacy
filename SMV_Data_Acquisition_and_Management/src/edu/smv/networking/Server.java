@@ -148,6 +148,7 @@ public class Server extends Thread{
 					try {
 						inputLine = in.readObject().toString();
 
+						while(nodeList.size()<=0);
 						DataNode outputNode = nodeList.get(nodeList.size()-1);
 						
 						if(outputNode != null){

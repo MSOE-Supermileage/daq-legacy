@@ -11,7 +11,7 @@ import edu.smv.networking.Server;
 
 public class ProgramDriver {
 
-	private static double REFRESH_RATE = .25 * 1000; // In secounds
+	private static double REFRESH_RATE = (1.0/16) * 1000; // In milliseconds
 	
 	/**
 	 * Program Driver
@@ -36,7 +36,7 @@ public class ProgramDriver {
 		while(true){
 			long currentTime = System.currentTimeMillis();
 			
-			if((currentTime - lastTimeLong) >= REFRESH_RATE || currentNode == null){
+			if(Math.abs(currentTime - lastTimeLong) >= REFRESH_RATE || currentNode == null){
 				lastTimeLong = currentTime;
 				currentNode = cape.getDataNode();
 				nodeList.add(currentNode);

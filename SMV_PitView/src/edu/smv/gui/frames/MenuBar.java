@@ -3,6 +3,7 @@ package edu.smv.gui.frames;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -13,6 +14,7 @@ import javax.swing.filechooser.FileFilter;
 
 import edu.smv.data.DataNode;
 import edu.smv.fileIO.FileIO;
+import edu.smv.gui.networking.ThreadedClient;
 
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 168849161387643717L;
@@ -127,7 +129,14 @@ public class MenuBar extends JMenuBar {
 	 */
 	protected void goLive() {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(this.mainApplication, "This feature is not yet available.", "Go Live", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(this.mainApplication, "This feature is connecting to 0.0.0.0 on port 1234.", "Go Live", JOptionPane.WARNING_MESSAGE);
+		try {
+			ThreadedClient threadedClient= new ThreadedClient("0.0.0.0", 1234, this.mainApplication);
+			threadedClient.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

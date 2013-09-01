@@ -1,5 +1,6 @@
 package edu.smv.runtime;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class ProgramDriver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		List<DataNode> dataNodes = new LinkedList<DataNode>();
+		List<DataNode> dataNodes = Collections.synchronizedList(new LinkedList<DataNode>());
 		DataNode currentNode = null;
 		
 		new MainFrame(dataNodes, currentNode);
