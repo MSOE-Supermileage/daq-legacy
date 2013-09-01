@@ -11,6 +11,8 @@ import edu.smv.networking.Server;
 
 public class ProgramDriver {
 
+	private static double REFRESH_RATE = .25 * 1000; // In secounds
+	
 	/**
 	 * Program Driver
 	 * @param args
@@ -21,24 +23,35 @@ public class ProgramDriver {
 		Cape cape = new Cape();
 		MainFrame gui = new MainFrame();
 		Server server = new Server(nodeList);
+		Runtime runtime = Runtime.getRuntime();
 		
 		// Start the server thread
 		server.start();
 		
+		// Loop Variables
+		DataNode currentNode = null;
+		long lastTimeLong = Long.MIN_VALUE;
+		
 		// Run forever. The program will exit by an action listener in MainFrame.
 		while(true){
-			DataNode currentNode = cape.getDataNode();
-			gui.refresh(currentNode);
-			nodeList.add(currentNode);
+			long currentTime = System.currentTimeMillis();
 			
-			// Refresh rate
-			try {
-				Thread.sleep((long) (.5 * 1000));
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if((currentTime - lastTimeLong) >= REFRESH_RATE || currentNode == null){
+				lastTimeLong = currentTime;
+				currentNode = cape.getDataNode();
+				nodeList.add(currentNode);
+			}
+			
+			gui.refresh(currentNode);
+			
+			// Don't let the heap explode!
+			double maxHeapUsagePercent = 0.75;
+			double usedMemory = runtime.totalMemory() - runtime.freeMemory();
+			
+			if(usedMemory / runtime.totalMemory() > maxHeapUsagePercent) {
+				//TODO: Save list as a log file
+				nodeList.clear();
 			}
 		}
 	}
-
 }

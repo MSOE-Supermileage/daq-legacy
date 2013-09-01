@@ -20,13 +20,13 @@ public class Log_Generator {
 		double longitude = 0;
 		double altitude = 0;
 		
-		for (int i = 0; i < 2000; i++){
+		 for (int i = 0; i < 2000; i++){
 			speed = (speed <= 120 ? speed + 1 : 0);
 			rpm = (rpm <= 10000 ? rpm +100 : 0);;
 			batteryVoltage = (batteryVoltage <= 12 ? batteryVoltage + 1 : 0);;
 			
 			nodes.add( new DataNode(speed/DataNode.MILES_IN_A_METER,  rpm,  batteryVoltage,  latitude,  longitude,  altitude));
-		}
+		 }
 
 		FileIO.saveDataNodes(new File("TestNodes." + DataNode.FILE_TYPE), nodes);
 	}
