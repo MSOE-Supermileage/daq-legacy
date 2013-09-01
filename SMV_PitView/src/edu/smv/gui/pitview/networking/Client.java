@@ -38,8 +38,17 @@ public class Client {
 		DataNode retVal = null;
 
     	try {
-    		this.output.writeObject(new String("Any object will do."));
-    		retVal = (DataNode) this.input.readObject();
+    		this.output.writeObject(new String("Any serialized object will do."));
+    		
+    		boolean objectReceived = false;
+    		while(!objectReceived){
+    			try {
+    				retVal = (DataNode) this.input.readObject();
+    				objectReceived = true;
+    			} catch (java.io.EOFException e){
+    				// The packet hasn't arrived yet
+    			}
+    		}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -140,32 +140,26 @@ public class Server extends Thread{
 				// Get socket commication 
 				ObjectInputStream in = new ObjectInputStream(client.getInputStream());
 				ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
-				
-				String inputLine;
-				
+								
 				while(runServer){
 					//Echo
 					try {
-						inputLine = in.readObject().toString();
-
-						while(nodeList.size()<=0);
+						Object objectReceived = in.readObject();
+						
+			    		// Output node
+						while(nodeList.size()<=0); // Wait until we have a node
 						DataNode outputNode = nodeList.get(nodeList.size()-1);
-						
-						if(outputNode != null){
-							out.writeObject(outputNode);
-						}else{
-							out.writeObject(inputLine);
-						}
-						
+						out.writeObject(outputNode);
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
+			}catch (java.io.EOFException eof){
+				/* Do Nothing */
 			} catch(IOException e){
 				e.printStackTrace();
 			}
 		}
-		
 	}
 }
