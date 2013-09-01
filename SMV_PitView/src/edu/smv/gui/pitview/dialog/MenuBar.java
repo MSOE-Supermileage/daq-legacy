@@ -1,9 +1,8 @@
-package edu.smv.gui.pitview.frames;
+package edu.smv.gui.pitview.dialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -14,6 +13,7 @@ import javax.swing.filechooser.FileFilter;
 
 import edu.smv.common.data.DataNode;
 import edu.smv.common.fileIO.FileIO;
+import edu.smv.gui.pitview.frames.MainFrame;
 import edu.smv.gui.pitview.networking.ClientHandler;
 
 public class MenuBar extends JMenuBar {
@@ -27,7 +27,16 @@ public class MenuBar extends JMenuBar {
 		this.mainApplication = main;
 		
 		JMenu file = new JMenu("File");
+		JMenu networking = new JMenu("Networking");
 		JMenu help = new JMenu("Help");
+		
+		JMenuItem newItem = new JMenuItem("New");
+		newItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				newMethod();
+			}
+		});
 		
 		JMenuItem open = new JMenuItem("Open");
 		open.addActionListener(new ActionListener() {
@@ -53,11 +62,19 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		
-		JMenuItem goLive = new JMenuItem("Go Live");
-		goLive.addActionListener(new ActionListener() {
+		JMenuItem connect = new JMenuItem("Connet");
+		connect.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				goLive();
+				connect();
+			}
+		});
+		
+		JMenuItem disconnect = new JMenuItem("Disconnet");
+		disconnect.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				disconnect();
 			}
 		});
 		
@@ -85,18 +102,30 @@ public class MenuBar extends JMenuBar {
 			}
 		});
 		
+		file.add(newItem);
 		file.add(open);
 		file.add(saveAs);
 		file.add(export);
-		file.add(goLive);
 		file.add(exit);
+		networking.add(connect);
+		networking.add(disconnect);
 		help.add(helpItem);
 		help.add(about);
 		
 		this.add(file);
+		this.add(networking);
 		this.add(help);
 	}
 
+	
+	/**
+	 * Method called when New is pressed
+	 */
+	protected void newMethod() {
+		this.mainApplication.getDataNodes().clear();
+		this.mainApplication.refreshAll();
+	}
+	
 	
 	/**
 	 * Method called when help is pressed
@@ -125,17 +154,30 @@ public class MenuBar extends JMenuBar {
 
 
 	/**
-	 * Method called when Go Live is pressed
+	 * Method called when Connect is pressed
 	 */
-	protected void goLive() {
+	protected void connect() {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(this.mainApplication, "This feature is connecting to 0.0.0.0 on port 1234.", "Go Live", JOptionPane.WARNING_MESSAGE);
+		String serverInfo = JOptionPane.showInputDialog(this.mainApplication, "What server are your trying to connect to?\n Please enter in the form 192.168.7.2:1234.");
+		String[] tokens = serverInfo.split(":");
+		
 		try {
-			ClientHandler threadedClient= new ClientHandler("0.0.0.0", 1234, this.mainApplication);
-			threadedClient.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.mainApplication.setClientHandle(new ClientHandler(tokens[0], Integer.parseInt(tokens[1]), this.mainApplication));
+			this.mainApplication.getClientHandle().start();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this.mainApplication, "Unable to connect to sever.\n" + e.getMessage());
+		}
+	}
+	
+	
+	/**
+	 * Method called when Disconnect is pressed
+	 */
+	protected void disconnect() {
+		try{
+			this.mainApplication.getClientHandle().terminate();
+		} catch(Exception e){
+			JOptionPane.showMessageDialog(this.mainApplication, "Unable to disconnect from server.\n" + e.getMessage());
 		}
 	}
 	

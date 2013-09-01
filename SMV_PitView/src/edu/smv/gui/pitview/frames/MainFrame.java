@@ -10,6 +10,8 @@ import javax.swing.ToolTipManager;
 
 import edu.smv.common.data.DataNode;
 import edu.smv.dam.gui.DriverDisplay;
+import edu.smv.gui.pitview.dialog.MenuBar;
+import edu.smv.gui.pitview.networking.ClientHandler;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = -8572684314913790609L;
@@ -20,6 +22,7 @@ public class MainFrame extends JFrame {
 	private GraphPanel graphPanel;
 	private DriverDisplay driverDisplay;
 	
+	private ClientHandler clientHandle;
 	private List<DataNode> dataNodes;
 	private DataNode currentNode;
 	
@@ -36,6 +39,7 @@ public class MainFrame extends JFrame {
 		
 		this.dataNodes = dataNodes;
 		this.currentNode = currentNode;
+		this.setClientHandle(clientHandle);
 		
 		this.mapPanel = new MapPanel(this);
 		this.listPanel = new ListPanel(this);
@@ -124,5 +128,15 @@ public class MainFrame extends JFrame {
 	public void refreshDataPanel() {
 		this.dataPanel.refreshData();
 		this.revalidate();
+	}
+
+
+	public ClientHandler getClientHandle() {
+		return clientHandle;
+	}
+
+
+	public void setClientHandle(ClientHandler clientHandle) {
+		this.clientHandle = clientHandle;
 	}
 }

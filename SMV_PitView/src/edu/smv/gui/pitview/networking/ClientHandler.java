@@ -9,8 +9,13 @@ public class ClientHandler extends Thread{
 	private MainFrame main;
 	private Client clientHandle;
 	private boolean terminate = false;
+	private long sleepTime;
 	
 	public ClientHandler(String host, int port, MainFrame main) throws IOException{
+		this(host, port, 250, main);
+	}
+	
+	public ClientHandler(String host, int port, long sleepTime, MainFrame main) throws IOException{
 		this.main = main;
 		clientHandle = new Client (host, port);
 	}
@@ -45,7 +50,7 @@ public class ClientHandler extends Thread{
 			}
 			
 			try {
-				Thread.sleep(250);
+				Thread.sleep(this.sleepTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
