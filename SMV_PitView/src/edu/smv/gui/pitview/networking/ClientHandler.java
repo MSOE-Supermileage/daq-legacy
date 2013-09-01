@@ -2,6 +2,8 @@ package edu.smv.gui.pitview.networking;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import edu.smv.common.data.DataNode;
 import edu.smv.gui.pitview.frames.*;
 
@@ -37,15 +39,16 @@ public class ClientHandler extends Thread{
 				this.main.setCurrentNode(node);
 				
 				this.main.refreshAll();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(this.main, "Server error:\n" + e.getMessage());
+				this.terminate();
 			} finally {
-				try {
-					this.clientHandle.disconnect();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(this.clientHandle != null){
+					try {
+						this.clientHandle.disconnect();
+					} catch (IOException e) {
+						JOptionPane.showMessageDialog(this.main, "Server error:\n" + e.getMessage());
+					}
 				}
 			}
 			

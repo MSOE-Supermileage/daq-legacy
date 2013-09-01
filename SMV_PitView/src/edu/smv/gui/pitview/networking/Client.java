@@ -28,9 +28,15 @@ public class Client {
 	
 	
 	public void disconnect() throws IOException{
-		input.close();
-		output.close();
-		socket.close();
+		if(input != null){
+			input.close();
+		}
+		if(output != null){
+			output.close();
+		}
+		if(socket != null){
+			socket.close();
+		}
 	}
 	
 	
