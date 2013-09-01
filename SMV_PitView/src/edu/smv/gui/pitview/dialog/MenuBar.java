@@ -157,15 +157,17 @@ public class MenuBar extends JMenuBar {
 	 * Method called when Connect is pressed
 	 */
 	protected void connect() {
-		// TODO Auto-generated method stub
-		String serverInfo = JOptionPane.showInputDialog(this.mainApplication, "What server are your trying to connect to?\n Please enter in the form 192.168.7.2:1234.");
-		String[] tokens = serverInfo.split(":");
+		String prompt = "What server are your trying to connect to?\n Please enter in the form 192.168.7.2:1234.";
+		String serverInfo = JOptionPane.showInputDialog(this.mainApplication, prompt, "Connect", JOptionPane.QUESTION_MESSAGE);
 		
-		try {
-			this.mainApplication.setClientHandle(new ClientHandler(tokens[0], Integer.parseInt(tokens[1]), this.mainApplication));
-			this.mainApplication.getClientHandle().start();
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this.mainApplication, "Unable to connect to sever.\n" + e.getMessage());
+		if(serverInfo != null){
+			try {
+				String[] tokens = serverInfo.split(":");
+				this.mainApplication.setClientHandle(new ClientHandler(tokens[0], Integer.parseInt(tokens[1]), this.mainApplication));
+				this.mainApplication.getClientHandle().start();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this.mainApplication, "Unable to connect to sever.\n" + e.getMessage());
+			}
 		}
 	}
 	

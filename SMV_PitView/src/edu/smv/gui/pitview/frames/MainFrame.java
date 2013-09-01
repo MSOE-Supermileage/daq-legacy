@@ -1,5 +1,7 @@
 package edu.smv.gui.pitview.frames;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -28,18 +30,27 @@ public class MainFrame extends JFrame {
 	
 	
 	/**
+	 * Program Driver
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new MainFrame();
+	}
+	
+	
+	/**
 	 * Constructor
 	 * @param currentNode 
 	 * @param dataNodes 
 	 */
-	public MainFrame(List<DataNode> dataNodes, DataNode currentNode){
+	public MainFrame(){
 		// Prevent tooltips and menus from being light weight so they get drawn over the Worldwind canvas
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 		ToolTipManager.sharedInstance().setLightWeightPopupEnabled(false);
 		
-		this.dataNodes = dataNodes;
-		this.currentNode = currentNode;
+		this.dataNodes = Collections.synchronizedList(new LinkedList<DataNode>());
 		this.setClientHandle(clientHandle);
+		this.currentNode = null;
 		
 		this.mapPanel = new MapPanel(this);
 		this.listPanel = new ListPanel(this);
