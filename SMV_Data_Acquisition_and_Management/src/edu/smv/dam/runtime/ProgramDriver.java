@@ -11,7 +11,8 @@ import edu.smv.dam.networking.Server;
 
 public class ProgramDriver {
 
-	private static double REFRESH_RATE = (1.0/16) * 1000; // In milliseconds
+	private static final double REFRESH_RATE = (1.0/16) * 1000; // In milliseconds
+	private static final double MAX_HEAP_USAGE_PERCENT = 0.75;
 	
 	/**
 	 * Program Driver
@@ -45,10 +46,9 @@ public class ProgramDriver {
 			gui.refresh(currentNode);
 			
 			// Don't let the heap explode!
-			double maxHeapUsagePercent = 0.75;
 			double usedMemory = runtime.totalMemory() - runtime.freeMemory();
 			
-			if(usedMemory / runtime.totalMemory() > maxHeapUsagePercent) {
+			if(usedMemory / runtime.totalMemory() > MAX_HEAP_USAGE_PERCENT) {
 				//TODO: Save list as a log file
 				nodeList.clear();
 			}

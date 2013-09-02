@@ -146,10 +146,18 @@ public class Server extends Thread{
 					try {
 						Object objectReceived = in.readObject();
 						
-			    		// Output node
-						while(nodeList.size()<=0); // Wait until we have a node
-						DataNode outputNode = nodeList.get(nodeList.size()-1);
-						out.writeObject(outputNode);
+						// Output node
+						boolean nodeSent = false;
+						while(!nodeSent){
+							try{
+								DataNode outputNode = nodeList.get(nodeList.size()-1);
+								out.writeObject(outputNode);
+								nodeSent = true;
+							} catch(IndexOutOfBoundsException e){
+								/* Failed to get node. Loop again. */
+							}
+						}
+						
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
