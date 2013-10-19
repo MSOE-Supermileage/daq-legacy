@@ -12,7 +12,7 @@ package edu.smv.gui.pitview.frames;
  *  	a) gluegen-rt.dll
  *  	b) jogl.dll
  *  	c) jogl_awt.dll
- *  	d)jogl_cg.dll
+ *  	d) jogl_cg.dll
  *  
  *  	Copy the correct DLLs for the system before invoking
  *  		See here: http://stackoverflow.com/questions/1611357/how-to-make-a-jar-file-that-include-dll-files

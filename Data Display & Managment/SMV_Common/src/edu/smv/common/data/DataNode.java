@@ -70,6 +70,7 @@ public class DataNode implements Serializable {
 	/**
 	 * ToString method that displays all data in data node
 	 */
+	@Override
 	public String toString(){
 		return "Name: " + this.getName() + "\n" +
 				"Date: " +  this.getDate() + "\n" + 

@@ -14,7 +14,7 @@ public class ClientHandler extends Thread{
 	private long sleepTime;
 	
 	public ClientHandler(String host, int port, MainFrame main) throws IOException{
-		this(host, port, 250, main);
+		this(host, port, 10 * 1000, main);
 	}
 	
 	public ClientHandler(String host, int port, long sleepTime, MainFrame main) throws IOException{

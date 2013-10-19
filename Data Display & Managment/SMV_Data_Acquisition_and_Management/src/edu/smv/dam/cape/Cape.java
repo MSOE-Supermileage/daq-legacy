@@ -13,12 +13,21 @@ import edu.smv.common.data.DataNode;
  *
  */
 public class Cape {
+	/*TEMP VALUES*/
+	private static int speed = 0;
+	private static int rpm = 0;
+	
 	/**
 	 * The speed in meters per hour.
 	 * @return
 	 */
 	public double getSpeed(){
-		return Math.random() * 190000;
+		if(speed >= 120){
+			speed = 0;
+		}else{
+			speed++;
+		}
+		return speed / DataNode.MILES_IN_A_METER;
 	}
 	
 	
@@ -26,7 +35,12 @@ public class Cape {
 	 * @return the revolutions per minute.
 	 */
 	public double getRPM() {
-		return Math.random() * 10000;
+		if(rpm >= 10000){
+			rpm = 0;
+		}else{
+			rpm += 100;
+		}
+		return rpm;
 	}
 	
 	

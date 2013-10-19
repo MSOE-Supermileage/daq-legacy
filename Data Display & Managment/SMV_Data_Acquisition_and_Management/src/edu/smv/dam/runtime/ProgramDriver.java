@@ -11,7 +11,7 @@ import edu.smv.dam.networking.Server;
 
 public class ProgramDriver {
 
-	private static final double REFRESH_RATE = (1.0/16) * 1000; // In milliseconds
+	private static final double REFRESH_RATE = (1/4.0) * 1000; // In milliseconds
 	private static final double MAX_HEAP_USAGE_PERCENT = 0.75;
 	
 	/**
