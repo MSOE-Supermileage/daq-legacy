@@ -1,18 +1,15 @@
-package edu.smv.dam.cape;
+package edu.smv.dam.PI;
 
 import edu.smv.common.data.DataNode;
 
 
 /**
- * A cape is an expansion board for a beaglebone using it's IO connections.
- * This class is an api for a custom cape for our beaglebone black.
- * 
- * "Capes arn't just for super heros anymore!"
+ * API for getting I/O input from the raspberry PI.
  * 
  * @author Mark
  *
  */
-public class Cape {
+public class PI {
 	/*TEMP VALUES*/
 	private static int speed = 0;
 	private static int rpm = 0;

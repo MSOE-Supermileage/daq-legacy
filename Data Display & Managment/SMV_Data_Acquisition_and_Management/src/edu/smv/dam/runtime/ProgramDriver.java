@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.smv.common.data.DataNode;
-import edu.smv.dam.cape.Cape;
+import edu.smv.dam.PI.PI;
 import edu.smv.dam.gui.MainFrame;
 import edu.smv.dam.networking.Server;
 
@@ -21,7 +21,7 @@ public class ProgramDriver {
 	public static void main(String[] args) {
 		List<DataNode> nodeList = Collections.synchronizedList(new LinkedList<DataNode>());
 		
-		Cape cape = new Cape();
+		PI cape = new PI();
 		MainFrame gui = new MainFrame();
 		Server server = new Server(nodeList);
 		Runtime runtime = Runtime.getRuntime();

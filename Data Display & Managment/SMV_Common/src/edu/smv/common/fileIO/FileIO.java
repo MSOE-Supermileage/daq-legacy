@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.List;
+import java.util.Scanner;
 
 import edu.smv.common.data.DataNode;
 
@@ -136,4 +137,35 @@ public class FileIO {
     	return retVal;
     }
 
+    
+    /**
+     * Read a text file and return it has a string.
+     * @param file
+     * @param output
+     * @return
+     */
+    static public String readTextFile(File file){
+    	String retVal = null;
+    	Scanner reader = null;
+    	
+    	try {
+    		reader = new Scanner(file);
+    		retVal = "";    		
+    		
+    		while(reader.hasNext()){
+    			retVal += reader.nextLine();
+    			
+    			if(reader.hasNext()){
+    				retVal += "\n";
+    			}
+    		}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			reader.close();
+		}
+    	
+    	return retVal;
+    }
 }
