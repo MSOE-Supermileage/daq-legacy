@@ -22,46 +22,49 @@ import edu.smv.common.fileIO.FileIO;
 public class GPIO {
 	/**
 	 * Set the direction of the pin to input or output.
-	 * @param pinName
+	 * @param header
+	 * @param pin
 	 * @return
 	 */
-	public static boolean setDirection(String pinName){
-		exportPin(pinName, true);
+	public static boolean setDirection(int header, int pin){
+		exportPin(header, pin, true);
 		
 		// TODO: Set the pin's direction.
 		
-		exportPin(pinName, false);
+		exportPin(header, pin, false);
 		return false; //Return if the operation was successful
 	}
 	
 	
 	/**
 	 * Set the pin's value.
-	 * @param pinName
+	 * @param header
+	 * @param pin
 	 * @param value
 	 * @return
 	 */
-	public static boolean setPin(String pinName, int value){
-		exportPin(pinName, true);
+	public static boolean setPin(int header, int pin, int value){
+		exportPin(header, pin, true);
 		
 		// TODO: Set the pin's value.
 		
-		exportPin(pinName, false);
+		exportPin(header, pin, false);
 		return false; //Return if the operation was successful
 	}
 	
 	
 	/**
 	 * Read the pin's value.
-	 * @param pinName
+	 * @param header
+	 * @param pin
 	 * @return
 	 */
-	public static int readPin(String pinName){
-		exportPin(pinName, true);
+	public static int readPin(int header, int pin){
+		exportPin(header, pin, true);
 		
 		// TODO: Read the pin's value.
 		
-		exportPin(pinName, false);
+		exportPin(header, pin, false);
 		return -1;
 	}
 	
@@ -73,7 +76,7 @@ public class GPIO {
 	 * @param export
 	 * @return
 	 */
-	private static boolean exportPin(String pinName, boolean export){
+	private static boolean exportPin(int header, int pin, boolean export){
 		// To unexport write the pin's number to /sys/class/gpio/unexport 
 		// To export write the pin's number to /sys/class/gpio/export
 		return false;
