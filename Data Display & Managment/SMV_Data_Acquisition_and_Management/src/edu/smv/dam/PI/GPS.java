@@ -49,17 +49,21 @@ public class GPS {
 				
 				if(buffer.contains("\n"))	// New line received from GPS
 				{
+					buffer = buffer.replaceAll("\n", "");
+					buffer = buffer.replaceAll("\r", "");
 					String tokens[] = buffer.split(",");
-					if(tokens[0].contains("$GPGGA"))
+					
+					if(buffer.contains("$GPGGA"))
 					{
-						try { latitude 	= Double.parseDouble(tokens[2]);} 	catch(NumberFormatException ne) { latitude 	= -1; }
-						try { longitude = Double.parseDouble(tokens[4]);} 	catch(NumberFormatException ne) { longitude = -1; }
-						try { fixQuality= Double.parseDouble(tokens[6]);} 	catch(NumberFormatException ne) { fixQuality= -1; }
-						try { altitude 	= Double.parseDouble(tokens[9]);} 	catch(NumberFormatException ne) { altitude	= -1; }
-					}
+						try { latitude 	= Double.parseDouble(tokens[2]);} catch (NumberFormatException ne) { latitude 	= -1; }
+						try { longitude = Double.parseDouble(tokens[4]);} catch (NumberFormatException ne) { longitude = -1;  }
+						try { fixQuality= Double.parseDouble(tokens[6]);} catch (NumberFormatException ne) { fixQuality= -1;  }
+						try { altitude 	= Double.parseDouble(tokens[9]);} catch (NumberFormatException ne) { altitude	= -1; }
+					} 
+					
+					buffer = "";
 				}
 			}
-			
 		});
 	}
 

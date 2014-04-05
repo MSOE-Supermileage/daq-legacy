@@ -21,7 +21,7 @@ public class PI {
 		this.rpm = 0;
 		
 		try {
-			this.gps = new GPS("com4");
+			this.gps = new GPS("com5");
 		} catch (SerialPortException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
