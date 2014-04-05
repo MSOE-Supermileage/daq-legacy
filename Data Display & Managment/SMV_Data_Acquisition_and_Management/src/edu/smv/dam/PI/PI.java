@@ -1,5 +1,6 @@
 package edu.smv.dam.PI;
 
+import jssc.SerialPortException;
 import edu.smv.common.data.DataNode;
 
 
@@ -10,9 +11,23 @@ import edu.smv.common.data.DataNode;
  *
  */
 public class PI {
-	/*TEMP VALUES*/
-	private static int speed = 0;
-	private static int rpm = 0;
+	private int speed;
+	private int rpm;
+	private GPS gps;
+	
+	public PI()
+	{
+		this.speed = 0;
+		this.rpm = 0;
+		
+		try {
+			this.gps = new GPS("com4");
+		} catch (SerialPortException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * The speed in meters per hour.
@@ -53,7 +68,15 @@ public class PI {
 	 * @return the latitude in degrees.
 	 */
 	public double getLatitude() {
-		return -1;
+		double retVal = -1;
+		
+		try
+		{
+			retVal = this.gps.getLatitude();
+		}
+		catch(NullPointerException e){}
+		
+		return retVal;
 	}
 
 	
@@ -61,7 +84,15 @@ public class PI {
 	 * @return the longitde in degrees.
 	 */
 	public double getLongitude() {
-		return -1;
+		double retVal = -1;
+		
+		try
+		{
+			retVal = this.gps.getLongitude();
+		}
+		catch(NullPointerException e){}
+		
+		return retVal;
 	}
 
 	
@@ -69,7 +100,15 @@ public class PI {
 	 * @return the altitude in meters
 	 */
 	public double getAltitude() {
-		return -1;
+		double retVal = -1;
+		
+		try
+		{
+			retVal = this.gps.getAltitude();
+		}
+		catch(NullPointerException e){}
+		
+		return retVal;
 	}
 	
 	
