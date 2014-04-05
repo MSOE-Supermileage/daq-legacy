@@ -82,23 +82,15 @@ public class Server extends Thread{
 		Socket clientSocket;
 		
 		try{
-			//Start the server
+			// Start the server
 			serverSocket = new ServerSocket(port);
-			serverSocket.setSoTimeout(1000);
 			
 			while(runServer){
-				try{
-					// Wait for a client to connect
-					clientSocket = serverSocket.accept();
-					
-					// Kick off a new thread to handle the client
-					(new ClientHandler(clientSocket)).start();
-					
-				}catch(SocketTimeoutException ste){
-					/* Do nothing. We expect this to happen every 
-					 * second a client hasn't connected to see if the 
-					 * thread has be asked to stop. */
-				}
+				// Wait for a client to connect
+				clientSocket = serverSocket.accept();
+				
+				// Kick off a new thread to handle the client
+				(new ClientHandler(clientSocket)).start();
 			}
 	
 		}catch(IOException e){
