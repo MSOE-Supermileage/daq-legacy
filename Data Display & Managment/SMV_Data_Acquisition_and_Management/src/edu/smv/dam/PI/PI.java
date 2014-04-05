@@ -11,14 +11,18 @@ import edu.smv.common.data.DataNode;
  *
  */
 public class PI {
-	private int speed;
-	private int rpm;
+	private double wheelCircumference = 1;
+	private double wheelShaftCircumference = 1;
+	private double engineShaftCircumference = 1;
+	
 	private GPS gps;
+	private Encoder wheelShaftEncoder;
+	private Encoder engineShaftEncoder;
 	
 	public PI()
-	{
-		this.speed = 0;
-		this.rpm = 0;
+	{	
+		this.engineShaftEncoder = new Encoder(engineShaftCircumference, 0);
+		this.wheelShaftEncoder = new Encoder(wheelCircumference, 0);
 		
 		try {
 			this.gps = new GPS("com5");
@@ -34,25 +38,17 @@ public class PI {
 	 * @return
 	 */
 	public double getSpeed(){
-		if(speed >= 120){
-			speed = 0;
-		}else{
-			speed++;
-		}
-		return speed / DataNode.MILES_IN_A_METER;
+		double circumferenceRatio = wheelCircumference / wheelShaftCircumference;
+		return circumferenceRatio * this.wheelShaftEncoder.getShaftSpeed();
 	}
 	
 	
 	/**
 	 * @return the revolutions per minute.
 	 */
-	public double getRPM() {
-		if(rpm >= 10000){
-			rpm = 0;
-		}else{
-			rpm += 100;
-		}
-		return rpm;
+	public double getRPM() 
+	{
+		return engineShaftEncoder.getShaftSpeed();
 	}
 	
 	
