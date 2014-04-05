@@ -18,16 +18,6 @@ public class GPS {
 	
 	/**
 	 * 
-	 * @param args
-	 */
-	public void main(String args[])
-	{
-		
-	}
-	
-	
-	/**
-	 * 
 	 * @param port
 	 * @throws SerialPortException
 	 */
