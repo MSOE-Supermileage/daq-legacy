@@ -1,6 +1,5 @@
 package edu.smv.dam.PI;
 
-import jssc.SerialPortException;
 import edu.smv.common.data.DataNode;
 
 
@@ -10,23 +9,25 @@ import edu.smv.common.data.DataNode;
  * @author Mark
  *
  */
-public class PI {
+public class PI 
+{
 	private double wheelCircumference = 1;
 	private double wheelShaftCircumference = 1;
 	private double engineShaftCircumference = 1;
 	
 	private GPS gps;
+	
 	private Encoder wheelShaftEncoder;
 	private Encoder engineShaftEncoder;
 	
 	public PI()
 	{	
-		this.engineShaftEncoder = new Encoder(engineShaftCircumference, 0);
-		this.wheelShaftEncoder = new Encoder(wheelCircumference, 0);
-		
+		this.engineShaftEncoder = new Encoder(engineShaftCircumference, 2);	// Connected to gpio 2
+		this.wheelShaftEncoder = new Encoder(wheelCircumference, 3);		// Connected to gpio 3
+	
 		try {
-			this.gps = new GPS("com5");
-		} catch (SerialPortException e) {
+			this.gps = new GPS();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -37,7 +38,8 @@ public class PI {
 	 * The speed in meters per hour.
 	 * @return
 	 */
-	public double getSpeed(){
+	public double getSpeed()
+	{
 		double circumferenceRatio = wheelCircumference / wheelShaftCircumference;
 		return circumferenceRatio * this.wheelShaftEncoder.getShaftSpeed();
 	}
@@ -55,7 +57,8 @@ public class PI {
 	/**
 	 * @return the batteryVoltage in volts.
 	 */
-	public double getPMSVoltage() {
+	public double getPMSVoltage() 
+	{
 		return -1;
 	}
 
@@ -63,7 +66,8 @@ public class PI {
 	/**
 	 * @return the latitude in degrees.
 	 */
-	public double getLatitude() {
+	public double getLatitude() 
+	{
 		double retVal = -1;
 		
 		try
@@ -79,7 +83,8 @@ public class PI {
 	/**
 	 * @return the longitde in degrees.
 	 */
-	public double getLongitude() {
+	public double getLongitude() 
+	{
 		double retVal = -1;
 		
 		try
@@ -95,7 +100,8 @@ public class PI {
 	/**
 	 * @return the altitude in meters
 	 */
-	public double getAltitude() {
+	public double getAltitude()
+	{
 		double retVal = -1;
 		
 		try
@@ -111,7 +117,8 @@ public class PI {
 	/**
 	 * @return A datanode populated with values from the cape.
 	 */
-	public DataNode getDataNode() {
+	public DataNode getDataNode() 
+	{
 		return new DataNode(getSpeed(), getRPM(), getPMSVoltage(), 
 				getLatitude(), getLongitude(), getAltitude());
 	}

@@ -4,10 +4,15 @@ import jssc.*;
 
 public class GPS {
 	/**
-	 * 
+	 * Serial Port that is attached to the GPS
 	 */
 	private SerialPort serialPort;
+	
+	/**
+	 * Input buffer for the GPS
+	 */
 	private String buffer = "";
+	
 	
 	// GPS Data
 	private double latitude;
@@ -17,7 +22,17 @@ public class GPS {
 	
 	
 	/**
-	 * 
+	 * Constructor - Use the first serial port found
+	 * @throws SerialPortException
+	 */
+	public GPS() throws SerialPortException
+	{
+		this((SerialPortList.getPortNames())[0]);
+	}
+	
+	
+	/**
+	 * Constructor
 	 * @param port
 	 * @throws SerialPortException
 	 */
