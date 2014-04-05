@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="Dependencies/jfreechart-1.0.15/jfreechart-1.0.15/lib/jfreechart-1.0.15-experimental.jar"/>
 	<classpathentry kind="lib" path="Dependencies/jfreechart-1.0.15/jfreechart-1.0.15/lib/jfreechart-1.0.15-swt.jar"/>
 	<classpathentry kind="lib" path="Dependencies/jfreechart-1.0.15/jfreechart-1.0.15/lib/jfreechart-1.0.15.jar"/>
+	<classpathentry kind="lib" path="Dependencies/jSSC-2.6.0-Release/jssc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
