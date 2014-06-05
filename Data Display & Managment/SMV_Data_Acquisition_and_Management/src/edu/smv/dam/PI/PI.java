@@ -11,9 +11,9 @@ import edu.smv.common.data.DataNode;
  */
 public class PI 
 {
-	private double wheelCircumference = 1;
-	private double wheelShaftCircumference = 1;
-	private double engineShaftCircumference = 1;
+	private double wheelCircumference = 2 * Math.PI * 0.01687;
+	private double wheelShaftCircumference = 2 * Math.PI * 0.01687;	
+	private double engineShaftCircumference = 2 * Math.PI * 0.01687;
 	
 	private GPS gps;
 	
@@ -22,8 +22,8 @@ public class PI
 	
 	public PI()
 	{	
-		this.engineShaftEncoder = new Encoder(engineShaftCircumference, 2);	// Connected to gpio 2
-		this.wheelShaftEncoder = new Encoder(wheelCircumference, 3);		// Connected to gpio 3
+		this.engineShaftEncoder = new Encoder(engineShaftCircumference, 4);	// Connected to gpio 4
+		this.wheelShaftEncoder = new Encoder(wheelCircumference, 5);		// Connected to gpio 5
 	
 		try {
 			this.gps = new GPS();

@@ -8,11 +8,11 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 public class Encoder 
 {
-    private double shaftCircumference;
+    private final double shaftCircumference;
     private Date lastInterupt;
     private Date secoundToLastInterupt;
-    private GpioPinDigitalInput hallEffectSensorPIN = null;
-    
+    private final GpioPinDigitalInput hallEffectSensorPIN;
+    private boolean softwareDebounceActive = false;
     
     /**
      * Constructor
@@ -25,7 +25,28 @@ public class Encoder
     	this.shaftCircumference = shaftCircumference;
     	
     	// Set the Encoder to a GPIO on the PI
-    	provisionGPIO_PIN(getRaspPin(gpioPIN));
+        final GpioController gpio = GpioFactory.getInstance();
+        
+        // provision gpio pin as an input pin with its internal pull down resistor enabled
+        hallEffectSensorPIN = gpio.provisionDigitalInputPin(getRaspPin(gpioPIN), PinPullResistance.PULL_DOWN);
+
+        // create and register gpio pin listener
+        hallEffectSensorPIN.addListener(new GpioPinListenerDigital() 
+        {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) 
+            {
+                // The shaft has made a revolution
+            	if(event.getState().isHigh() && (softwareDebounceActive == false))
+                {
+                	secoundToLastInterupt = lastInterupt;
+                	lastInterupt = new Date();
+                	softwareDebounceActive = true;
+                } else if(event.getState().isLow()){
+                	softwareDebounceActive = false;
+                }
+            }
+        });
     	
     	// Initialize dates to the current time
     	this.lastInterupt = new Date();
@@ -34,13 +55,13 @@ public class Encoder
     
 
     /**
-     * Get the time between rotations,
+     * Get the time between rotations in hours,
      * which is the time between pulses from the hall effect sensor
      * @return
      */
 	private double getTimePerRotation()
     {
-        return lastInterupt.getTime() - secoundToLastInterupt.getTime();
+        return (lastInterupt.getTime() - secoundToLastInterupt.getTime()) / 1000.0 / 60.0 / 60.0;
     }
     
     
@@ -139,33 +160,4 @@ public class Encoder
     	
 		return retVal;
 	}
-    
-    
-    /**
-     * Provision a pin for the hall effect sensor
-     * @param pin
-     */
-    private void provisionGPIO_PIN(Pin pin)
-    {
-    	// create gpio controller
-        final GpioController gpio = GpioFactory.getInstance();
-        
-        // provision gpio pin as an input pin with its internal pull down resistor enabled
-        hallEffectSensorPIN = gpio.provisionDigitalInputPin(pin, PinPullResistance.PULL_DOWN);
-
-        // create and register gpio pin listener
-        hallEffectSensorPIN.addListener(new GpioPinListenerDigital() 
-        {
-            @Override
-            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) 
-            {
-                // The shaft has made a revolution
-            	if(event.getState().isHigh())
-                {
-                	secoundToLastInterupt = lastInterupt;
-                	lastInterupt = new Date();
-                }
-            }
-        });
-    }
 }

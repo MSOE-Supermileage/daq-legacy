@@ -15,9 +15,8 @@ public class MainFrame extends JFrame{
 	 * Constructor
 	 */
 	public MainFrame(){
-		this.add(driverDisplay);
 		this.setJFrameProperties();
-		this.pack();
+		this.add(driverDisplay);
 	}
 	
 	
@@ -29,6 +28,7 @@ public class MainFrame extends JFrame{
 		this.setTitle(TITLE);
 		this.setVisible(true);
 		this.setResizable(false);
+		this.setSize(656, 416);
 	}
 
 

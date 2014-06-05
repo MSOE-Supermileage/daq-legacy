@@ -21,7 +21,7 @@ public class ProgramDriver {
 	public static void main(String[] args) {
 		List<DataNode> nodeList = Collections.synchronizedList(new LinkedList<DataNode>());
 		
-		PI cape = new PI();
+		PI pi = new PI();
 		MainFrame gui = new MainFrame();
 		Server server = new Server(nodeList);
 		Runtime runtime = Runtime.getRuntime();
@@ -31,27 +31,29 @@ public class ProgramDriver {
 		
 		// Loop Variables
 		DataNode currentNode = null;
-		long lastTimeLong = Long.MIN_VALUE;
 		
 		// Run forever. The program will exit by an action listener in MainFrame.
 		while(true){
-			long currentTime = System.currentTimeMillis();
-			
-			if(Math.abs(currentTime - lastTimeLong) >= REFRESH_RATE || currentNode == null){
-				lastTimeLong = currentTime;
-				currentNode = cape.getDataNode();
-				nodeList.add(currentNode);
-			}
-			
+			currentNode = pi.getDataNode();
+			nodeList.add(currentNode);
 			gui.refresh(currentNode);
 			
 			// Don't let the heap explode!
 			double usedMemory = runtime.totalMemory() - runtime.freeMemory();
 			
-			if(usedMemory / runtime.totalMemory() > MAX_HEAP_USAGE_PERCENT) {
+			if(usedMemory / runtime.totalMemory() > MAX_HEAP_USAGE_PERCENT) 
+			{
 				//TODO: Save list as a log file
 				nodeList.clear();
 			}
+			
+			
+			
+			try {
+				Thread.sleep((long) REFRESH_RATE);
+			} 
+			catch (InterruptedException e) 
+			{}
 		}
 	}
 }

@@ -25,7 +25,7 @@ import org.jfree.ui.StandardGradientPaintTransformer;
 
 public class GuagePanel extends JPanel {
 	private static final long serialVersionUID = -3472679468327071122L;
-	
+	private final int DIAL_RADIUS = 325;
 	private DefaultValueDataset rpmDataset;
 	private DefaultValueDataset mphDataset;
 	
@@ -92,7 +92,7 @@ public class GuagePanel extends JPanel {
         DialValueIndicator dvi = new DialValueIndicator(0);
         plot.addLayer(dvi);
         
-        StandardDialScale scale = new StandardDialScale(0, 120, -120, -300, 10, 1);
+        StandardDialScale scale = new StandardDialScale(0, 30, -120, -300, 5, 1);
         scale.setTickRadius(0.88);
         scale.setTickLabelOffset(0.15);
         scale.setTickLabelFont(new Font("Dialog", Font.PLAIN, 14));
@@ -108,7 +108,7 @@ public class GuagePanel extends JPanel {
         JFreeChart chart = new JFreeChart(plot);
         chart.setTitle("MPH");
         ChartPanel cp = new ChartPanel(chart);
-        cp.setPreferredSize(new Dimension(200, 200));
+        cp.setPreferredSize(new Dimension(DIAL_RADIUS, DIAL_RADIUS));
 
         this.add(cp);
 	}
@@ -172,7 +172,7 @@ public class GuagePanel extends JPanel {
         JFreeChart chart = new JFreeChart(plot);
         chart.setTitle("RPM");
         ChartPanel cp = new ChartPanel(chart);
-        cp.setPreferredSize(new Dimension(200, 200));
+        cp.setPreferredSize(new Dimension(DIAL_RADIUS, DIAL_RADIUS));
 
         this.add(cp);
 	}
